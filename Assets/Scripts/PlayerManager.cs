@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     //-------------------------------------------
     // フィールド
@@ -19,6 +19,16 @@ public class Player : MonoBehaviour
     /// 自機の移動速度量
     /// </summary>
     [SerializeField] float playerSpeed;
+
+    /// <summary>
+    /// クリアリザルトパネル
+    /// </summary>
+    [SerializeField] GameObject clearResultPanel;
+
+    /// <summary>
+    /// ゲームオーバーリザルトパネル
+    /// </summary>
+    [SerializeField] GameObject gameOverPanel;
 
     /// <summary>
     /// 自機の当たり判定
@@ -92,12 +102,21 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Finish")
         {   // ゴール判定
 
-            Destroy(this.gameObject);
+            // クリアリザルトON
+            clearResultPanel.SetActive(true);
+
+            // 速度0に
+            this.rigid2d.velocity *= 0;
+
         }
 
         if (collision.gameObject.tag == "Thunder")
         {   // 雷判定
 
+            // ゲームオーバーパネル表示
+            gameOverPanel.SetActive(true);
+
+            // プレイヤー破棄
             Destroy(this.gameObject);
         }
     }
