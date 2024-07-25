@@ -10,6 +10,7 @@ using UnityEngine;
 
 namespace TedLab
 {
+    [ExecuteAlways] // Ä¶ˆÈŠO‚Å‚à“®ì‚·‚é
     public class RectScalerWithViewport : MonoBehaviour
     {
         private const float LogBase = 2;
