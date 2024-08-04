@@ -55,7 +55,15 @@ public class HomeManager : MonoBehaviour
     }
 
     //=======================================================
-    // シーン遷移
+    // シーン遷移メソッド
+
+    public void TransNormalMode()
+    {
+        /* フェード処理 (黒)  
+                        ( "シーン名",フェードの色, 速さ);  */
+        Initiate.DoneFading();
+        Initiate.Fade("StageSelectScene", Color.black, 1.5f);
+    }
 
     //=======================================================
     // メニュー関連メソッド

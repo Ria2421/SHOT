@@ -3,7 +3,7 @@
 // ゲームマネージャー [ GameManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/07/18
-// Update:2024/07/18
+// Update:2024/08/04
 //
 //---------------------------------------------------------------
 using System.Collections;
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("TitleScene", Color.gray, 2.5f);
+        Initiate.Fade("HomeScene", Color.gray, 2.5f);
     }
 
     /// <summary>

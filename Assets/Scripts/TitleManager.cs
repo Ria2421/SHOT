@@ -46,6 +46,6 @@ public class TitleManager : MonoBehaviour
         /* フェード処理 (黒)  
                          ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("StageSelectScene", Color.black, 1.5f);
+        Initiate.Fade("HomeScene", Color.black, 1.5f);
     }
 }
