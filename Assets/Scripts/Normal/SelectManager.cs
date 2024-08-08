@@ -43,9 +43,23 @@ public class SelectManager : MonoBehaviour
         // ログにてステージNoを表示
         Debug.Log(buttonNum);
 
-        /* フェード処理 (黒)  
+        if (buttonNum != "")
+        {
+            /* フェード処理 (黒)  
                          ( "シーン名",フェードの色, 速さ);  */
+            Initiate.DoneFading();
+            Initiate.Fade("Stage" + buttonNum + "Scene", Color.gray, 2.5f);
+        }
+    }
+
+    /// <summary>
+    /// 戻るボタン押下処理
+    /// </summary>
+    public void PushBackButton()
+    {
+        /* フェード処理 (黒)  
+                        ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade( "Stage" + buttonNum +"Scene", Color.gray, 2.5f);
+        Initiate.Fade("HomeScene", Color.gray, 2.5f);
     }
 }

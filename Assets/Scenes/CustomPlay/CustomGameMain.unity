@@ -136,26 +136,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 205380657}
-  - component: {fileID: 205380656}
+  - component: {fileID: 205380658}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: CustomGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &205380656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 205380655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47fb29e91603eff43a984dd386e36559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &205380657
 Transform:
   m_ObjectHideFlags: 0
@@ -171,6 +159,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &205380658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205380655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda058ffa9e7c1248a614564cd1ee676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &214644873
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +462,7 @@ PrefabInstance:
     - target: {fileID: 219376549527135555, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 205380656}
+      objectReference: {fileID: 0}
     - target: {fileID: 219376549527135555, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: gameReplay
@@ -470,7 +470,7 @@ PrefabInstance:
     - target: {fileID: 1224337863979705569, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 205380656}
+      objectReference: {fileID: 0}
     - target: {fileID: 1224337863979705569, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: transitionSelect
@@ -478,7 +478,7 @@ PrefabInstance:
     - target: {fileID: 1993521925860836782, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 205380656}
+      objectReference: {fileID: 0}
     - target: {fileID: 1993521925860836782, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: transitionHome
@@ -486,7 +486,7 @@ PrefabInstance:
     - target: {fileID: 5660996681569637775, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 205380656}
+      objectReference: {fileID: 0}
     - target: {fileID: 5660996681569637775, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: transitionSelect
@@ -494,7 +494,7 @@ PrefabInstance:
     - target: {fileID: 6303450138973521964, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 205380656}
+      objectReference: {fileID: 0}
     - target: {fileID: 6303450138973521964, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: gameReplay
@@ -502,7 +502,7 @@ PrefabInstance:
     - target: {fileID: 7301387531581291883, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 205380656}
+      objectReference: {fileID: 0}
     - target: {fileID: 7301387531581291883, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: transitionHome

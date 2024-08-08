@@ -57,12 +57,37 @@ public class HomeManager : MonoBehaviour
     //=======================================================
     // シーン遷移メソッド
 
+    /// <summary>
+    /// ノーマルモード遷移処理
+    /// </summary>
     public void TransNormalMode()
     {
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
         Initiate.Fade("StageSelectScene", Color.black, 1.5f);
+    }
+
+    /// <summary>
+    /// カスタムプレイモード遷移処理
+    /// </summary>
+    public void TransCustomPlayMode()
+    {
+        /* フェード処理 (黒)  
+                        ( "シーン名",フェードの色, 速さ);  */
+        Initiate.DoneFading();
+        Initiate.Fade("CustumStageSelect", Color.black, 1.5f);
+    }
+
+    /// <summary>
+    /// カスタムプレイモード遷移処理
+    /// </summary>
+    public void TransCreateMode()
+    {
+        /* フェード処理 (黒)  
+                        ( "シーン名",フェードの色, 速さ);  */
+        Initiate.DoneFading();
+        Initiate.Fade("CreateHomeScene", Color.black, 1.5f);
     }
 
     //=======================================================
