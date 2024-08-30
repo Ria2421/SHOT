@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: PuzzleGameGroup
+  m_EditorClassIdentifier: 
+  m_GroupName: PuzzleGameGroup
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c833c96db24db1d4294211e53c437839
+  m_SerializeEntries:
+  - m_GUID: 00e2da87d79cc324c92c913be8c4d05d
+    m_Address: Stage1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37dd349a791e20247bc45f44ec64d92d
+    m_Address: Stage2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a57421e44cbf1904c96e018a36f3e3ac, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 468ef2f7bff6c8e469a21315c5df3c9c, type: 2}
+    - {fileID: 11400000, guid: 0e81865a927a0c441b9809619c8105df, type: 2}

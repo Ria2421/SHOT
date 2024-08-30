@@ -22,7 +22,7 @@ public class NetworkManager : MonoBehaviour
     /// <summary>
     /// APIベースURL
     /// </summary>
-    const string API_BASE_URL = "http://4.241.89.234/api/";
+    const string API_BASE_URL = "https://api-shot.japaneast.cloudapp.azure.com/api/";
 
     /// <summary>
     /// プレイ中のユーザーID
@@ -33,6 +33,16 @@ public class NetworkManager : MonoBehaviour
     /// プレイ中のユーザー名
     /// </summary>
     private string userName = "";
+
+    /// <summary>
+    /// プレイ中のステージNo
+    /// </summary>
+    public int PlayStageNo {  get; set; }
+
+    /// <summary>
+    /// プレイ中のステージタイプ (1:ノーマル 2:クリエイト)
+    /// </summary>
+    public int PlayStageType {  get; set; }
 
     // getプロパティを呼び出した初回時にインスタンス生成してstaticで保持
     private static NetworkManager instance;

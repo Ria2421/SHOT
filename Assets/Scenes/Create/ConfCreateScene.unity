@@ -447,6 +447,10 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 4238672685301332515, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
+      propertyPath: refCamera
+      value: 
+      objectReference: {fileID: 1888504307}
     - target: {fileID: 5223589328295226691, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -1469,6 +1473,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
+--- !u!20 &1888504307 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
+  m_PrefabInstance: {fileID: 1888504306}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1991968815
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.AddressableAssets;
 
 
 public class TitleManager : MonoBehaviour
@@ -61,15 +62,33 @@ public class TitleManager : MonoBehaviour
                 Guid.NewGuid().ToString(),  // ユーザー名
                 result =>
                 {
-                    /* 画面遷移処理 */
-                    Initiate.DoneFading();
-                    Initiate.Fade("HomeScene", Color.black, 1.5f);
+                    // カタログ更新チェック
+                    StartCoroutine(checkCatalog());
                 }));
         }
         else {
-            /* 画面遷移処理 */
+            // カタログ更新チェック
+            StartCoroutine(checkCatalog());
+        }   
+    }
+
+    private IEnumerator checkCatalog()
+    {
+        // カタログデータが更新されているかをチェック
+        var checkHandle = Addressables.CheckForCatalogUpdates(false);
+        yield return checkHandle;
+        var updates = checkHandle.Result;
+        Addressables.Release(checkHandle);  // メモリの開放
+
+        if(updates.Count >= 1)
+        {   // 更新が1つ以上あった場合はロード画面へ
+            Initiate.DoneFading();
+            Initiate.Fade("LoadingScene", Color.black, 1.5f);
+        }
+        else
+        {   // ない場合はホーム画面へ
             Initiate.DoneFading();
             Initiate.Fade("HomeScene", Color.black, 1.5f);
-        }   
+        }
     }
 }

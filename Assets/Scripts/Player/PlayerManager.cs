@@ -25,12 +25,12 @@ public class PlayerManager : MonoBehaviour
     /// <summary>
     /// クリアリザルトパネル
     /// </summary>
-    [SerializeField] GameObject clearResultPanel;
+    private GameObject clearResultPanel;
 
     /// <summary>
     /// ゲームオーバーリザルトパネル
     /// </summary>
-    [SerializeField] GameObject gameOverPanel;
+    private GameObject gameOverPanel;
 
     /// <summary>
     /// 自機の当たり判定
@@ -94,6 +94,12 @@ public class PlayerManager : MonoBehaviour
     {
         // 自機の速度設定
         this.speed = playerSpeed;
+
+        // リザルトパネルの取得・非表示
+        clearResultPanel = GameObject.Find("GameClearPanel");
+        gameOverPanel = GameObject.Find("GameOverPanel");
+        clearResultPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
     }
 
     /// <summary>

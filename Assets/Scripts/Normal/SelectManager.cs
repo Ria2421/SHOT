@@ -53,7 +53,10 @@ public class SelectManager : MonoBehaviour
 
                     scrollObj.SetActive(true);  // スクロールウィンドウ有効化
 
-                    foreach(NormalStageResponse stageData in result)
+                    // NetworkManagerを取得
+                    NetworkManager networkManager = NetworkManager.Instance;
+
+                    foreach (NormalStageResponse stageData in result)
                     {
                         // プレハブからオブジェクトの生成
                         GameObject selectBtn = Instantiate(buttonPrefub, Vector3.zero, Quaternion.identity, scrollView);
@@ -64,10 +67,14 @@ public class SelectManager : MonoBehaviour
                         // 生成したボタンにクリック時の処理を追加
                         selectBtn.GetComponent<Button>().onClick.AddListener(() =>
                         {
+                            // NetworkManagerにStageNo・Typeを保存
+                            networkManager.PlayStageNo = stageData.StageID;
+                            networkManager.PlayStageType = 1;
+
                             /* フェード処理 (黒)  
                                          ( "シーン名",フェードの色, 速さ);  */
                             Initiate.DoneFading();
-                            Initiate.Fade("Stage" + stageData.StageID.ToString() + "Scene", Color.gray, 2.5f);
+                            Initiate.Fade("UIScene", Color.gray, 2.5f);
                         });
                     }
                 }

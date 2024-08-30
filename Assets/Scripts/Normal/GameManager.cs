@@ -34,35 +34,4 @@ public class GameManager : MonoBehaviour
     {
         
     }
-
-    /// <summary>
-    /// リプレイ処理
-    /// </summary>
-    public void gameReplay()
-    {
-        // シーンの再読み
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    /// <summary>
-    /// ホーム遷移処理
-    /// </summary>
-    public void transitionHome()
-    {
-        /* フェード処理 (黒)  
-                        ( "シーン名",フェードの色, 速さ);  */
-        Initiate.DoneFading();
-        Initiate.Fade("HomeScene", Color.gray, 2.5f);
-    }
-
-    /// <summary>
-    /// ステージ選択遷移処理
-    /// </summary>
-    public void transitionSelect()
-    {
-        /* フェード処理 (黒)  
-                        ( "シーン名",フェードの色, 速さ);  */
-        Initiate.DoneFading();
-        Initiate.Fade("StageSelectScene", Color.gray, 2.5f);
-    }
 }
