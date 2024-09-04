@@ -3,7 +3,7 @@
 // UIマネージャー [ UIManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/29
-// Update:2024/08/29
+// Update:2024/09/04
 //
 //---------------------------------------------------------------
 using System.Collections;
@@ -17,6 +17,11 @@ public class UIManager : MonoBehaviour
     //-------------------------------------------
     // フィールド
 
+    /// <summary>
+    /// シーン名
+    /// </summary>
+    [SerializeField] private string sceneName = "";
+
     //--------------------------------------------
     // メソッド
 
@@ -28,16 +33,12 @@ public class UIManager : MonoBehaviour
         // NetworkManager取得
         NetworkManager networkManager = NetworkManager.Instance;
 
+#if UNITY_EDITOR
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+#else
         // UIシーンの追加
         Addressables.LoadScene("Stage" + networkManager.PlayStageNo.ToString(), LoadSceneMode.Additive);
-    }
-
-    /// <summary>
-    /// 更新処理
-    /// </summary>
-    void Update()
-    {
-        
+#endif
     }
 
     /// <summary>

@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131b50b41aabbfe4db49610add83012d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: Stage1
 --- !u!1001 &1050225477
 PrefabInstance:
   m_ObjectHideFlags: 0

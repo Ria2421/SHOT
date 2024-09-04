@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5584811856619863572}
   - component: {fileID: 893635761623133273}
   m_Layer: 0
-  m_Name: Player
+  m_Name: 12
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.46, y: -5.84, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1496891341560898395}
@@ -149,7 +149,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.45
 --- !u!114 &893635761623133273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,8 +163,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 700
-  clearResultPanel: {fileID: 0}
-  gameOverPanel: {fileID: 0}
   maxMagnitude: 15
   predictionLineRenderer: {fileID: 5203470284346036135}
   wallLayer:
@@ -223,7 +221,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

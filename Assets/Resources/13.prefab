@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 730846766700159611}
   - component: {fileID: 4782002993061421502}
   m_Layer: 0
-  m_Name: thunder
+  m_Name: 13
   m_TagString: Thunder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

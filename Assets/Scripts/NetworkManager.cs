@@ -156,6 +156,11 @@ public class NetworkManager : MonoBehaviour
         result?.Invoke(isSuccess);
     }
 
+    /// <summary>
+    /// ノーマルステージ取得処理
+    /// </summary>
+    /// <param name="result"></param>
+    /// <returns></returns>
     public IEnumerator GetNormalStage(Action<List<NormalStageResponse>> result)
     {
         // リクエスト送信処理

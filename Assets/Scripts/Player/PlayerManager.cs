@@ -85,6 +85,16 @@ public class PlayerManager : MonoBehaviour
     {
         //オブジェクトの位置を取得するためにリジッドボディの取得
         rigid2d = GetComponent<Rigidbody2D>();
+
+        // リザルトパネルの取得・非表示
+        clearResultPanel = GameObject.Find("GameClearPanel");
+        gameOverPanel = GameObject.Find("GameOverPanel");
+
+        if(clearResultPanel != null && gameOverPanel != null)
+        {   // nullチェック
+            clearResultPanel.SetActive(false);
+            gameOverPanel.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -94,12 +104,6 @@ public class PlayerManager : MonoBehaviour
     {
         // 自機の速度設定
         this.speed = playerSpeed;
-
-        // リザルトパネルの取得・非表示
-        clearResultPanel = GameObject.Find("GameClearPanel");
-        gameOverPanel = GameObject.Find("GameOverPanel");
-        clearResultPanel.SetActive(false);
-        gameOverPanel.SetActive(false);
     }
 
     /// <summary>
