@@ -182,6 +182,8 @@ public class PlayerManager : MonoBehaviour
             // 速度0に
             this.rigid2d.velocity *= 0;
 
+            // 動かないようにする
+            Destroy(this.GetComponent<PlayerManager>());
         }
 
         if (collision.gameObject.tag == "Thunder")
@@ -192,6 +194,9 @@ public class PlayerManager : MonoBehaviour
 
             // プレイヤー破棄
             Destroy(this.gameObject);
+
+            // 動かないようにする
+            Destroy(this.GetComponent<PlayerManager>());
         }
     }
 

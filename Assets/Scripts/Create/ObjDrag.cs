@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ObjDrag : MonoBehaviour
 {
@@ -44,6 +45,15 @@ public class ObjDrag : MonoBehaviour
             Destroy(this.gameObject); 
             return;
         }
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
+
+#if UNITY_EDITOR
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+#else
+   if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))return;
+#endif
 
         // タッチ時のワールド座標をスクリーン座標に変換
         screenPoint = Camera.main.WorldToScreenPoint(transform.position);

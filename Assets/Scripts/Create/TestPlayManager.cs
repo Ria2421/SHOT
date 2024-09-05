@@ -21,6 +21,11 @@ public class TestPlayManager : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject parentObj;
 
+    /// <summary>
+    /// メニューパネル
+    /// </summary>
+    [SerializeField] private GameObject menuPanel;
+
     //--------------------------------------------
     // メソッド
 
@@ -59,24 +64,49 @@ public class TestPlayManager : MonoBehaviour
     /// <summary>
     /// ホーム遷移処理
     /// </summary>
-    public void PushHome()
+    public void PushComplete()
     {
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("CreateHomeScene", Color.white, 2.5f);
-
-        Destroy(GameObject.Find("StageDataObject"));
+        Initiate.Fade("ConfCreateScene", Color.white, 2.5f);
     }
 
     /// <summary>
-    /// クリエイト画面遷移処理
+    /// メニュー押下時
     /// </summary>
-    public void PushBackCreate()
+    public void PushMenuButton()
+    {
+        // メニューパネルを表示
+        menuPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// 閉じるボタン押下時
+    /// </summary>
+    public void PushCloseButton()
+    {
+        // メニューパネルを非表示
+        menuPanel.SetActive(false);
+    }
+
+    /// <summary>
+    /// リプレイ処理
+    /// </summary>
+    public void gameReplay()
+    {
+        // シーンの再読み
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// バックボタン押下時
+    /// </summary>
+    public void PushBackButton()
     {
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("CreateMainScene", Color.white, 2.5f);
+        Initiate.Fade("CreateMainScene", Color.white, 1.5f);
     }
 }
