@@ -72,6 +72,10 @@ public class TitleManager : MonoBehaviour
         }   
     }
 
+    /// <summary>
+    /// ステージカタログチェック
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator checkCatalog()
     {
         // カタログデータが更新されているかをチェック

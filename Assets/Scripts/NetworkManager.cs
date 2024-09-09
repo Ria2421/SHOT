@@ -3,7 +3,7 @@
 // ネットワークマネージャー [ NetWorkManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/26
-// Update:2024/08/26
+// Update:2024/09/09
 //
 //---------------------------------------------------------------
 using Newtonsoft.Json;
@@ -72,6 +72,15 @@ public class NetworkManager : MonoBehaviour
     // メソッド
 
     /// <summary>
+    /// ユーザー名取得
+    /// </summary>
+    /// <returns>ユーザー名</returns>
+    public string GetUserName()
+    {
+        return userName;
+    } 
+
+    /// <summary>
     /// ユーザーデータ保存処理
     /// </summary>
     private void SaveUserData()
@@ -116,6 +125,9 @@ public class NetworkManager : MonoBehaviour
         return true;
     }
 
+    //=============================
+    // POST処理
+
     /// <summary>
     /// ユーザー登録処理
     /// </summary>
@@ -157,6 +169,45 @@ public class NetworkManager : MonoBehaviour
     }
 
     /// <summary>
+    /// クリエイトステージ登録処理
+    /// </summary>
+    /// <param name="name">ステージ名</param>
+    /// <param name="gimmickData">ギミックデータ</param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator StoreCreateStage(string name, string gimmickData, Action<bool> result)
+    {
+        // サーバーに送信するオブジェクトを作成
+        CreateStageRequest repuestData = new CreateStageRequest();
+        repuestData.Name = name;                // ステージ名
+        repuestData.UserID = this.userID;       // ユーザーID
+        repuestData.GimmickPos = gimmickData;   // ステージデータ
+
+        // サーバーに送信するオブジェクトをJSONに変換
+        string json = JsonConvert.SerializeObject(repuestData);
+
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Post(API_BASE_URL + "stages/create/store", json, "application/json");
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        bool isSuccess = false; // 受信結果
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {
+            // 通信が成功した場合、帰ってきたJSONをオブジェクトに変換
+            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            isSuccess = true;
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(isSuccess);
+    }
+
+    //=============================
+    // GET処理
+
+    /// <summary>
     /// ノーマルステージ取得処理
     /// </summary>
     /// <param name="result"></param>
@@ -176,6 +227,60 @@ public class NetworkManager : MonoBehaviour
 
             string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
             response = JsonConvert.DeserializeObject<List<NormalStageResponse>>(resultJson);  // JSONデシリアライズ
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(response);
+    }
+
+    /// <summary>
+    /// 自作ステージ取得処理
+    /// </summary>
+    /// <param name="userID">自分のユーザーID</param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator GetPlayerCreateStage(Action<List<CreateStageResponse>> result)
+    {
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Get(API_BASE_URL + "stages/create/user/" + userID.ToString());
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        // 受信情報格納用
+        List<CreateStageResponse> response = new List<CreateStageResponse>();
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {   // 通信が成功した時
+
+            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            response = JsonConvert.DeserializeObject<List<CreateStageResponse>>(resultJson);  // JSONデシリアライズ
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(response);
+    }
+
+    /// <summary>
+    /// 指定IDのステージ情報を取得
+    /// </summary>
+    /// <param name="id">ステージID</param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator GetIDCreate(int id,Action<CreateStageResponse> result)
+    {
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Get(API_BASE_URL + "stages/create/" + id.ToString());
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        // 受信情報格納用
+        CreateStageResponse response = new CreateStageResponse();
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {   // 通信が成功した時
+
+            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            response = JsonConvert.DeserializeObject<CreateStageResponse>(resultJson);  // JSONデシリアライズ
         }
 
         // 呼び出し元のresult処理を呼び出す
