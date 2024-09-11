@@ -35,21 +35,13 @@ public class TestPlayManager : MonoBehaviour
     void Start()
     {
         // ステージデータの受け取り・配置
-        var stageDatas = GameObject.Find("StageDataObject").GetComponent<StageDataObject>().GetData();
+        var stageDatas = GameObject.Find("StageDataObject").GetComponent<StageDataObject>().GetStageData();
         foreach (GimmickData data in stageDatas)
         {
             // Resourcesフォルダからギミックのオブジェクトを取得・生成
             GameObject obj = (GameObject)Resources.Load(data.ID.ToString());
             Instantiate(obj, new Vector3(data.X, data.Y, 0), Quaternion.identity);
         }
-    }
-
-    /// <summary>
-    /// 更新処理
-    /// </summary>
-    void Update()
-    {
-        
     }
 
     /// <summary>
@@ -88,15 +80,6 @@ public class TestPlayManager : MonoBehaviour
     {
         // メニューパネルを非表示
         menuPanel.SetActive(false);
-    }
-
-    /// <summary>
-    /// リプレイ処理
-    /// </summary>
-    public void gameReplay()
-    {
-        // シーンの再読み
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>

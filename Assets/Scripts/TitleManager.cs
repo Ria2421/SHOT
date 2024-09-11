@@ -29,22 +29,6 @@ public class TitleManager : MonoBehaviour
     // メソッド
 
     /// <summary>
-    /// 初期処理
-    /// </summary>
-    void Start()
-    {
-
-    }
-
-    /// <summary>
-    /// 更新処理
-    /// </summary>
-    void Update()
-    {
-        
-    }
-
-    /// <summary>
     ///  ステージ選択画面移行処理
     /// </summary>
     public void TransSelectScene()
@@ -87,12 +71,12 @@ public class TitleManager : MonoBehaviour
         if(updates.Count >= 1)
         {   // 更新が1つ以上あった場合はロード画面へ
             Initiate.DoneFading();
-            Initiate.Fade("LoadingScene", Color.black, 1.5f);
+            Initiate.Fade("LoadingScene", Color.white, 2.5f);
         }
         else
         {   // ない場合はホーム画面へ
             Initiate.DoneFading();
-            Initiate.Fade("HomeScene", Color.black, 1.5f);
+            Initiate.Fade("HomeScene", Color.white, 2.5f);
         }
     }
 }

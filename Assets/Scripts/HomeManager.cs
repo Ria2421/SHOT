@@ -3,7 +3,7 @@
 // ホームマネージャー [ HomeManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/01
-// Update:2024/08/01
+// Update:2024/09/11
 //
 //---------------------------------------------------------------
 using System.Collections;
@@ -38,23 +38,8 @@ public class HomeManager : MonoBehaviour
     //--------------------------------------------
     // メソッド
 
-    /// <summary>
-    /// 初期処理
-    /// </summary>
-    private void Start()
-    {
-        
-    }
 
-    /// <summary>
-    /// 更新処理
-    /// </summary>
-    private void Update()
-    {
-        
-    }
-
-    //=======================================================
+    //======================
     // シーン遷移メソッド
 
     /// <summary>
@@ -65,7 +50,7 @@ public class HomeManager : MonoBehaviour
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("StageSelectScene", Color.black, 1.5f);
+        Initiate.Fade("StageSelectScene", Color.white, 1.5f);
     }
 
     /// <summary>
@@ -76,7 +61,7 @@ public class HomeManager : MonoBehaviour
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("CustumStageSelect", Color.black, 1.5f);
+        Initiate.Fade("CustumStageSelect", Color.white, 2.5f);
     }
 
     /// <summary>
@@ -87,7 +72,7 @@ public class HomeManager : MonoBehaviour
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("CreateHomeScene", Color.black, 1.5f);
+        Initiate.Fade("CreateHomeScene", Color.white, 2.5f);
     }
 
     //=======================================================

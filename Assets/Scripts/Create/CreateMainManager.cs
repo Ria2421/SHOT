@@ -76,7 +76,7 @@ public class CreateMainManager : MonoBehaviour
         }
         else
         {   // データを元にギミックを配置
-            var gimmckDatas = check.GetComponent<StageDataObject>().GetData();
+            var gimmckDatas = check.GetComponent<StageDataObject>().GetStageData();
             foreach(GimmickData data in gimmckDatas)
             {
                 // Resourcesフォルダからギミックのオブジェクトを取得・生成
@@ -254,7 +254,7 @@ public class CreateMainManager : MonoBehaviour
         {
             // ステージデータを保管オブジェに受け渡し
             var dataObj = GameObject.Find("StageDataObject").GetComponent<StageDataObject>();
-            dataObj.SetData(createDatas);
+            dataObj.SetData(0,createDatas,0);
         }
 
         /* フェード処理 (白)  

@@ -60,7 +60,7 @@ public class ConfCreateManager : MonoBehaviour
         inputField.interactable = false;
 
         // ステージデータをjsonシリアライズ
-        var data = stageDataObject.GetData();
+        var data = stageDataObject.GetStageData();
         string json = JsonConvert.SerializeObject(data);
 
         // ユーザーデータが保存されていない場合は登録

@@ -234,39 +234,12 @@ public class NetworkManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 自作ステージ取得処理
-    /// </summary>
-    /// <param name="userID">自分のユーザーID</param>
-    /// <param name="result"></param>
-    /// <returns></returns>
-    public IEnumerator GetPlayerCreateStage(Action<List<CreateStageResponse>> result)
-    {
-        // リクエスト送信処理
-        UnityWebRequest request = UnityWebRequest.Get(API_BASE_URL + "stages/create/user/" + userID.ToString());
-        yield return request.SendWebRequest();  // 結果を受信するまで待機
-
-        // 受信情報格納用
-        List<CreateStageResponse> response = new List<CreateStageResponse>();
-
-        if (request.result == UnityWebRequest.Result.Success
-            && request.responseCode == 200)
-        {   // 通信が成功した時
-
-            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
-            response = JsonConvert.DeserializeObject<List<CreateStageResponse>>(resultJson);  // JSONデシリアライズ
-        }
-
-        // 呼び出し元のresult処理を呼び出す
-        result?.Invoke(response);
-    }
-
-    /// <summary>
-    /// 指定IDのステージ情報を取得
+    /// 指定IDのギミック情報を取得
     /// </summary>
     /// <param name="id">ステージID</param>
     /// <param name="result"></param>
     /// <returns></returns>
-    public IEnumerator GetIDCreate(int id,Action<CreateStageResponse> result)
+    public IEnumerator GetIDCreate(int id, Action<CreateStageResponse> result)
     {
         // リクエスト送信処理
         UnityWebRequest request = UnityWebRequest.Get(API_BASE_URL + "stages/create/" + id.ToString());
@@ -285,5 +258,87 @@ public class NetworkManager : MonoBehaviour
 
         // 呼び出し元のresult処理を呼び出す
         result?.Invoke(response);
+    }
+
+    /// <summary>
+    /// 自作ステージ取得処理
+    /// </summary>
+    /// <param name="userID">自分のユーザーID</param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator GetPlayerCreateStage(Action<List<CreateStageInfoResponse>> result)
+    {
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Get(API_BASE_URL + "stages/create/user/" + userID.ToString());
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        // 受信情報格納用
+        List<CreateStageInfoResponse> response = new List<CreateStageInfoResponse>();
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {   // 通信が成功した時
+
+            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            response = JsonConvert.DeserializeObject<List<CreateStageInfoResponse>>(resultJson);  // JSONデシリアライズ
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(response);
+    }
+
+    /// <summary>
+    /// カスタムプレイ情報取得処理
+    /// </summary>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator GetCustomList(Action<List<List<CreateStageInfoResponse>>> result)
+    {
+        List<List<CreateStageInfoResponse>> responses = new List<List<CreateStageInfoResponse>>();
+
+        //===================================
+        // フォローのステージ情報受信処理
+
+        // リクエスト送信処理
+        UnityWebRequest request1 = UnityWebRequest.Get(API_BASE_URL + "stages/create/follow/" + userID.ToString());
+        yield return request1.SendWebRequest();  // 結果を受信するまで待機
+
+        if (request1.result == UnityWebRequest.Result.Success
+            && request1.responseCode == 200)
+        {   // 通信が成功した時
+
+            string resultJson = request1.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            List<CreateStageInfoResponse> response = JsonConvert.DeserializeObject<List<CreateStageInfoResponse>>(resultJson);
+            responses.Add(response);
+        }
+
+        //=======================================
+        // イイネ数降順のステージ情報受信処理
+        UnityWebRequest request2 = UnityWebRequest.Get(API_BASE_URL + "stages/create/good");
+        yield return request2.SendWebRequest();
+
+        if (request2.result == UnityWebRequest.Result.Success
+            && request2.responseCode == 200)
+        {
+            string resultJson = request2.downloadHandler.text;
+            List<CreateStageInfoResponse> response = JsonConvert.DeserializeObject<List<CreateStageInfoResponse>>(resultJson);
+            responses.Add(response);
+        }
+
+        //=======================================
+        // フォローの共有ステージ情報受信処理
+        UnityWebRequest request3 = UnityWebRequest.Get(API_BASE_URL + "stages/create/follow/" + userID.ToString());
+        yield return request3.SendWebRequest();
+
+        if (request3.result == UnityWebRequest.Result.Success
+            && request3.responseCode == 200)
+        {
+            string resultJson = request3.downloadHandler.text;
+            List<CreateStageInfoResponse> response = JsonConvert.DeserializeObject<List<CreateStageInfoResponse>>(resultJson);
+            responses.Add(response);
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(responses);
     }
 }

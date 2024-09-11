@@ -6,9 +6,9 @@
 // Update:2024/08/08
 //
 //---------------------------------------------------------------
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,38 +43,56 @@ public class LookCreateStageManager : MonoBehaviour
         // ネットワークマネージャーの取得
         networkManager = NetworkManager.Instance;
 
-        // ユーザーデータが保存されていない場合は登録
+        // ステージオブジェクトを検索
+        GameObject stageDataObject = GameObject.Find("StageDataObject");
+
+        if(stageDataObject != null)
+        {
+            // ステージデータのリセット
+            stageDataObject.GetComponent<StageDataObject>().ResetData();
+        }
+        else
+        {
+            // データ保管用オブジェクトの生成
+            stageDataObject = new GameObject("StageDataObject");
+            stageDataObject.AddComponent<StageDataObject>();
+            DontDestroyOnLoad(stageDataObject);    // Scene遷移で破棄されなようにする
+        }
+
+        // 自作ステージ一覧の取得
         StartCoroutine(NetworkManager.Instance.GetPlayerCreateStage(
             result =>
             {
                 if (result != null)
                 {
-                    // データ取得官僚
+                    // データ取得完了
                     Debug.Log("ステージ一覧取得");
-                    foreach (var item in result)
+                    foreach (var data in result)
                     {
                         // ステージ一覧の生成
                         GameObject info = Instantiate(infoPrefab, Vector3.zero, Quaternion.identity, parentObj.transform);
-                        // 情報代入
-                        info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "ID:" + item.ID.ToString();   // ID
-                        info.transform.GetChild(1).gameObject.GetComponent<Text>().text = item.Name;                    // ステージ名
+                        // ステージ情報代入
+                        info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "ID:" + data.ID.ToString();   // ID
+                        info.transform.GetChild(1).gameObject.GetComponent<Text>().text = data.Name;                    // ステージ名
                         info.transform.GetChild(2).gameObject.GetComponent<Text>().text = networkManager.GetUserName(); // ユーザー名
-                        info.transform.GetChild(3).gameObject.GetComponent<Text>().text = item.GoodVol.ToString();      // イイネ数
+                        info.transform.GetChild(3).gameObject.GetComponent<Text>().text = data.GoodVol.ToString();      // イイネ数
                         // クリック時ステージ遷移
                         info.GetComponent<Button>().onClick.AddListener(() =>
                         {
-                            // データ保管用オブジェクトの生成
-                            GameObject stageDataObject = new GameObject("StageDataObject");
-                            stageDataObject.AddComponent<StageDataObject>();
-                            DontDestroyOnLoad(stageDataObject);    // Scene遷移で破棄されなようにする
-
                             StartCoroutine(NetworkManager.Instance.GetIDCreate(
-                                item.ID,
+                                data.ID,
                                 result =>
                                 {
+                                    // JSONデシリアライズ
+                                    var resultData = JsonConvert.DeserializeObject<List<GimmickData>>(result.GimmickPos);
+                                    stageDataObject.GetComponent<StageDataObject>().SetData(data.ID,resultData,data.GoodVol);
                                     Debug.Log("ステージデータ取得");
-                                }));
 
+                                    /* フェード処理 (白)  
+                                        ( "シーン名",フェードの色, 速さ);  */
+                                    Initiate.DoneFading();
+                                    Initiate.Fade("CreatePlayScene", Color.white, 2.5f);
+                                }));
                         });
                     }
                 }
@@ -98,6 +116,13 @@ public class LookCreateStageManager : MonoBehaviour
     /// </summary>
     public void PushBackButton()
     {
+        var stageDataObject = GameObject.Find("StageDataObject");
+        // ステージデータオブジェの削除
+        if(stageDataObject != null)
+        {
+            Destroy(stageDataObject);
+        }
+
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();

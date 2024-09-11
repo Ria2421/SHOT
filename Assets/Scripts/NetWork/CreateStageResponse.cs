@@ -13,23 +13,7 @@ using UnityEngine;
 
 public class CreateStageResponse
 {
-    /// ステージID
-    [JsonProperty("id")]
-    public int ID { get; set; }
-
-    /// ステージ名
-    [JsonProperty("name")]
-    public string Name { get; set; }
-
-    /// 作成ユーザーID
-    [JsonProperty("user_id")]
-    public int UserID { get; set; }
-
     // ギミック座標
     [JsonProperty("gimmick_pos")]
     public string GimmickPos { get; set; }
-
-    // イイネ数
-    [JsonProperty("good_vol")]
-    public int GoodVol { get; set; }
 }
