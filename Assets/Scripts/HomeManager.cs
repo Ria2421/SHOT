@@ -3,12 +3,15 @@
 // ホームマネージャー [ HomeManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/01
-// Update:2024/09/11
+// Update:2024/09/13
 //
 //---------------------------------------------------------------
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class HomeManager : MonoBehaviour
 {
@@ -35,9 +38,84 @@ public class HomeManager : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject achievementPanel;
 
+    /// <summary>
+    /// ユーザー名入力欄
+    /// </summary>
+    [SerializeField] private InputField nameInput;
+
+    /// <summary>
+    /// プロフィール情報テキスト
+    /// [0:ユーザー名 1:総プレイ数 2:クリア数 3:作成ステージ数 4:フォロー数 5:フォロワー数]
+    /// </summary>
+    [SerializeField] private List<Text> contentTexts;
+
+    /// <summary>
+    /// 完了通知位置情報
+    /// </summary>
+    [SerializeField] private RectTransform changeComplete;
+
+    /// <summary>
+    /// 失敗通知位置情報
+    /// </summary>
+    [SerializeField] private RectTransform changeFailed;
+
+    /// <summary>
+    /// 名前入力欄
+    /// </summary>
+    [SerializeField] private GameObject namePanel;
+
+    /// <summary>
+    /// アイコン一覧パネル
+    /// </summary>
+    [SerializeField] private GameObject iconPanel;
+
+    /// <summary>
+    /// アイコン集
+    /// </summary>
+    [SerializeField] private List<Sprite> iconSprite;
+
+    /// <summary>
+    /// アイコン画像
+    /// </summary>
+    [SerializeField] private Image iconImage;
+
+    /// <summary>
+    /// ネットワークマネージャー
+    /// </summary>
+    private NetworkManager networkManager;
+
+    /// <summary>
+    /// アイコンID
+    /// </summary>
+    private int iconID = 0;
+
     //--------------------------------------------
     // メソッド
 
+    /// <summary>
+    /// 初期処理
+    /// </summary>
+    void Start()
+    {
+        // ネットワークマネージャー取得
+        networkManager = NetworkManager.Instance;
+
+        // ユーザ名の取得・反映
+        contentTexts[0].text = networkManager.GetUserName();
+
+        // ユーザーデータが保存されていない場合は登録
+        StartCoroutine(NetworkManager.Instance.GetProfileInfo(
+            result =>
+            {   // 情報反映
+                iconID = result.IconID;                                      // アイコンID取得 
+                iconImage.sprite = iconSprite[iconID - 1];                   // アイコン反映
+                contentTexts[1].text = result.PlayCnt.ToString() + "回";     // 総プレイ数
+                contentTexts[2].text = result.ClearCnt.ToString() + "回";    // クリア数
+                contentTexts[3].text = result.CreateCnt.ToString() + "回";   // ステージ作成数
+                contentTexts[4].text = result.FollowCnt.ToString() + "回";   // フォロー数
+                contentTexts[5].text = result.FollowerCnt.ToString() + "回"; // フォロワー数
+            }));
+    }
 
     //======================
     // シーン遷移メソッド
@@ -50,7 +128,7 @@ public class HomeManager : MonoBehaviour
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("StageSelectScene", Color.white, 1.5f);
+        Initiate.Fade("StageSelectScene", Color.white, 2.5f);
     }
 
     /// <summary>
@@ -113,7 +191,6 @@ public class HomeManager : MonoBehaviour
     /// </summary>
     public void PushCloseButton(GameObject menuPanel)
     {
-        // 親オブジェクトを非アクティブに
         menuPanel.SetActive(false);
     }
 
@@ -122,7 +199,74 @@ public class HomeManager : MonoBehaviour
     /// </summary>
     public void PushMenuIconButton(GameObject iconPanel)
     {
-        // アチーブメント画面の表示
         iconPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// 通知押下処理
+    /// </summary>
+    /// <param name="gameObject"></param>
+    public void PushNoticeButton(RectTransform rectTransform)
+    {
+        // 初期位置に移動
+        rectTransform.anchoredPosition = new Vector2(700.0f, rectTransform.anchoredPosition.y);
+    }
+
+    /// <summary>
+    /// 通知表示処理
+    /// </summary>
+    /// <param name="cautionImage">移動対象</param>
+    private void MoveCaution(RectTransform cautionImage)
+    {
+        cautionImage.DOAnchorPos(new Vector2(0f, cautionImage.anchoredPosition.y), 0.6f).SetEase(Ease.OutBack);
+    }
+
+    /// <summary>
+    /// 名前変更ボタン押下時
+    /// </summary>
+    public void PushNameChange()
+    {
+        StartCoroutine(NetworkManager.Instance.ChangeName(
+            nameInput.text,
+            result =>
+            {
+                if (result)
+                {
+                    // 名前の変更処理
+                    contentTexts[0].text = nameInput.text;
+                    MoveCaution(changeComplete);    // 成功通知
+                    namePanel.SetActive(false);     // 入力欄非表示
+                }
+                else
+                {
+                    MoveCaution(changeFailed);      // 失敗通知
+                    namePanel.SetActive(false);     // 入力欄非表示
+                }
+            }));
+    }
+
+    /// <summary>
+    /// アイコン変更押下処理
+    /// </summary>
+    /// <param name="id">アイコンID</param>
+    public void PushIconChange(int id)
+    {
+        StartCoroutine(NetworkManager.Instance.ChangeIcon(
+            id,
+            result =>
+            {
+                if (result)
+                {
+                    // アイコンの変更処理
+                    iconImage.sprite = iconSprite[id - 1];
+                    MoveCaution(changeComplete);    // 成功通知
+                    iconPanel.SetActive(false);     // 入力欄非表示
+                }
+                else
+                {
+                    MoveCaution(changeFailed);      // 失敗通知
+                    iconPanel.SetActive(false);     // 入力欄非表示
+                }
+            }));
     }
 }

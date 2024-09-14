@@ -3,7 +3,7 @@
 // タイトルマネージャー [ TitleManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/07/18
-// Update:2024/07/18
+// Update:2024/09/13
 //
 //---------------------------------------------------------------
 using System;
@@ -18,24 +18,13 @@ using UnityEngine.AddressableAssets;
 public class TitleManager : MonoBehaviour
 {
     //-------------------------------------------------------------------
-    // フィールド
-
-    /// <summary>
-    /// ボタンコンポーネント保存用
-    /// </summary>
-    [SerializeField] private Button btn;
-
-    //-------------------------------------------------------------------
     // メソッド
 
     /// <summary>
-    ///  ステージ選択画面移行処理
+    /// 初期処理
     /// </summary>
-    public void TransSelectScene()
+    void Start()
     {
-        // 一度押された場合はボタンを無効にする
-        btn.interactable = false;
-
         // ユーザーデータの読込処理・結果を取得
         bool isSuccess = NetworkManager.Instance.LoadUserData();
 
@@ -50,12 +39,12 @@ public class TitleManager : MonoBehaviour
                     StartCoroutine(checkCatalog());
                 }));
         }
-        else {
+        else
+        {
             // カタログ更新チェック
             StartCoroutine(checkCatalog());
-        }   
+        }
     }
-
     /// <summary>
     /// ステージカタログチェック
     /// </summary>

@@ -204,6 +204,78 @@ public class NetworkManager : MonoBehaviour
         result?.Invoke(isSuccess);
     }
 
+    /// <summary>
+    /// 名前変更処理
+    /// </summary>
+    /// <param name="name">ユーザー名</param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator ChangeName(string name, Action<bool> result)
+    {
+        // 変更内容の保存
+        this.userName = name;
+        SaveUserData();
+
+        // サーバーに送信するオブジェクトを作成
+        NameChangeRequest repuestData = new NameChangeRequest();
+        repuestData.Name = name;                // ステージ名
+        repuestData.UserID = this.userID;       // ユーザーID
+
+        // サーバーに送信するオブジェクトをJSONに変換
+        string json = JsonConvert.SerializeObject(repuestData);
+
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Post(API_BASE_URL + "users/update", json, "application/json");
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        bool isSuccess = false; // 受信結果
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {
+            // 通信が成功した場合、帰ってきたJSONをオブジェクトに変換
+            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            isSuccess = true;
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(isSuccess);
+    }
+
+    /// <summary>
+    /// アイコン変更処理
+    /// </summary>
+    /// <param name="name">アイコンid</param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator ChangeIcon(int id, Action<bool> result)
+    {
+        // サーバーに送信するオブジェクトを作成
+        IconChangeRequest repuestData = new IconChangeRequest();
+        repuestData.UserID = this.userID;       // ユーザーID
+        repuestData.IconID = id;                // アイコンID
+
+        // サーバーに送信するオブジェクトをJSONに変換
+        string json = JsonConvert.SerializeObject(repuestData);
+
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Post(API_BASE_URL + "users/update", json, "application/json");
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        bool isSuccess = false; // 受信結果
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {
+            // 通信が成功した場合、帰ってきたJSONをオブジェクトに変換
+            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            isSuccess = true;
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(isSuccess);
+    }
+
     //=============================
     // GET処理
 
@@ -340,5 +412,28 @@ public class NetworkManager : MonoBehaviour
 
         // 呼び出し元のresult処理を呼び出す
         result?.Invoke(responses);
+    }
+
+    //----------------------------------
+    // プロフィール情報取得
+
+    public IEnumerator GetProfileInfo(Action<ProfileInfoResponse> result)
+    {
+        ProfileInfoResponse response = new ProfileInfoResponse();
+
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Get(API_BASE_URL + "users/summary/" + userID.ToString());
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {   // 通信が成功した時
+
+            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            response = JsonConvert.DeserializeObject<ProfileInfoResponse>(resultJson);
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(response);
     }
 }

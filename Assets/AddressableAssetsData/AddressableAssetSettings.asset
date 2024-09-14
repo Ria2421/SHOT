@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 7d1b7c690236ede4684391ee16d6e9e4
   m_currentHash:
     serializedVersion: 2
-    Hash: a98381e07f92689f531f89a54a5be140
+    Hash: 8ed23522b27a5f55ceab5b73ab976910
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
       - m_Id: bda9f5cfd8ad08746b45946aa5b24fe7
         m_Value: ServerData/[BuildTarget]
       - m_Id: 728804d04ba6f5349a0af69772bb60d9
-        m_Value: 
+        m_Value: https://shotstarage.blob.core.windows.net/puzzle-data/Android
     - m_InheritedParent: 
       m_Id: a73aff84c52d9694287a7ffc6ae8307b
       m_ProfileName: iOS
@@ -95,7 +95,7 @@ MonoBehaviour:
       - m_Id: bda9f5cfd8ad08746b45946aa5b24fe7
         m_Value: ServerData/[BuildTarget]
       - m_Id: 728804d04ba6f5349a0af69772bb60d9
-        m_Value: 
+        m_Value: https://shotstarage.blob.core.windows.net/puzzle-data/iOS
     m_ProfileEntryNames:
     - m_Id: 1e6ef254315f4f3498c81d23e78e0464
       m_Name: BuildTarget
@@ -129,7 +129,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48c37be623e77654f84addcf13584d49, type: 2}
   - {fileID: 11400000, guid: 2a0b109509640744197063e964405e8d, type: 2}
   - {fileID: 11400000, guid: 938f2fedabb330b40800ffe0ff050528, type: 2}
-  m_ActiveProfileId: 4ab7d3d1550ae7f459f1e813f6421ad3
+  m_ActiveProfileId: a40065a1b77b29d44a7178726a31ed21
   m_HostingServicesManager:
     m_HostingServiceInfos: []
     m_Settings: {fileID: 11400000}
