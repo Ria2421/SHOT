@@ -644,8 +644,16 @@ PrefabInstance:
       value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0.124816895
+      objectReference: {fileID: 0}
+    - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 0.7503662
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -840,6 +848,17 @@ MonoBehaviour:
   - {fileID: 6143162892768836623}
   - {fileID: 2057098070}
   - {fileID: 2049560035}
+  iconSprits:
+  - {fileID: 21300000, guid: fecca81bd4a9d0d4a96741bf27e36ade, type: 3}
+  - {fileID: 21300000, guid: 7fe3ee6ae4d0a8f4cbfa4e6c1d265201, type: 3}
+  - {fileID: 21300000, guid: 91d719474f2b1af4392f75562098de42, type: 3}
+  - {fileID: 21300000, guid: 46a5226c0245e644a9ecb49aa22c49bb, type: 3}
+  - {fileID: 21300000, guid: 9e84fe85479513f4ea8f5144b90d961d, type: 3}
+  - {fileID: 21300000, guid: f8cd82bc853ad594dbaa694cb53b518d, type: 3}
+  - {fileID: 21300000, guid: 8c5c722ad16e8a147bc7805d4fd100fb, type: 3}
+  - {fileID: 21300000, guid: 38a29ac7aca68bc45a2f23527aad7a03, type: 3}
+  - {fileID: 21300000, guid: 7ecf43ba507054f4e9c32b07683db1a5, type: 3}
+  - {fileID: 21300000, guid: 4146dde19cc03434694077eafc54ced0, type: 3}
 --- !u!4 &2032759140
 Transform:
   m_ObjectHideFlags: 0
@@ -1792,15 +1811,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8389795037963917432, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.4229167
       objectReference: {fileID: 0}
     - target: {fileID: 8389795037963917432, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.4229167
       objectReference: {fileID: 0}
     - target: {fileID: 8389795037963917432, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.4229167
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

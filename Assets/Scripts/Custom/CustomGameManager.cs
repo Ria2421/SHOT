@@ -6,10 +6,12 @@
 // Update:2024/09/11
 //
 //---------------------------------------------------------------
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CustomGameManager : MonoBehaviour
 {
@@ -26,6 +28,26 @@ public class CustomGameManager : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject menuPanel;
 
+    /// <summary>
+    /// イイネボタン
+    /// </summary>
+    [SerializeField] private GameObject goodButton;
+
+    /// <summary>
+    /// 共有ボタン
+    /// </summary>
+    [SerializeField] private GameObject shareButton;
+
+    /// <summary>
+    /// ネットワークマネージャー
+    /// </summary>
+    private NetworkManager networkManager;
+
+    /// <summary>
+    /// ステージデータオブジェクト
+    /// </summary>
+    private StageDataObject stageDataObject;
+
     //--------------------------------------------
     // メソッド
 
@@ -34,8 +56,10 @@ public class CustomGameManager : MonoBehaviour
     /// </summary>
     void Start()
     {
+        networkManager = NetworkManager.Instance;
         // ステージデータの受け取り・配置
-        var stageDatas = GameObject.Find("StageDataObject").GetComponent<StageDataObject>().GetStageData();
+        stageDataObject = GameObject.Find("StageDataObject").GetComponent<StageDataObject>();
+        var stageDatas = stageDataObject.GetStageData();
         foreach (GimmickData data in stageDatas)
         {
             // Resourcesフォルダからギミックのオブジェクトを取得・生成
@@ -89,9 +113,52 @@ public class CustomGameManager : MonoBehaviour
     //========================
     // リザルト処理
 
-    //++ イイネボタン処理
+    /// <summary>
+    /// イイネボタン処理
+    /// </summary>
+    public void PushGoodButton()
+    {
+        goodButton.GetComponent<Button>().interactable = false;    // ボタン無効化
 
-    //++ 共有ボタン処理
+        // イイネ更新処理
+        StartCoroutine(NetworkManager.Instance.UpdateGood(
+            stageDataObject.GetID(),
+            stageDataObject.GetGood() + 1,
+            result =>
+            {
+                if (result)
+                {
+                    goodButton.GetComponent<Image>().color = Color.green;
+                }
+                else
+                {
+                    goodButton.GetComponent<Image>().color = Color.red;
+                }
+            }));
+    }
+
+    /// <summary>
+    /// 共有ボタン処理
+    /// </summary>
+    public void PushShareButton()
+    {
+        shareButton.GetComponent<Button>().interactable = false;    // ボタン無効化
+
+        // イイネ更新処理
+        StartCoroutine(NetworkManager.Instance.ShereStage(
+            stageDataObject.GetID(),
+            result =>
+            {
+                if (result)
+                {
+                    shareButton.GetComponent<Image>().color = Color.green;
+                }
+                else
+                {
+                    shareButton.GetComponent<Image>().color = Color.red;
+                }
+            }));
+    }
 
     // ホームボタン押下処理
     public void PushHomeButton()

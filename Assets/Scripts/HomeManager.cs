@@ -11,12 +11,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class HomeManager : MonoBehaviour
 {
     //-------------------------------------------
     // フィールド
+
+    /// <summary>
+    /// ネットワークマネージャー
+    /// </summary>
+    private NetworkManager networkManager;
+
+    /// <summary>
+    /// アイコンID
+    /// </summary>
+    private int iconID = 0;
+
+    [Header(" ホーム画面関連 ")]
 
     /// <summary>
     /// メニュー表示ボタン
@@ -37,6 +48,13 @@ public class HomeManager : MonoBehaviour
     /// アチーブメント画面
     /// </summary>
     [SerializeField] private GameObject achievementPanel;
+
+    /// <summary>
+    /// フォローパネル
+    /// </summary>
+    [SerializeField] private GameObject followPanel;
+
+    [Header(" アカウント画面関連 ")]
 
     /// <summary>
     /// ユーザー名入力欄
@@ -79,15 +97,37 @@ public class HomeManager : MonoBehaviour
     /// </summary>
     [SerializeField] private Image iconImage;
 
-    /// <summary>
-    /// ネットワークマネージャー
-    /// </summary>
-    private NetworkManager networkManager;
+    [Header(" フォロー画面関連 ")]
 
     /// <summary>
-    /// アイコンID
+    /// ユーザー情報プレハブ
     /// </summary>
-    private int iconID = 0;
+    [SerializeField] private GameObject userInfoPrefab;
+
+    /// <summary>
+    /// ノーデータプレハブ
+    /// </summary>
+    [SerializeField] private GameObject noDataPrefab;
+
+    /// <summary>
+    /// リスト切り替えボタン
+    /// </summary>
+    [SerializeField] private List<GameObject> listButtons;
+
+    /// <summary>
+    /// 切り替えボタンImageリスト
+    /// </summary>
+    [SerializeField] private List<Image> buttonColors;
+
+    /// <summary>
+    /// スクロールリスト    [0:フォロー 1:フォロワー 2:相互]
+    /// </summary>
+    [SerializeField] private List<GameObject> scrollList;
+
+    /// <summary>
+    /// スクロールコンテンツ
+    /// </summary>
+    [SerializeField] private List<GameObject> scrolltContents;
 
     //--------------------------------------------
     // メソッド
@@ -203,6 +243,99 @@ public class HomeManager : MonoBehaviour
     }
 
     /// <summary>
+    /// フォローボタン押下時
+    /// </summary>
+    public void PushFollowButton()
+    {
+        followPanel.SetActive(true);
+
+        StartCoroutine(NetworkManager.Instance.GetFollow(
+            result =>
+            {
+                foreach(var data in result.Follow)
+                {   // フォローリスト
+                    if(result.Follow.Count == 0) 
+                    {
+                        // データ無し表示
+                        GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[0].transform);
+                        break; 
+                    }
+
+                    // ユーザーデータ生成
+                    GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[0].transform);
+
+                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // アイコン設定
+                    userData.transform.GetChild(1).GetComponent<Text>().text = data.Name;   // 名前設定
+                    userData.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
+                    {   // フォロー解除処理
+                        //StartCoroutine(NetworkManager.Instance.GetIDCreate(
+                        //    result =>
+                        //    {
+
+                        //    }));
+                    });
+                }
+
+                foreach (var data in result.Follower)
+                {   // フォロワーリスト
+                    if (result.Follower.Count == 0)
+                    {
+                        // データ無し表示
+                        GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[1].transform);
+                        break;
+                    }
+
+                    // ユーザーデータ生成
+                    GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[1].transform);
+
+                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // アイコン設定
+                    userData.transform.GetChild(1).GetComponent<Text>().text = data.Name;   // 名前設定
+                    userData.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
+                    {   // フォロー解除処理
+                        //StartCoroutine(NetworkManager.Instance.GetIDCreate(
+                        //    result =>
+                        //    {
+
+                        //    }));
+                    });
+                }
+
+                foreach (var data in result.Mutual)
+                {   // 相互リスト
+                    if (result.Mutual.Count == 0)
+                    {
+                        // データ無し表示
+                        GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[2].transform);
+                        break;
+                    }
+
+                    // ユーザーデータ生成
+                    GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[2].transform);
+
+                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // アイコン設定
+                    userData.transform.GetChild(1).GetComponent<Text>().text = data.Name;   // 名前設定
+                    userData.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
+                    {   // フォロー解除処理
+                        //StartCoroutine(NetworkManager.Instance.GetIDCreate(
+                        //    result =>
+                        //    {
+
+                        //    }));
+                    });
+                }
+
+                Debug.Log("リスト生成完了");
+
+                foreach (GameObject button in listButtons)
+                {   // ボタンの有効化
+                    button.GetComponent<Button>().interactable = true;
+                }
+
+                SetList(0); // フォローリストの有効化
+            }));
+    }
+
+    /// <summary>
     /// 通知押下処理
     /// </summary>
     /// <param name="gameObject"></param>
@@ -268,5 +401,29 @@ public class HomeManager : MonoBehaviour
                     iconPanel.SetActive(false);     // 入力欄非表示
                 }
             }));
+    }
+
+    /// <summary>
+    /// リスト・ボタンの表示初期化
+    /// </summary>
+    private void ResetList()
+    {
+        // ボタン・スクロールウィンドウ初期化
+        for (int i = 0; i < listButtons.Count; i++)
+        {
+            scrollList[i].SetActive(false);         // 全リストを非表示
+            buttonColors[i].color = Color.white;    // カラー白
+        }
+    }
+
+    /// <summary>
+    /// 指定Noのリストを表示
+    /// </summary>
+    /// <param name="num"></param>
+    public void SetList(int no)
+    {
+        ResetList();   // 初期化処理
+        scrollList[no].SetActive(true);
+        buttonColors[no].color = Color.gray;
     }
 }

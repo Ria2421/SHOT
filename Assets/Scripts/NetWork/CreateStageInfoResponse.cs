@@ -23,7 +23,7 @@ public class CreateStageInfoResponse
 
     /// ステージ名
     [JsonProperty("icon_id")]
-    public string IconID { get; set; }
+    public int IconID { get; set; }
 
     /// 作成ユーザーID
     [JsonProperty("user_id")]

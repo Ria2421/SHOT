@@ -48,6 +48,11 @@ public class CustomSelectManager : MonoBehaviour
     [SerializeField] private List<GameObject> scrolltContents;
 
     /// <summary>
+    /// アイコンスプライト
+    /// </summary>
+    [SerializeField] private List<Sprite> iconSprits;
+
+    /// <summary>
     /// ネットワークマネージャー格納用
     /// </summary>
     private NetworkManager networkManager;
@@ -83,7 +88,7 @@ public class CustomSelectManager : MonoBehaviour
         StartCoroutine(NetworkManager.Instance.GetCustomList(
             result =>
             {
-                for(int i = 0; i < 3; i++)
+                for(int i = 0; i < result.Count; i++)
                 {
                     if (result[i].Count == 0)
                     {   // データ無し表示
@@ -96,10 +101,11 @@ public class CustomSelectManager : MonoBehaviour
                         // ステージ一覧の生成
                         GameObject info = Instantiate(stageInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[i].transform);
                         // ステージ情報代入
-                        info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "ID:" + data.ID.ToString();   // ID
-                        info.transform.GetChild(1).gameObject.GetComponent<Text>().text = data.Name;                    // ステージ名
-                        info.transform.GetChild(2).gameObject.GetComponent<Text>().text = data.UserName;                // ユーザー名
-                        info.transform.GetChild(3).gameObject.GetComponent<Text>().text = data.GoodVol.ToString();      // イイネ数
+                        info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "ID:" + data.ID.ToString();    // ID
+                        info.transform.GetChild(1).gameObject.GetComponent<Text>().text = data.Name;                     // ステージ名
+                        info.transform.GetChild(2).gameObject.GetComponent<Text>().text = data.UserName;                 // ユーザー名
+                        info.transform.GetChild(3).gameObject.GetComponent<Text>().text = data.GoodVol.ToString();       // イイネ数
+                        info.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = iconSprits[data.IconID - 1];// アイコン設定
                         // クリック時ステージ遷移
                         info.GetComponent<Button>().onClick.AddListener(() =>
                         {

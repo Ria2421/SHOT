@@ -28,6 +28,11 @@ public class LookCreateStageManager : MonoBehaviour
     [SerializeField] private GameObject parentObj;
 
     /// <summary>
+    /// アイコンスプライト
+    /// </summary>
+    [SerializeField] private List<Sprite> iconSprits;
+
+    /// <summary>
     /// ネットワークマネージャー格納用
     /// </summary>
     private NetworkManager networkManager;
@@ -72,10 +77,11 @@ public class LookCreateStageManager : MonoBehaviour
                         // ステージ一覧の生成
                         GameObject info = Instantiate(infoPrefab, Vector3.zero, Quaternion.identity, parentObj.transform);
                         // ステージ情報代入
-                        info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "ID:" + data.ID.ToString();   // ID
-                        info.transform.GetChild(1).gameObject.GetComponent<Text>().text = data.Name;                    // ステージ名
-                        info.transform.GetChild(2).gameObject.GetComponent<Text>().text = networkManager.GetUserName(); // ユーザー名
-                        info.transform.GetChild(3).gameObject.GetComponent<Text>().text = data.GoodVol.ToString();      // イイネ数
+                        info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "ID:" + data.ID.ToString();    // ID
+                        info.transform.GetChild(1).gameObject.GetComponent<Text>().text = data.Name;                     // ステージ名
+                        info.transform.GetChild(2).gameObject.GetComponent<Text>().text = networkManager.GetUserName();  // ユーザー名
+                        info.transform.GetChild(3).gameObject.GetComponent<Text>().text = data.GoodVol.ToString();       // イイネ数
+                        info.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = iconSprits[data.IconID - 1];// アイコン設定
                         // クリック時ステージ遷移
                         info.GetComponent<Button>().onClick.AddListener(() =>
                         {
