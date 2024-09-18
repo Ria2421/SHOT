@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Thunder
   - Wall
   - Jewel
   - Create
+  - Trap
   layers:
   - Default
   - TransparentFX

@@ -105,6 +105,6 @@ public class ConfCreateManager : MonoBehaviour
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("CreateHomeScene", Color.white, 2.5f);
+        Initiate.Fade("HomeScene", Color.white, 2.5f);
     }
 }

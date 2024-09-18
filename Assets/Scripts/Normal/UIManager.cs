@@ -34,8 +34,7 @@ public class UIManager : MonoBehaviour
         NetworkManager networkManager = NetworkManager.Instance;
 
 #if UNITY_EDITOR
-        //SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-        Addressables.LoadScene("Stage" + networkManager.PlayStageNo.ToString(), LoadSceneMode.Additive);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
 #else
         // UIÉVÅ[ÉìÇÃí«â¡
         Addressables.LoadScene("Stage" + networkManager.PlayStageNo.ToString(), LoadSceneMode.Additive);

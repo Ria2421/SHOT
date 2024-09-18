@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Utility;
@@ -27,6 +28,11 @@ public class PlayerManager : MonoBehaviour
     /// ゲームオーバーリザルトパネル
     /// </summary>
     private GameObject gameOverPanel;
+
+    /// <summary>
+    /// クリアフラグ
+    /// </summary>
+    private bool clearFlag;
 
     //======================================
     // 反射予測線用
@@ -80,6 +86,9 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        // フラグの初期化
+        clearFlag = false;
+
         physics = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
         mainCameraTransform = mainCamera.transform;
@@ -100,6 +109,8 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if(clearFlag) { return; }
+
         // マウスの動きと反対方向に発射する処理
 
         if (Input.GetMouseButtonDown(0))
@@ -137,6 +148,7 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        if (clearFlag) { return; }
         physics.velocity *= 0.95f;
     }
 
@@ -171,8 +183,11 @@ public class PlayerManager : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (clearFlag) { return; }
+
         if (collision.gameObject.tag == "Finish")
         {   // ゴール判定
+            clearFlag = true;
 
             // 成功ログ登録
             StorePlayLog(true);
@@ -183,9 +198,32 @@ public class PlayerManager : MonoBehaviour
             // 速度0に
             physics.velocity *= 0;
         }
+        else if (collision.gameObject.tag == "Trap")
+        {   // トラップ判定
+            clearFlag = true;
 
-        if (collision.gameObject.tag == "Thunder")
-        {   // 雷判定
+            // 失敗ログ登録
+            StorePlayLog(false);
+
+            // ゲームオーバーパネル表示
+            gameOverPanel.SetActive(true);
+
+            // 速度0に
+            physics.velocity *= 0;
+        }
+    }
+
+    /// <summary>
+    /// トリガー判定
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (clearFlag) { return; }
+
+        if (collision.gameObject.tag == "Trap")
+        {   // 罠判定
+            clearFlag = true;
 
             // 失敗ログ登録
             StorePlayLog(false);

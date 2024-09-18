@@ -86,11 +86,12 @@ public class CreateMainManager : MonoBehaviour
                 // ドラッグ用コンポーネントの追加
                 gimmick.AddComponent<BoxCollider2D>();
                 gimmick.AddComponent<ObjDrag>();
+                Destroy(gimmick.GetComponent<Rigidbody2D>());
 
                 // タグを付与
                 gimmick.tag = "Create";
 
-                if (gimmick.name == "12(Clone)")
+                if (gimmick.name == "99(Clone)")
                 {   // プレイヤー生成時に動かないようにコンポーネントを削除
                     Destroy(gimmick.GetComponent<PlayerManager>());
                 }
@@ -144,7 +145,7 @@ public class CreateMainManager : MonoBehaviour
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("CreateHomeScene", Color.black, 1.5f);
+        Initiate.Fade("HomeScene", Color.black, 1.5f);
         
     }
 
@@ -183,11 +184,12 @@ public class CreateMainManager : MonoBehaviour
         // ドラッグ用コンポーネントの追加
         gimmick.AddComponent<BoxCollider2D>();
         gimmick.AddComponent<ObjDrag>();
+        Destroy(gimmick.GetComponent<Rigidbody2D>());
 
         // タグを付与
         gimmick.tag = "Create";
 
-        if(gimmick.name == "12(Clone)")
+        if(gimmick.name == "99(Clone)")
         {   // プレイヤー生成時に動かないようにコンポーネントを削除
             Destroy(gimmick.GetComponent<PlayerManager>());
             Destroy(gimmick.GetComponent<Rigidbody2D>());
@@ -213,10 +215,10 @@ public class CreateMainManager : MonoBehaviour
             string name = obj.name.Replace("(Clone)", "");
 
             // 設置判定
-            if(name == "10")
+            if(name == "99")
             {   // ゴール有
                 glFlag = true;
-            }else if(name == "12")
+            }else if(name == "100")
             {   // PL有
                 plFlag = true;
             }

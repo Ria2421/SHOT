@@ -30,26 +30,6 @@ public class HomeManager : MonoBehaviour
     [Header(" ホーム画面関連 ")]
 
     /// <summary>
-    /// メニュー表示ボタン
-    /// </summary>
-    [SerializeField] private GameObject upManuButton;
-
-    /// <summary>
-    /// メニュー非表示ボタン
-    /// </summary>
-    [SerializeField] private GameObject downManuButton;
-
-    /// <summary>
-    /// メニュー画面
-    /// </summary>
-    [SerializeField] private GameObject menuPanel;
-
-    /// <summary>
-    /// アチーブメント画面
-    /// </summary>
-    [SerializeField] private GameObject achievementPanel;
-
-    /// <summary>
     /// フォローパネル
     /// </summary>
     [SerializeField] private GameObject followPanel;
@@ -183,79 +163,16 @@ public class HomeManager : MonoBehaviour
     //======================
     // シーン遷移メソッド
 
-    /// <summary>
-    /// ノーマルモード遷移処理
-    /// </summary>
-    public void TransNormalMode()
+    public void TransScene(string name)
     {
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("StageSelectScene", Color.white, 2.5f);
-    }
-
-    /// <summary>
-    /// カスタムプレイモード遷移処理
-    /// </summary>
-    public void TransCustomPlayMode()
-    {
-        /* フェード処理 (黒)  
-                        ( "シーン名",フェードの色, 速さ);  */
-        Initiate.DoneFading();
-        Initiate.Fade("CustumStageSelect", Color.white, 2.5f);
-    }
-
-    /// <summary>
-    /// カスタムプレイモード遷移処理
-    /// </summary>
-    public void TransCreateMode()
-    {
-        /* フェード処理 (黒)  
-                        ( "シーン名",フェードの色, 速さ);  */
-        Initiate.DoneFading();
-        Initiate.Fade("CreateHomeScene", Color.white, 2.5f);
+        Initiate.Fade(name, Color.white, 2.5f);
     }
 
     //=======================================================
     // メニュー関連メソッド
-
-    /// <summary>
-    /// メニュー表示処理
-    /// </summary>
-    public void PushMenuUpButton()
-    {
-        // メニュー表示ボタンを非アクティブに
-        upManuButton.SetActive(false);
-
-        // メニュー非表示ボタンをアクティブに
-        downManuButton.SetActive(true);
-
-        // メニューを表示
-        menuPanel.SetActive(true);
-    }
-
-    /// <summary>
-    /// メニュー非表示処理
-    /// </summary>
-    public void PushMenuDownButton()
-    {
-        // メニュー表示ボタンをアクティブに
-        upManuButton.SetActive(true);
-
-        // メニュー非表示ボタンを非アクティブに
-        downManuButton.SetActive(false);
-
-        // メニューを閉じる
-        menuPanel.SetActive(false);
-    }
-
-    /// <summary>
-    /// メニュー閉じる処理
-    /// </summary>
-    public void PushCloseButton(GameObject menuPanel)
-    {
-        menuPanel.SetActive(false);
-    }
 
     /// <summary>
     /// 各アイコン押下処理
@@ -266,13 +183,21 @@ public class HomeManager : MonoBehaviour
     }
 
     /// <summary>
+    /// パネル閉じる処理
+    /// </summary>
+    public void PushCloseButton(GameObject menuPanel)
+    {
+        menuPanel.SetActive(false);
+    }
+
+    /// <summary>
     /// フォローボタン押下時
     /// </summary>
     public void PushFollowButton()
     {
         followPanel.SetActive(true);
 
-        //++ おすすめユーザーリストの生成
+        // おすすめユーザーリストの生成
         StartCoroutine(NetworkManager.Instance.GetRandom(
             result =>
             {

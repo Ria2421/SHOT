@@ -132,6 +132,6 @@ public class LookCreateStageManager : MonoBehaviour
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("CreateHomeScene", Color.gray, 1.5f);
+        Initiate.Fade("HomeScene", Color.gray, 1.5f);
     }
 }
