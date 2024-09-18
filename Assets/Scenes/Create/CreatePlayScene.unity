@@ -136,11 +136,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5849423125287309060, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1080
+      value: 1079.9999
       objectReference: {fileID: 0}
     - target: {fileID: 5849423125287309060, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1920
+      value: 1919.9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849423125287309060, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849423125287309060, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849423125287309060, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0666667
       objectReference: {fileID: 0}
     - target: {fileID: 8278992610012612464, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_Name
@@ -911,6 +923,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1113,6 +1133,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6244472635838638026, guid: a2c22c00a2af5094db5b36134e171129, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712638070109911331, guid: a2c22c00a2af5094db5b36134e171129, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712638070109911331, guid: a2c22c00a2af5094db5b36134e171129, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712638070109911331, guid: a2c22c00a2af5094db5b36134e171129, type: 3}
+      propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9139755341405993927, guid: a2c22c00a2af5094db5b36134e171129, type: 3}

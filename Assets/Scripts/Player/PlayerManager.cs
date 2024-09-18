@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Utility;
 
@@ -16,11 +17,6 @@ public class PlayerManager : MonoBehaviour
 {
     //-------------------------------------------
     // フィールド
-
-    /// <summary>
-    /// 自機の移動速度量
-    /// </summary>
-    [SerializeField] float playerSpeed;
 
     /// <summary>
     /// クリアリザルトパネル
@@ -32,48 +28,49 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     private GameObject gameOverPanel;
 
-    /// <summary>
-    /// 自機の当たり判定
-    /// </summary>
-    private Rigidbody2D rigid2d;
-    
-    /// <summary>
-    /// 自機のスピード
-    /// </summary>
-    private float speed = 0.0f;
-
-    /// <summary>
-    /// 指(マウス)のタップ開始位置
-    /// </summary>
-    private Vector2 startPos = Vector2.zero;
-
     //======================================
     // 反射予測線用
+
+    ///// <summary>
+    ///// wallLayerを指定
+    ///// </summary>
+    [SerializeField] private LayerMask wallLayer;
+
+    /// <summary>
+    /// 物理剛体
+    /// </summary>
+    private Rigidbody2D physics = null;
 
     /// <summary>
     /// 発射方向
     /// </summary>
-    private Vector2 launchDirection;
+    [SerializeField]
+    private LineRenderer direction = null;
 
     /// <summary>
-    /// ドラッグ開始位置を取得する
+    /// 最大付与力量
     /// </summary>
-    private Vector2 dragStart = Vector2.zero;
+    private const float MaxMagnitude = 4f;
 
     /// <summary>
-    /// 反射予測線の最大値
+    /// 発射方向の力
     /// </summary>
-    [SerializeField] private float maxMagnitude;
+    private Vector3 currentForce = Vector3.zero;
 
     /// <summary>
-    /// 予測線の描画
+    /// メインカメラ
     /// </summary>
-    [SerializeField] private LineRenderer predictionLineRenderer;
+    private Camera mainCamera = null;
 
     /// <summary>
-    /// wallLayerを指定
+    /// メインカメラ座標
     /// </summary>
-    [SerializeField] private LayerMask wallLayer;
+    private Transform mainCameraTransform = null;
+
+    /// <summary>
+    /// ドラッグ開始点
+    /// </summary>
+    private Vector3 dragStart = Vector3.zero;
 
     //--------------------------------------------
     // メソッド
@@ -83,27 +80,19 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        //オブジェクトの位置を取得するためにリジッドボディの取得
-        rigid2d = GetComponent<Rigidbody2D>();
+        physics = GetComponent<Rigidbody2D>();
+        mainCamera = Camera.main;
+        mainCameraTransform = mainCamera.transform;
 
         // リザルトパネルの取得・非表示
         clearResultPanel = GameObject.Find("GameClearPanel");
         gameOverPanel = GameObject.Find("GameOverPanel");
 
-        if(clearResultPanel != null && gameOverPanel != null)
+        if (clearResultPanel != null && gameOverPanel != null)
         {   // nullチェック
             clearResultPanel.SetActive(false);
             gameOverPanel.SetActive(false);
         }
-    }
-
-    /// <summary>
-    /// 初期処理
-    /// </summary>
-    void Start()
-    {
-        // 自機の速度設定
-        this.speed = playerSpeed;
     }
 
     /// <summary>
@@ -115,56 +104,65 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {   // マウスクリック開始時
-
-            // クリック座標を保存
-            this.startPos = Input.mousePosition;
-
-            //ドラッグの開始位置をワールド座標で取得する
             dragStart = GetMousePosition();
 
-            //描画線の予測を有効にする
-            predictionLineRenderer.enabled = true;
+            direction.enabled = true;
 
+            direction.SetPosition(0, physics.position);
+            direction.SetPosition(1, physics.position);
         }
         else if (Input.GetMouseButton(0))
         {   // クリックホールド時
-
-            //ドラッグ中のマウスの位置をワールド座標で取得する。
             var position = GetMousePosition();
 
-            //ドラッグ開始点からの距離を取得する
-            var currentForce = dragStart - position;
+            currentForce = position - dragStart;
 
-            // MaxMagnitudeに直線の長さの制限を指定しておきそれを超える場合は、最大値となるようにします。
-            if (currentForce.magnitude > maxMagnitude)
+            if (currentForce.magnitude > MaxMagnitude)
             {
-                currentForce *= maxMagnitude / currentForce.magnitude;
+                currentForce *= MaxMagnitude / currentForce.magnitude;
             }
 
-            // 予測線を描画する
-            DrawLineOfReflection(currentForce);
+            direction.SetPosition(0, physics.position);
+            direction.SetPosition(1, physics.position + new Vector2(-currentForce.x, -currentForce.y));
         }
         else if (Input.GetMouseButtonUp(0))
         {   // マウスクリックを離した時
-
-            // 離した位置を保存
-            Vector2 endPos = Input.mousePosition;
-
-            // 引っ張り方向とは逆のベクトルを計算し、正規化
-            Vector2 startDirection = (startPos - endPos).normalized;
-
-            // スピード定数 * 計算した力の向き
-            this.rigid2d.AddForce(startDirection * speed);
-
-            // 予測線描画終了
-            predictionLineRenderer.enabled = false;
+            direction.enabled = false;
+            Flip(currentForce * 6f);
         }
+    }
 
-        // テスト用：スペースキー押下で停止
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            this.rigid2d.velocity *= 0;
-        }
+    /// <summary>
+    /// 定期更新処理
+    /// </summary>
+    void FixedUpdate()
+    {
+        physics.velocity *= 0.95f;
+    }
+
+    /// <summary>
+    /// マウス座標をワールド座標に変換して取得
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 GetMousePosition()
+    {
+        // マウスから取得できないZ座標を補完する
+        var position = Input.mousePosition;
+        position.z = mainCameraTransform.position.z;
+        position = mainCamera.ScreenToWorldPoint(position);
+        position.z = 0;
+
+        return position;
+    }
+
+    /// <summary>
+    /// ボールをはじく
+    /// </summary>
+    /// <param name="force"></param>
+    public void Flip(Vector3 force)
+    {
+        // 瞬間的に力を加えてはじく
+        physics.AddForce(-force, ForceMode2D.Impulse);
     }
 
     /// <summary>
@@ -176,54 +174,66 @@ public class PlayerManager : MonoBehaviour
         if (collision.gameObject.tag == "Finish")
         {   // ゴール判定
 
+            // 成功ログ登録
+            StorePlayLog(true);
+
             // クリアリザルトON
             clearResultPanel.SetActive(true);
 
             // 速度0に
-            this.rigid2d.velocity *= 0;
-
-            // 動かないようにする
-            Destroy(this.GetComponent<PlayerManager>());
+            physics.velocity *= 0;
         }
 
         if (collision.gameObject.tag == "Thunder")
         {   // 雷判定
 
+            // 失敗ログ登録
+            StorePlayLog(false);
+
             // ゲームオーバーパネル表示
             gameOverPanel.SetActive(true);
 
-            // プレイヤー破棄
-            Destroy(this.gameObject);
-
-            // 動かないようにする
-            Destroy(this.GetComponent<PlayerManager>());
+            // 速度0に
+            physics.velocity *= 0;
         }
     }
 
     /// <summary>
-    /// ワールド座標のマウスの場所を取得
+    /// プレイログ登録処理
     /// </summary>
-    /// <returns>マウスポジション</returns>
-    private Vector2 GetMousePosition()
+    /// <param name="stageID">ステージID</param>
+    /// <param name="type">   [1:ノーマル 2:クリエイト]</param>
+    /// <param name="flag">   クリアフラグ</param>
+    private void StorePlayLog(bool flag)
     {
-        // マウスの場所を取得
-        Vector2 position = Input.mousePosition;
+        string name = SceneManager.GetActiveScene().name;   // シーン名取得
+        int stageID = 0;
+        int type = 0;
 
-        // ワールド座標に変換
-        return Camera.main.ScreenToWorldPoint(position);
-    }
-
-    /// <summary>
-    /// 反射予測線の描画
-    /// </summary>
-    /// <param name="currentForce">反射予測線の方向と大きさ</param>
-    private void DrawLineOfReflection(Vector2 currentForce)
-    {
-        var poses = Physics2DUtil.RefrectionLinePoses(rigid2d.position, currentForce.normalized, maxMagnitude, wallLayer).ToArray();
-        predictionLineRenderer.positionCount = poses.Length;
-        for (var i = 0; i < poses.Length; i++)
+        switch (name)
         {
-            predictionLineRenderer.SetPosition(i, poses[i]);
+            case "UIScene":
+                stageID = GameObject.Find("GameManager").GetComponent<GameManager>().GetStageNo();
+                type = 1;
+                break;
+
+            case "CustomGameScene":
+                stageID = GameObject.Find("StageDataObject").GetComponent<StageDataObject>().GetID();
+                type = 2;
+                break;
+
+            default:
+                break;
         }
+
+        // プレイログ登録API呼び出し
+        StartCoroutine(NetworkManager.Instance.StorePlayLog(
+            stageID,
+            type,
+            flag,
+            result =>
+            {
+                Debug.Log("ログ登録完了");
+            }));
     }
 }

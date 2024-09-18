@@ -20,8 +20,4 @@ public class FollowResponse
     /// ƒtƒHƒƒ[î•ñ
     [JsonProperty("follower")]
     public List<FollowInfo> Follower { get; set; }
-
-    /// ‘ŠŒİî•ñ
-    [JsonProperty("mutual")]
-    public List<FollowInfo> Mutual { get; set; }
 }

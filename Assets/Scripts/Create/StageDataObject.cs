@@ -22,6 +22,11 @@ public class StageDataObject : MonoBehaviour
     private int stageID = 0;
 
     /// <summary>
+    /// 作成者ID
+    /// </summary>
+    private int creatorID = 0;
+
+    /// <summary>
     /// クリエイトデータ
     /// </summary>
     private List<GimmickData> stageDatas = new List<GimmickData>();
@@ -38,9 +43,10 @@ public class StageDataObject : MonoBehaviour
     /// データ受取処理
     /// </summary>
     /// <param name="datas">ステージデータ</param>
-    public void SetData(int id,List<GimmickData> datas,int good)
+    public void SetData(int id,int cid,List<GimmickData> datas,int good)
     {
         stageID = id;
+        creatorID = cid;
         stageDatas = datas;
         goodVol = good;
         Debug.Log("受取完了");
@@ -51,6 +57,12 @@ public class StageDataObject : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     public int GetID() { return stageID; }
+
+    /// <summary>
+    /// ステージID返し処理
+    /// </summary>
+    /// <returns></returns>
+    public int GetCreatorID() { return creatorID; }
 
     /// <summary>
     /// ステージデータ返し処理

@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.124816895
+      value: 0.10638785
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -189,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.7503662
+      value: 0.7872243
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -290,13 +290,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 3666309094428167840, guid: 2dfc2c8365dabf948a0f3047140c1f25, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 12
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &44889058
@@ -495,13 +495,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 1776737982874716813, guid: 0b851adf9e5e0434f84d24f8ade1ca22, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 6
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &164049984
@@ -627,13 +627,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 591577892480612421, guid: 63695a6b78e812c45aa6c840fd5944bf, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &438021906
@@ -759,13 +759,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 949628956055485008, guid: 99b5b565589ded8469e045295ed639cc, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 5
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &497558670
@@ -891,13 +891,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 3190225481784650639, guid: 98407594eff2e3e4a880551b24b9ee46, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 9
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &513916370
@@ -1323,13 +1323,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 3109841442602173494, guid: a5c068a8d51d7524fb7555cc0c007555, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &913699754
@@ -1637,13 +1637,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 4031308768434391588, guid: bd7d6723a69924a44b7dfbd96d9788fa, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 7
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1096094599
@@ -1769,13 +1769,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 3355348400155552927, guid: c43963db9d3397348a56b90831142607, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1114723705
@@ -1918,15 +1918,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8389795037963917432, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.4229167
+      value: 0.29739583
       objectReference: {fileID: 0}
     - target: {fileID: 8389795037963917432, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.4229167
+      value: 0.29739583
       objectReference: {fileID: 0}
     - target: {fileID: 8389795037963917432, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.4229167
+      value: 0.29739583
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2128,13 +2128,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 2184380549894397116, guid: 78e1bc737ae900944ad9b91957a94cfb, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 11
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1303664714
@@ -2220,7 +2220,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1834567621}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.29812032
+  m_Size: 0.2981203
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2532,13 +2532,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 574273640384100170, guid: 92c96cf6feabb7a4d827ba514e2d463d, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 4
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1345506852
@@ -2754,13 +2754,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 7011394160145949832, guid: 12d1c7e714d84ec47950b54bb4f352f7, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 8
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1487154175
@@ -2924,13 +2924,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 8265779458390402918, guid: 18055adca107ffd4aadbeb557bad7ae4, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 10
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1787387279 stripped
@@ -3066,13 +3066,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1136175114}
         m_TargetAssemblyTypeName: CreateMainManager, Assembly-CSharp
         m_MethodName: PushGimmickButton
-        m_Mode: 2
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 2083003471176119955, guid: 773b612507a14e54abbe4900ddf38375, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 13
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1834567620
@@ -3322,8 +3322,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1313990636}
   m_HandleRect: {fileID: 1313990635}
   m_Direction: 2
-  m_Value: 0.9999936
-  m_Size: 0.94000006
+  m_Value: 0.99999744
+  m_Size: 0.94
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

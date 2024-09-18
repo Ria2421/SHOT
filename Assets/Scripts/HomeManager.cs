@@ -63,7 +63,7 @@ public class HomeManager : MonoBehaviour
 
     /// <summary>
     /// プロフィール情報テキスト
-    /// [0:ユーザー名 1:総プレイ数 2:クリア数 3:作成ステージ数 4:フォロー数 5:フォロワー数]
+    /// [0:ユーザーID 1:ユーザー名 2:総プレイ数 3:クリア数 4:作成ステージ数 5:フォロー数 6:フォロワー数]
     /// </summary>
     [SerializeField] private List<Text> contentTexts;
 
@@ -129,6 +129,26 @@ public class HomeManager : MonoBehaviour
     /// </summary>
     [SerializeField] private List<GameObject> scrolltContents;
 
+    /// <summary>
+    /// 登録画像スプライト
+    /// </summary>
+    [SerializeField] private Sprite registSprite;
+
+    /// <summary>
+    /// フォローID入力欄
+    /// </summary>
+    [SerializeField] private InputField followIDInput;
+
+    /// <summary>
+    /// フォロー登録ボタン
+    /// </summary>
+    [SerializeField] private Button followRegistButton;
+
+    /// <summary>
+    /// エラーパネル [0:完了 1:フォロー済 2:404エラー]
+    /// </summary>
+    [SerializeField] private List<RectTransform> noticePanels;
+
     //--------------------------------------------
     // メソッド
 
@@ -140,8 +160,11 @@ public class HomeManager : MonoBehaviour
         // ネットワークマネージャー取得
         networkManager = NetworkManager.Instance;
 
+        // ユーザIDの取得・反映
+        contentTexts[0].text = "ID : " + networkManager.GetUserID().ToString();
+
         // ユーザ名の取得・反映
-        contentTexts[0].text = networkManager.GetUserName();
+        contentTexts[1].text = networkManager.GetUserName();
 
         // ユーザーデータが保存されていない場合は登録
         StartCoroutine(NetworkManager.Instance.GetProfileInfo(
@@ -149,11 +172,11 @@ public class HomeManager : MonoBehaviour
             {   // 情報反映
                 iconID = result.IconID;                                      // アイコンID取得 
                 iconImage.sprite = iconSprite[iconID - 1];                   // アイコン反映
-                contentTexts[1].text = result.PlayCnt.ToString() + "回";     // 総プレイ数
-                contentTexts[2].text = result.ClearCnt.ToString() + "回";    // クリア数
-                contentTexts[3].text = result.CreateCnt.ToString() + "回";   // ステージ作成数
-                contentTexts[4].text = result.FollowCnt.ToString() + "回";   // フォロー数
-                contentTexts[5].text = result.FollowerCnt.ToString() + "回"; // フォロワー数
+                contentTexts[2].text = result.PlayCnt.ToString() + "回";     // 総プレイ数
+                contentTexts[3].text = result.ClearCnt.ToString() + "回";    // クリア数
+                contentTexts[4].text = result.CreateCnt.ToString() + "回";   // ステージ作成数
+                contentTexts[5].text = result.FollowCnt.ToString() + "回";   // フォロー数
+                contentTexts[6].text = result.FollowerCnt.ToString() + "回"; // フォロワー数
             }));
     }
 
@@ -249,79 +272,84 @@ public class HomeManager : MonoBehaviour
     {
         followPanel.SetActive(true);
 
-        StartCoroutine(NetworkManager.Instance.GetFollow(
+        //++ おすすめユーザーリストの生成
+        StartCoroutine(NetworkManager.Instance.GetRandom(
             result =>
             {
-                foreach(var data in result.Follow)
+                if (result.Count == 0)
+                {
+                    // データ無し表示
+                    GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[2].transform);
+                }
+                foreach (var data in result)
                 {   // フォローリスト
-                    if(result.Follow.Count == 0) 
-                    {
-                        // データ無し表示
-                        GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[0].transform);
-                        break; 
-                    }
-
-                    // ユーザーデータ生成
-                    GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[0].transform);
-
-                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // アイコン設定
-                    userData.transform.GetChild(1).GetComponent<Text>().text = data.Name;   // 名前設定
-                    userData.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
-                    {   // フォロー解除処理
-                        //StartCoroutine(NetworkManager.Instance.GetIDCreate(
-                        //    result =>
-                        //    {
-
-                        //    }));
-                    });
-                }
-
-                foreach (var data in result.Follower)
-                {   // フォロワーリスト
-                    if (result.Follower.Count == 0)
-                    {
-                        // データ無し表示
-                        GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[1].transform);
-                        break;
-                    }
-
-                    // ユーザーデータ生成
-                    GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[1].transform);
-
-                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // アイコン設定
-                    userData.transform.GetChild(1).GetComponent<Text>().text = data.Name;   // 名前設定
-                    userData.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
-                    {   // フォロー解除処理
-                        //StartCoroutine(NetworkManager.Instance.GetIDCreate(
-                        //    result =>
-                        //    {
-
-                        //    }));
-                    });
-                }
-
-                foreach (var data in result.Mutual)
-                {   // 相互リスト
-                    if (result.Mutual.Count == 0)
-                    {
-                        // データ無し表示
-                        GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[2].transform);
-                        break;
-                    }
 
                     // ユーザーデータ生成
                     GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[2].transform);
 
                     userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // アイコン設定
-                    userData.transform.GetChild(1).GetComponent<Text>().text = data.Name;   // 名前設定
-                    userData.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
-                    {   // フォロー解除処理
-                        //StartCoroutine(NetworkManager.Instance.GetIDCreate(
-                        //    result =>
-                        //    {
+                    userData.transform.GetChild(1).GetComponent<Text>().text = "ID : " + data.ID.ToString();    // ID設定
+                    userData.transform.GetChild(2).GetComponent<Text>().text = data.Name;                       // 名前設定
+                    userData.transform.GetChild(3).GetComponent<Image>().sprite = registSprite;                 // 画像設定
+                    userData.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() =>
+                    {   // フォロー登録処理
+                        // ボタンの無効化
+                        userData.transform.GetChild(3).GetComponent<Button>().interactable = false;
 
-                        //    }));
+                        StartCoroutine(NetworkManager.Instance.RegistFollow(
+                            data.ID,
+                            result =>
+                            {
+                                Debug.Log("登録完了");
+                            }));
                     });
+                }
+            }));
+
+        // フォロー・フォロワーリストの生成
+        StartCoroutine(NetworkManager.Instance.GetFollow(
+            result =>
+            {
+                if (result.Follow.Count == 0)
+                {
+                    // データ無し表示
+                    GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[0].transform);
+                }
+                foreach (var data in result.Follow)
+                {   // フォローリスト
+
+                    // ユーザーデータ生成
+                    GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[0].transform);
+
+                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // アイコン設定
+                    userData.transform.GetChild(1).GetComponent<Text>().text = "ID : " + data.ID.ToString();    // ID設定
+                    userData.transform.GetChild(2).GetComponent<Text>().text = data.Name;                       // 名前設定
+                    userData.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() =>
+                    {   // フォロー解除処理
+                        StartCoroutine(NetworkManager.Instance.DestroyFollow(
+                            data.ID,
+                            result =>
+                            {   // ユーザInfoオブジェの削除
+                                Destroy(userData);
+                            }));
+                    });
+                }
+
+                if (result.Follower.Count == 0)
+                {
+                    // データ無し表示
+                    GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[1].transform);
+                }
+                foreach (var data in result.Follower)
+                {   // フォロワーリスト
+                    
+                    // ユーザーデータ生成
+                    GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[1].transform);
+
+                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // アイコン設定
+                    userData.transform.GetChild(1).GetComponent<Text>().text = "ID : " + data.ID.ToString();    // ID設定
+                    userData.transform.GetChild(2).GetComponent<Text>().text = data.Name;                       // 名前設定
+                    Destroy(userData.transform.GetChild(3).gameObject);    // ボタンの破棄 
                 }
 
                 Debug.Log("リスト生成完了");
@@ -336,13 +364,30 @@ public class HomeManager : MonoBehaviour
     }
 
     /// <summary>
+    /// フォローパネル閉じる処理
+    /// </summary>
+    public void PushFollowClose()
+    {
+        followPanel.SetActive(false);
+
+        for(int i=0; i<scrolltContents.Count; i++)
+        {
+            foreach (Transform content in scrolltContents[i].transform)
+            {
+                //自分の子供をDestroyする
+                Destroy(content.gameObject);
+            }
+        }
+    }
+
+    /// <summary>
     /// 通知押下処理
     /// </summary>
     /// <param name="gameObject"></param>
     public void PushNoticeButton(RectTransform rectTransform)
     {
         // 初期位置に移動
-        rectTransform.anchoredPosition = new Vector2(700.0f, rectTransform.anchoredPosition.y);
+        rectTransform.anchoredPosition = new Vector2(1000.0f, rectTransform.anchoredPosition.y);
     }
 
     /// <summary>
@@ -366,7 +411,7 @@ public class HomeManager : MonoBehaviour
                 if (result)
                 {
                     // 名前の変更処理
-                    contentTexts[0].text = nameInput.text;
+                    contentTexts[1].text = nameInput.text;
                     MoveCaution(changeComplete);    // 成功通知
                     namePanel.SetActive(false);     // 入力欄非表示
                 }
@@ -425,5 +470,52 @@ public class HomeManager : MonoBehaviour
         ResetList();   // 初期化処理
         scrollList[no].SetActive(true);
         buttonColors[no].color = Color.gray;
+    }
+
+    /// <summary>
+    /// フォロー登録処理
+    /// </summary>
+    public void PushRegistFollow()
+    {
+        if(followIDInput.text == "") { return; }  // 入力無い時
+
+        followRegistButton.interactable = false;    // ボタン無効化
+
+        Invoke("RevivalFollowButton", 2.5f);        // 指定時間経過後ボタン有効化
+
+        StartCoroutine(NetworkManager.Instance.RegistFollow(
+            int.Parse(followIDInput.text),
+            result =>
+            {
+                switch (result)
+                {
+                    case "200": // 登録成功
+                        Debug.Log("登録完了");
+                        MoveCaution(noticePanels[0]);
+                        break;
+
+                    case "400": // 登録済
+                        Debug.Log("登録済");
+                        MoveCaution(noticePanels[1]);
+                        break;
+
+                    case "404": // 指定IDが存在しない
+                        Debug.Log("IDが存在しない");
+                        MoveCaution(noticePanels[2]);
+                        break;
+
+                    default:
+                        break;
+                }
+            }));
+    }
+
+    /// <summary>
+    /// ボタン有効化処理
+    /// </summary>
+    /// <param name="button"></param>
+    private void RevivalFollowButton()
+    {
+        followRegistButton.interactable = true;
     }
 }

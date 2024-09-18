@@ -39,6 +39,11 @@ public class CustomGameManager : MonoBehaviour
     [SerializeField] private GameObject shareButton;
 
     /// <summary>
+    /// フォローボタン
+    /// </summary>
+    [SerializeField] private GameObject followButton;
+
+    /// <summary>
     /// ネットワークマネージャー
     /// </summary>
     private NetworkManager networkManager;
@@ -113,6 +118,15 @@ public class CustomGameManager : MonoBehaviour
     //========================
     // リザルト処理
 
+    // ホームボタン押下処理
+    public void PushHomeButton()
+    {
+        /* フェード処理 (白)  
+                        ( "シーン名",フェードの色, 速さ);  */
+        Initiate.DoneFading();
+        Initiate.Fade("HomeScene", Color.white, 2.5f);
+    }
+
     /// <summary>
     /// イイネボタン処理
     /// </summary>
@@ -160,12 +174,38 @@ public class CustomGameManager : MonoBehaviour
             }));
     }
 
-    // ホームボタン押下処理
-    public void PushHomeButton()
+    /// <summary>
+    /// フォローボタン処理
+    /// </summary>
+    public void PushFollowButton()
     {
-        /* フェード処理 (白)  
-                        ( "シーン名",フェードの色, 速さ);  */
-        Initiate.DoneFading();
-        Initiate.Fade("HomeScene", Color.white, 2.5f);
+        followButton.GetComponent<Button>().interactable = false;    // ボタン無効化
+
+        StartCoroutine(NetworkManager.Instance.RegistFollow(
+            stageDataObject.GetCreatorID(),
+            result =>
+            {
+                switch (result)
+                {
+                    case "200": // 登録成功
+                        Debug.Log("登録完了");
+                        followButton.GetComponent<Image>().color = Color.green;
+                        break;
+
+                    case "400": // 登録済
+                        Debug.Log("登録済");
+                        followButton.GetComponent<Image>().color = Color.green;
+                        break;
+
+                    case "404": // 指定IDが存在しない
+                        Debug.Log("IDが存在しない");
+                        followButton.GetComponent<Image>().color = Color.red;
+                        break;
+
+                    default:
+                        followButton.GetComponent<Image>().color = Color.red;
+                        break;
+                }
+            }));
     }
 }

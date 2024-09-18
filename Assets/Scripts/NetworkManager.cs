@@ -3,7 +3,7 @@
 // ネットワークマネージャー [ NetWorkManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/26
-// Update:2024/09/09
+// Update:2024/09/17
 //
 //---------------------------------------------------------------
 using Newtonsoft.Json;
@@ -72,13 +72,22 @@ public class NetworkManager : MonoBehaviour
     // メソッド
 
     /// <summary>
+    /// ユーザーID取得
+    /// </summary>
+    /// <returns></returns>
+    public int GetUserID()
+    {
+        return userID;
+    }
+
+    /// <summary>
     /// ユーザー名取得
     /// </summary>
     /// <returns>ユーザー名</returns>
     public string GetUserName()
     {
         return userName;
-    } 
+    }
 
     /// <summary>
     /// ユーザーデータ保存処理
@@ -297,7 +306,7 @@ public class NetworkManager : MonoBehaviour
         FollowResponse responses = new FollowResponse();
 
         // リクエスト送信処理
-        UnityWebRequest request = UnityWebRequest.Get(API_BASE_URL + "users/follows/" + 1.ToString());
+        UnityWebRequest request = UnityWebRequest.Get(API_BASE_URL + "users/follows/" + userID.ToString());
         yield return request.SendWebRequest();  // 結果を受信するまで待機
 
         if (request.result == UnityWebRequest.Result.Success
@@ -306,6 +315,31 @@ public class NetworkManager : MonoBehaviour
 
             string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
             responses = JsonConvert.DeserializeObject<FollowResponse>(resultJson);
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(responses);
+    }
+
+    /// <summary>
+    /// ランダムなユーザーデータを20件取得
+    /// </summary>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator GetRandom(Action<List<FollowInfo>> result)
+    {
+        List<FollowInfo> responses = new List<FollowInfo>();
+
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Get(API_BASE_URL + "users/random/" + userID.ToString());
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {   // 通信が成功した時
+
+            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            responses = JsonConvert.DeserializeObject<List<FollowInfo>>(resultJson);
         }
 
         // 呼び出し元のresult処理を呼び出す
@@ -514,6 +548,117 @@ public class NetworkManager : MonoBehaviour
 
         // リクエスト送信処理
         UnityWebRequest request = UnityWebRequest.Post(API_BASE_URL + "stages/share", json, "application/json");
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        bool isSuccess = false; // 受信結果
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {
+            // 通信が成功した場合、帰ってきたJSONをオブジェクトに変換
+            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            isSuccess = true;
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(isSuccess);
+    }
+
+    /// <summary>
+    /// フォロー登録処理
+    /// </summary>
+    /// <param name="followID">フォローユーザーID</param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator RegistFollow(int followID, Action<string> result)
+    {
+        string resultJson = "";
+
+        // サーバーに送信するオブジェクトを作成
+        FollowRequest repuestData = new FollowRequest();
+        repuestData.UserID = userID;
+        repuestData.FollowID = followID;
+
+        // サーバーに送信するオブジェクトをJSONに変換
+        string json = JsonConvert.SerializeObject(repuestData);
+
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Post(API_BASE_URL + "users/follows/store", json, "application/json");
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        if (request.responseCode == 200 && request.result == UnityWebRequest.Result.Success)
+        {   // 通信成功
+            resultJson = request.responseCode.ToString();   // レスポンスボディ(json)の文字列を取得
+        }
+        else if(request.responseCode == 400 && request.result == UnityWebRequest.Result.ProtocolError)
+        {   // 既に登録済み
+            resultJson = request.responseCode.ToString();
+        }
+        else if (request.responseCode == 404 && request.result == UnityWebRequest.Result.ProtocolError)
+        {   // 指定IDが存在しない
+            resultJson = request.responseCode.ToString();
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(resultJson);
+    }
+
+    /// <summary>
+    /// フォロー解除処理
+    /// </summary>
+    /// <param name="followID">フォローユーザーID</param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator DestroyFollow(int followID,Action<bool> result) 
+    {
+        // サーバーに送信するオブジェクトを作成
+        FollowRequest repuestData = new FollowRequest();
+        repuestData.UserID = userID;
+        repuestData.FollowID = followID;
+
+        // サーバーに送信するオブジェクトをJSONに変換
+        string json = JsonConvert.SerializeObject(repuestData);
+
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Post(API_BASE_URL + "users/follows/destroy", json, "application/json");
+        yield return request.SendWebRequest();  // 結果を受信するまで待機
+
+        bool isSuccess = false; // 受信結果
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {
+            // 通信が成功した場合、帰ってきたJSONをオブジェクトに変換
+            string resultJson = request.downloadHandler.text;   // レスポンスボディ(json)の文字列を取得
+            isSuccess = true;
+        }
+
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(isSuccess);
+    }
+
+    /// <summary>
+    /// プレイログ登録処理
+    /// </summary>
+    /// <param name="stageID">ステージID</param>
+    /// <param name="type">   1:ノーマル 2:クリエイト</param>
+    /// <param name="flag">   クリアフラグ</param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public IEnumerator StorePlayLog(int stageID,int type,bool flag, Action<bool> result)
+    {
+        // サーバーに送信するオブジェクトを作成
+        PlayLogRequest repuestData = new PlayLogRequest();
+        repuestData.UserID = userID;
+        repuestData.StageID = stageID;
+        repuestData.StageType = type;
+        repuestData.ClearFlag = flag;
+
+        // サーバーに送信するオブジェクトをJSONに変換
+        string json = JsonConvert.SerializeObject(repuestData);
+
+        // リクエスト送信処理
+        UnityWebRequest request = UnityWebRequest.Post(API_BASE_URL + "stages/store/result", json, "application/json");
         yield return request.SendWebRequest();  // 結果を受信するまで待機
 
         bool isSuccess = false; // 受信結果

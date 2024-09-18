@@ -116,7 +116,7 @@ public class CustomSelectManager : MonoBehaviour
                                     // JSONデシリアライズ
                                     var resultData = JsonConvert.DeserializeObject<List<GimmickData>>(result.GimmickPos);
                                     if (resultData == null) { return; }  // nullチェック
-                                    stageDataObject.GetComponent<StageDataObject>().SetData(data.ID, resultData, data.GoodVol);
+                                    stageDataObject.GetComponent<StageDataObject>().SetData(data.ID,data.UserID ,resultData, data.GoodVol);
                                     Debug.Log("ステージデータ取得");
 
                                     /* フェード処理 (白)  

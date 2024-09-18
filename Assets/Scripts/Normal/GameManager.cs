@@ -3,7 +3,7 @@
 // ゲームマネージャー [ GameManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/07/18
-// Update:2024/08/04
+// Update:2024/09/18
 //
 //---------------------------------------------------------------
 using System.Collections;
@@ -16,22 +16,15 @@ public class GameManager : MonoBehaviour
     //-------------------------------------------
     // フィールド
 
+    // ステージNo
+    [SerializeField] int stageNo;
+
     //--------------------------------------------
     // メソッド
 
     /// <summary>
-    /// 初期処理
+    /// ステージNo返却
     /// </summary>
-    void Start()
-    {
-        
-    }
-
-    /// <summary>
-    /// 更新処理
-    /// </summary>
-    void Update()
-    {
-        
-    }
+    /// <returns></returns>
+    public int GetStageNo() { return stageNo; }
 }

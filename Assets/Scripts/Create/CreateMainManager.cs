@@ -172,12 +172,12 @@ public class CreateMainManager : MonoBehaviour
     /// <summary>
     /// ギミックボタン押下処理
     /// </summary>
-    public void PushGimmickButton(GameObject gameObject)
+    public void PushGimmickButton(string objName)
     {
-        Debug.Log(gameObject.name); // ギミック名の表示
+        Debug.Log(objName); // ギミック名の表示
 
         // Resourcesフォルダからギミックのオブジェクトを取得・生成
-        GameObject obj = (GameObject)Resources.Load(gameObject.name);
+        GameObject obj = (GameObject)Resources.Load(objName);
         GameObject gimmick = Instantiate(obj,Vector3.zero,Quaternion.identity);
 
         // ドラッグ用コンポーネントの追加
@@ -254,7 +254,7 @@ public class CreateMainManager : MonoBehaviour
         {
             // ステージデータを保管オブジェに受け渡し
             var dataObj = GameObject.Find("StageDataObject").GetComponent<StageDataObject>();
-            dataObj.SetData(0,createDatas,0);
+            dataObj.SetData(0,0,createDatas,0);
         }
 
         /* フェード処理 (白)  

@@ -91,7 +91,7 @@ public class LookCreateStageManager : MonoBehaviour
                                 {
                                     // JSONデシリアライズ
                                     var resultData = JsonConvert.DeserializeObject<List<GimmickData>>(result.GimmickPos);
-                                    stageDataObject.GetComponent<StageDataObject>().SetData(data.ID,resultData,data.GoodVol);
+                                    stageDataObject.GetComponent<StageDataObject>().SetData(data.ID,data.UserID,resultData,data.GoodVol);
                                     Debug.Log("ステージデータ取得");
 
                                     /* フェード処理 (白)  
