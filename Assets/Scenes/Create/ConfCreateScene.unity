@@ -574,6 +574,7 @@ MonoBehaviour:
   compBtn: {fileID: 1031454469}
   backBtn: {fileID: 224505897}
   inputField: {fileID: 447714097}
+  buttonColor: {fileID: 1031454470}
 --- !u!4 &628999017
 Transform:
   m_ObjectHideFlags: 0

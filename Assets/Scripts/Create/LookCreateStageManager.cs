@@ -6,6 +6,7 @@
 // Update:2024/08/08
 //
 //---------------------------------------------------------------
+using KanKikuchi.AudioManager;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
@@ -85,6 +86,8 @@ public class LookCreateStageManager : MonoBehaviour
                         // クリック時ステージ遷移
                         info.GetComponent<Button>().onClick.AddListener(() =>
                         {
+                            SEManager.Instance.Play(SEPath.MENU_SELECT);
+
                             StartCoroutine(NetworkManager.Instance.GetIDCreate(
                                 data.ID,
                                 result =>
@@ -110,18 +113,12 @@ public class LookCreateStageManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 更新処理
-    /// </summary>
-    void Update()
-    {
-
-    }
-
-    /// <summary>
     /// 戻るボタン押下処理
     /// </summary>
     public void PushBackButton()
     {
+        SEManager.Instance.Play(SEPath.CANCEL);
+
         var stageDataObject = GameObject.Find("StageDataObject");
         // ステージデータオブジェの削除
         if(stageDataObject != null)

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
+using KanKikuchi.AudioManager;
 
 public class UIManager : MonoBehaviour
 {
@@ -26,15 +27,15 @@ public class UIManager : MonoBehaviour
     // メソッド
 
     /// <summary>
-    /// 初期処理
+    /// 起動処理
     /// </summary>
-    void Start()
+    void Awake()
     {
         // NetworkManager取得
         NetworkManager networkManager = NetworkManager.Instance;
 
 #if UNITY_EDITOR
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        Addressables.LoadScene("Stage" + networkManager.PlayStageNo.ToString(), LoadSceneMode.Additive);
 #else
         // UIシーンの追加
         Addressables.LoadScene("Stage" + networkManager.PlayStageNo.ToString(), LoadSceneMode.Additive);
@@ -46,6 +47,8 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void gameReplay()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // シーンの再読み
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -55,6 +58,9 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void transitionHome()
     {
+        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
@@ -66,6 +72,9 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void transitionSelect()
     {
+        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();

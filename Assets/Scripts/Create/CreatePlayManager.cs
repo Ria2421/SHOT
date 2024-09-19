@@ -6,6 +6,7 @@
 // Update:2024/09/10
 //
 //---------------------------------------------------------------
+using KanKikuchi.AudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,18 +43,13 @@ public class CreatePlayManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 更新処理
-    /// </summary>
-    void Update()
-    {
-        
-    }
-
-    /// <summary>
     /// セレクトボタン押下処理
     /// </summary>
     public void PushSelectButton()
     {
+        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
@@ -65,6 +61,8 @@ public class CreatePlayManager : MonoBehaviour
     /// </summary>
     public void PushGameReplay()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // シーンの再読み
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -74,6 +72,9 @@ public class CreatePlayManager : MonoBehaviour
     /// </summary>
     public void PushComplete()
     {
+        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
@@ -85,6 +86,8 @@ public class CreatePlayManager : MonoBehaviour
     /// </summary>
     public void PushMenuButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // メニューパネルを表示
         menuPanel.SetActive(true);
     }
@@ -94,6 +97,8 @@ public class CreatePlayManager : MonoBehaviour
     /// </summary>
     public void PushCloseButton()
     {
+        SEManager.Instance.Play(SEPath.CANCEL);
+
         // メニューパネルを非表示
         menuPanel.SetActive(false);
     }
@@ -103,6 +108,9 @@ public class CreatePlayManager : MonoBehaviour
     /// </summary>
     public void PushBackButton()
     {
+        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();

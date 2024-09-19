@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using KanKikuchi.AudioManager;
 
 public class ConfCreateManager : MonoBehaviour
 {
@@ -31,6 +32,11 @@ public class ConfCreateManager : MonoBehaviour
     /// ステージ名入力フィールド
     /// </summary>
     [SerializeField] private InputField inputField;
+
+    /// <summary>
+    /// 完成ボタンImage
+    /// </summary>
+    [SerializeField] private Image buttonColor;
 
     /// <summary>
     /// ステージデータオブジェ
@@ -54,6 +60,8 @@ public class ConfCreateManager : MonoBehaviour
     /// </summary>
     public void PushCompButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // UIを無効化
         compBtn.interactable = false;
         backBtn.interactable = false;
@@ -73,12 +81,15 @@ public class ConfCreateManager : MonoBehaviour
                 {
                     // 登録完了表示。表示内にホームへ戻るボタンを配置
                     Debug.Log("登録完了");
+                    buttonColor.color = Color.green;
                     // ステージデータオブジェを破棄
                     Destroy(GameObject.Find("StageDataObject"));
                 }
                 else
                 {
                     Debug.Log("登録失敗");
+                    buttonColor.color = Color.red;
+                    Invoke("ValidityCompButton", 1.5f);
                 }
             }));
     }
@@ -88,6 +99,8 @@ public class ConfCreateManager : MonoBehaviour
     /// </summary>
     public void PushBackButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
@@ -99,6 +112,8 @@ public class ConfCreateManager : MonoBehaviour
     /// </summary>
     public void PushHomeButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // ステージデータオブジェを破棄
         Destroy(GameObject.Find("StageDataObject"));
 
@@ -106,5 +121,14 @@ public class ConfCreateManager : MonoBehaviour
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
         Initiate.Fade("HomeScene", Color.white, 2.5f);
+    }
+
+    /// <summary>
+    /// 完成ボタン復活
+    /// </summary>
+    public void ValidityCompButton()
+    {
+        compBtn.interactable = true;
+        buttonColor.color = Color.white;
     }
 }

@@ -6,6 +6,7 @@
 // Update:2024/09/04
 //
 //---------------------------------------------------------------
+using KanKikuchi.AudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,6 +50,7 @@ public class TestPlayManager : MonoBehaviour
     /// </summary>
     public void PushGameReplay()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
         // シーンの再読み
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -58,6 +60,8 @@ public class TestPlayManager : MonoBehaviour
     /// </summary>
     public void PushComplete()
     {
+        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
@@ -69,6 +73,7 @@ public class TestPlayManager : MonoBehaviour
     /// </summary>
     public void PushMenuButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
         // メニューパネルを表示
         menuPanel.SetActive(true);
     }
@@ -78,6 +83,7 @@ public class TestPlayManager : MonoBehaviour
     /// </summary>
     public void PushCloseButton()
     {
+        SEManager.Instance.Play(SEPath.CANCEL);
         // メニューパネルを非表示
         menuPanel.SetActive(false);
     }
@@ -87,6 +93,8 @@ public class TestPlayManager : MonoBehaviour
     /// </summary>
     public void PushBackButton()
     {
+        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();

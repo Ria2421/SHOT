@@ -6,6 +6,7 @@
 // Update:2024/07/27
 //
 //---------------------------------------------------------------
+using KanKikuchi.AudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -99,6 +100,8 @@ public class SelectManager : MonoBehaviour
     /// </summary>
     public void PushStageSelect(string buttonNum)
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // ログにてステージNoを表示
         Debug.Log(buttonNum);
 
@@ -116,6 +119,8 @@ public class SelectManager : MonoBehaviour
     /// </summary>
     public void PushBackButton()
     {
+        SEManager.Instance.Play(SEPath.CANCEL);
+
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();

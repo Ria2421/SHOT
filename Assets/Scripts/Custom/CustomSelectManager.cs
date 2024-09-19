@@ -6,6 +6,7 @@
 // Update:2024/09/11
 //
 //---------------------------------------------------------------
+using KanKikuchi.AudioManager;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
@@ -109,6 +110,8 @@ public class CustomSelectManager : MonoBehaviour
                         // クリック時ステージ遷移
                         info.GetComponent<Button>().onClick.AddListener(() =>
                         {
+                            SEManager.Instance.Play(SEPath.MENU_SELECT);
+
                             StartCoroutine(NetworkManager.Instance.GetIDCreate(
                                 data.ID,
                                 result =>
@@ -168,6 +171,8 @@ public class CustomSelectManager : MonoBehaviour
     /// </summary>
     public void PushBackButton()
     {
+        SEManager.Instance.Play(SEPath.CANCEL);
+
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();

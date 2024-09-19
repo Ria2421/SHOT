@@ -7,9 +7,11 @@
 //
 //---------------------------------------------------------------
 using DG.Tweening;
+using KanKikuchi.AudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class HomeManager : MonoBehaviour
@@ -33,6 +35,16 @@ public class HomeManager : MonoBehaviour
     /// フォローパネル
     /// </summary>
     [SerializeField] private GameObject followPanel;
+
+    /// <summary>
+    /// BGMスライダー
+    /// </summary>
+    [SerializeField] private Slider bgmSlider;
+
+    /// <summary>
+    /// SEスライダー
+    /// </summary>
+    [SerializeField] private Slider seSlider;
 
     [Header(" アカウント画面関連 ")]
 
@@ -137,6 +149,12 @@ public class HomeManager : MonoBehaviour
     /// </summary>
     void Start()
     {
+        // BGM再生
+        if (!BGMManager.Instance.IsPlaying())
+        {
+            BGMManager.Instance.Play(BGMPath.HOME_SELECT,0.8f);
+        }
+
         // ネットワークマネージャー取得
         networkManager = NetworkManager.Instance;
 
@@ -158,6 +176,7 @@ public class HomeManager : MonoBehaviour
                 contentTexts[5].text = result.FollowCnt.ToString() + "回";   // フォロー数
                 contentTexts[6].text = result.FollowerCnt.ToString() + "回"; // フォロワー数
             }));
+
     }
 
     //======================
@@ -165,6 +184,7 @@ public class HomeManager : MonoBehaviour
 
     public void TransScene(string name)
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
@@ -180,6 +200,7 @@ public class HomeManager : MonoBehaviour
     public void PushMenuIconButton(GameObject iconPanel)
     {
         iconPanel.SetActive(true);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
     }
 
     /// <summary>
@@ -188,6 +209,7 @@ public class HomeManager : MonoBehaviour
     public void PushCloseButton(GameObject menuPanel)
     {
         menuPanel.SetActive(false);
+        SEManager.Instance.Play(SEPath.CANCEL);
     }
 
     /// <summary>
@@ -195,6 +217,8 @@ public class HomeManager : MonoBehaviour
     /// </summary>
     public void PushFollowButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         followPanel.SetActive(true);
 
         // おすすめユーザーリストの生成
@@ -293,6 +317,8 @@ public class HomeManager : MonoBehaviour
     /// </summary>
     public void PushFollowClose()
     {
+        SEManager.Instance.Play(SEPath.CANCEL);
+
         followPanel.SetActive(false);
 
         for(int i=0; i<scrolltContents.Count; i++)
@@ -311,6 +337,8 @@ public class HomeManager : MonoBehaviour
     /// <param name="gameObject"></param>
     public void PushNoticeButton(RectTransform rectTransform)
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // 初期位置に移動
         rectTransform.anchoredPosition = new Vector2(1000.0f, rectTransform.anchoredPosition.y);
     }
@@ -321,6 +349,7 @@ public class HomeManager : MonoBehaviour
     /// <param name="cautionImage">移動対象</param>
     private void MoveCaution(RectTransform cautionImage)
     {
+        SEManager.Instance.Play(SEPath.TUUTI);
         cautionImage.DOAnchorPos(new Vector2(0f, cautionImage.anchoredPosition.y), 0.6f).SetEase(Ease.OutBack);
     }
 
@@ -329,6 +358,8 @@ public class HomeManager : MonoBehaviour
     /// </summary>
     public void PushNameChange()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         StartCoroutine(NetworkManager.Instance.ChangeName(
             nameInput.text,
             result =>
@@ -354,6 +385,8 @@ public class HomeManager : MonoBehaviour
     /// <param name="id">アイコンID</param>
     public void PushIconChange(int id)
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         StartCoroutine(NetworkManager.Instance.ChangeIcon(
             id,
             result =>
@@ -402,7 +435,9 @@ public class HomeManager : MonoBehaviour
     /// </summary>
     public void PushRegistFollow()
     {
-        if(followIDInput.text == "") { return; }  // 入力無い時
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
+        if (followIDInput.text == "") { return; }  // 入力無い時
 
         followRegistButton.interactable = false;    // ボタン無効化
 
@@ -442,5 +477,21 @@ public class HomeManager : MonoBehaviour
     private void RevivalFollowButton()
     {
         followRegistButton.interactable = true;
+    }
+
+    /// <summary>
+    /// BGM音量変更処理
+    /// </summary>
+    public void ChangeBgmVolume()
+    {
+        BGMManager.Instance.ChangeBaseVolume(bgmSlider.value);
+    }
+
+    /// <summary>
+    /// SE音量変更処理
+    /// </summary>
+    public void ChangeSeVolume()
+    {
+        SEManager.Instance.ChangeBaseVolume(seSlider.value);
     }
 }

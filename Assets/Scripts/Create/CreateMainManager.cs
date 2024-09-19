@@ -13,6 +13,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using static UnityEngine.GraphicsBuffer;
+using KanKikuchi.AudioManager;
 
 public class CreateMainManager : MonoBehaviour
 {
@@ -100,19 +101,12 @@ public class CreateMainManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 更新処理
-    /// </summary>
-    private void Update()
-    {
-
-    }
-
-    /// <summary>
     /// 注意書き表示処理
     /// </summary>
     /// <param name="cautionImage">移動対象</param>
     private void MoveCaution(RectTransform cautionImage)
     {
+        SEManager.Instance.Play(SEPath.TUUTI);
         cautionImage.DOAnchorPos(new Vector2(0f, cautionImage.anchoredPosition.y), 0.6f).SetEase(Ease.OutBack);
     }
 
@@ -124,6 +118,7 @@ public class CreateMainManager : MonoBehaviour
     /// </summary>
     public void PushMenuButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
         // メニューパネルを表示
         menuPanel.SetActive(true);
     }
@@ -133,6 +128,7 @@ public class CreateMainManager : MonoBehaviour
     /// </summary>
     public void PushCloseButton()
     {
+        SEManager.Instance.Play(SEPath.CANCEL);
         // メニューパネルを非表示
         menuPanel.SetActive(false);
     }
@@ -142,6 +138,8 @@ public class CreateMainManager : MonoBehaviour
     /// </summary>
     public void PushHomeButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         /* フェード処理 (黒)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
@@ -154,6 +152,8 @@ public class CreateMainManager : MonoBehaviour
     /// </summary>
     public void PushDustBox(GameObject gameObject)
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         if (!DeleteModeFlag)
         {   // 削除モードOFFの時
             DeleteModeFlag = true;
@@ -175,6 +175,7 @@ public class CreateMainManager : MonoBehaviour
     /// </summary>
     public void PushGimmickButton(string objName)
     {
+        SEManager.Instance.Play(SEPath.GIMMICK_SET);
         Debug.Log(objName); // ギミック名の表示
 
         // Resourcesフォルダからギミックのオブジェクトを取得・生成
@@ -201,6 +202,8 @@ public class CreateMainManager : MonoBehaviour
     /// </summary>
     public void PushTestPlay()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // プレイヤー・ゴール設置フラグ
         bool plFlag = false;
         bool glFlag = false;
@@ -270,6 +273,8 @@ public class CreateMainManager : MonoBehaviour
     /// </summary>
     public void PushCation(RectTransform rectTransform)
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // 初期位置に移動
         rectTransform.anchoredPosition = new Vector2(1000.0f, rectTransform.anchoredPosition.y);
     }

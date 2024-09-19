@@ -6,6 +6,7 @@
 // Update:2024/07/24
 //
 //---------------------------------------------------------------
+using KanKikuchi.AudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Utility;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -22,12 +24,12 @@ public class PlayerManager : MonoBehaviour
     /// <summary>
     /// クリアリザルトパネル
     /// </summary>
-    private GameObject clearResultPanel;
+    private GameObject clearResultPanel = null;
 
     /// <summary>
     /// ゲームオーバーリザルトパネル
     /// </summary>
-    private GameObject gameOverPanel;
+    private GameObject gameOverPanel = null;
 
     /// <summary>
     /// クリアフラグ
@@ -86,22 +88,22 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        if(SceneManager.GetActiveScene().name != "CreateMainScene")
+        {
+            BGMManager.Instance.Play(BGMPath.GAME);
+
+            // リザルトパネルの取得
+            var panel = GameObject.Find("Panel");   // UIパネルの取得
+            clearResultPanel = panel.transform.Find("GameClearPanel").gameObject;
+            gameOverPanel = panel.transform.Find("GameOverPanel").gameObject;
+        }
+
         // フラグの初期化
         clearFlag = false;
 
         physics = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
         mainCameraTransform = mainCamera.transform;
-
-        // リザルトパネルの取得・非表示
-        clearResultPanel = GameObject.Find("GameClearPanel");
-        gameOverPanel = GameObject.Find("GameOverPanel");
-
-        if (clearResultPanel != null && gameOverPanel != null)
-        {   // nullチェック
-            clearResultPanel.SetActive(false);
-            gameOverPanel.SetActive(false);
-        }
     }
 
     /// <summary>
@@ -115,6 +117,8 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {   // マウスクリック開始時
+            SEManager.Instance.Play(SEPath.SHOT_CHARGE);
+
             dragStart = GetMousePosition();
 
             direction.enabled = true;
@@ -138,6 +142,8 @@ public class PlayerManager : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {   // マウスクリックを離した時
+            SEManager.Instance.Play(SEPath.SHOT);
+
             direction.enabled = false;
             Flip(currentForce * 6f);
         }
@@ -185,9 +191,11 @@ public class PlayerManager : MonoBehaviour
     {
         if (clearFlag) { return; }
 
+        SEManager.Instance.Play(SEPath.OBJ_BUTUKARI);
+
         if (collision.gameObject.tag == "Finish")
         {   // ゴール判定
-            clearFlag = true;
+            SEManager.Instance.Play(SEPath.CLEAR,0.7f);
 
             // 成功ログ登録
             StorePlayLog(true);
@@ -197,10 +205,12 @@ public class PlayerManager : MonoBehaviour
 
             // 速度0に
             physics.velocity *= 0;
+
+            clearFlag = true;
         }
         else if (collision.gameObject.tag == "Trap")
         {   // トラップ判定
-            clearFlag = true;
+            SEManager.Instance.Play(SEPath.FAILED);
 
             // 失敗ログ登録
             StorePlayLog(false);
@@ -210,6 +220,8 @@ public class PlayerManager : MonoBehaviour
 
             // 速度0に
             physics.velocity *= 0;
+
+            clearFlag = true;
         }
     }
 
@@ -221,9 +233,10 @@ public class PlayerManager : MonoBehaviour
     {
         if (clearFlag) { return; }
 
+        SEManager.Instance.Play(SEPath.OBJ_BUTUKARI);
+
         if (collision.gameObject.tag == "Trap")
         {   // 罠判定
-            clearFlag = true;
 
             // 失敗ログ登録
             StorePlayLog(false);
@@ -233,6 +246,8 @@ public class PlayerManager : MonoBehaviour
 
             // 速度0に
             physics.velocity *= 0;
+
+            clearFlag = true;
         }
     }
 
@@ -272,6 +287,7 @@ public class PlayerManager : MonoBehaviour
             result =>
             {
                 Debug.Log("ログ登録完了");
+                Destroy(GetComponent<Rigidbody2D>());
             }));
     }
 }

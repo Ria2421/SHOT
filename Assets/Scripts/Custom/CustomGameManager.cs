@@ -6,6 +6,7 @@
 // Update:2024/09/11
 //
 //---------------------------------------------------------------
+using KanKikuchi.AudioManager;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
@@ -82,6 +83,8 @@ public class CustomGameManager : MonoBehaviour
     /// </summary>
     public void PushMenuButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // メニューパネルを表示
         menuPanel.SetActive(true);
     }
@@ -91,6 +94,8 @@ public class CustomGameManager : MonoBehaviour
     /// </summary>
     public void PushCloseButton()
     {
+        SEManager.Instance.Play(SEPath.CANCEL);
+
         // メニューパネルを非表示
         menuPanel.SetActive(false);
     }
@@ -100,6 +105,9 @@ public class CustomGameManager : MonoBehaviour
     /// </summary>
     public void PushBackButton()
     {
+        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
@@ -111,16 +119,18 @@ public class CustomGameManager : MonoBehaviour
     /// </summary>
     public void PushReplayButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         // シーンの再読み
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    //========================
-    // リザルト処理
-
     // ホームボタン押下処理
     public void PushHomeButton()
     {
+        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
@@ -132,6 +142,8 @@ public class CustomGameManager : MonoBehaviour
     /// </summary>
     public void PushGoodButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         goodButton.GetComponent<Button>().interactable = false;    // ボタン無効化
 
         // イイネ更新処理
@@ -156,6 +168,8 @@ public class CustomGameManager : MonoBehaviour
     /// </summary>
     public void PushShareButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         shareButton.GetComponent<Button>().interactable = false;    // ボタン無効化
 
         // イイネ更新処理
@@ -179,6 +193,8 @@ public class CustomGameManager : MonoBehaviour
     /// </summary>
     public void PushFollowButton()
     {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
         followButton.GetComponent<Button>().interactable = false;    // ボタン無効化
 
         StartCoroutine(NetworkManager.Instance.RegistFollow(
