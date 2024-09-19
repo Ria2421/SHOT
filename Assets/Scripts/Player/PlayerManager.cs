@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒvƒŒƒCƒ„[ƒ}ƒl[ƒWƒƒ[ [ PlayerManager.cs ]
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ PlayerManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/07/17
 // Update:2024/07/24
@@ -18,72 +18,72 @@ using Utility;
 public class PlayerManager : MonoBehaviour
 {
     //-------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ƒNƒŠƒAƒŠƒUƒ‹ƒgƒpƒlƒ‹
+    /// ã‚¯ãƒªã‚¢ãƒªã‚¶ãƒ«ãƒˆãƒ‘ãƒãƒ«
     /// </summary>
     private GameObject clearResultPanel = null;
 
     /// <summary>
-    /// ƒQ[ƒ€ƒI[ƒo[ƒŠƒUƒ‹ƒgƒpƒlƒ‹
+    /// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ãƒªã‚¶ãƒ«ãƒˆãƒ‘ãƒãƒ«
     /// </summary>
     private GameObject gameOverPanel = null;
 
     /// <summary>
-    /// ƒNƒŠƒAƒtƒ‰ƒO
+    /// ã‚¯ãƒªã‚¢ãƒ•ãƒ©ã‚°
     /// </summary>
     private bool clearFlag;
 
     //======================================
-    // ”½Ë—\‘ªü—p
+    // åå°„äºˆæ¸¬ç·šç”¨
 
     ///// <summary>
-    ///// wallLayer‚ğw’è
+    ///// wallLayerã‚’æŒ‡å®š
     ///// </summary>
     [SerializeField] private LayerMask wallLayer;
 
     /// <summary>
-    /// •¨—„‘Ì
+    /// ç‰©ç†å‰›ä½“
     /// </summary>
     private Rigidbody2D physics = null;
 
     /// <summary>
-    /// ”­Ë•ûŒü
+    /// ç™ºå°„æ–¹å‘
     /// </summary>
     [SerializeField]
     private LineRenderer direction = null;
 
     /// <summary>
-    /// Å‘å•t—^—Í—Ê
+    /// æœ€å¤§ä»˜ä¸åŠ›é‡
     /// </summary>
     private const float MaxMagnitude = 4f;
 
     /// <summary>
-    /// ”­Ë•ûŒü‚Ì—Í
+    /// ç™ºå°„æ–¹å‘ã®åŠ›
     /// </summary>
     private Vector3 currentForce = Vector3.zero;
 
     /// <summary>
-    /// ƒƒCƒ“ƒJƒƒ‰
+    /// ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©
     /// </summary>
     private Camera mainCamera = null;
 
     /// <summary>
-    /// ƒƒCƒ“ƒJƒƒ‰À•W
+    /// ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©åº§æ¨™
     /// </summary>
     private Transform mainCameraTransform = null;
 
     /// <summary>
-    /// ƒhƒ‰ƒbƒOŠJn“_
+    /// ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹ç‚¹
     /// </summary>
     private Vector3 dragStart = Vector3.zero;
 
     //--------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‹N“®ˆ—
+    /// èµ·å‹•å‡¦ç†
     /// </summary>
     private void Awake()
     {
@@ -91,13 +91,13 @@ public class PlayerManager : MonoBehaviour
         {
             BGMManager.Instance.Play(BGMPath.GAME);
 
-            // ƒŠƒUƒ‹ƒgƒpƒlƒ‹‚Ìæ“¾
-            var panel = GameObject.Find("Panel");   // UIƒpƒlƒ‹‚Ìæ“¾
+            // ãƒªã‚¶ãƒ«ãƒˆãƒ‘ãƒãƒ«ã®å–å¾—
+            var panel = GameObject.Find("Panel");   // UIãƒ‘ãƒãƒ«ã®å–å¾—
             clearResultPanel = panel.transform.Find("GameClearPanel").gameObject;
             gameOverPanel = panel.transform.Find("GameOverPanel").gameObject;
         }
 
-        // ƒtƒ‰ƒO‚Ì‰Šú‰»
+        // ãƒ•ãƒ©ã‚°ã®åˆæœŸåŒ–
         clearFlag = false;
 
         physics = GetComponent<Rigidbody2D>();
@@ -106,16 +106,16 @@ public class PlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// XVˆ—
+    /// æ›´æ–°å‡¦ç†
     /// </summary>
     void Update()
     {
         if(clearFlag) { return; }
 
-        // ƒ}ƒEƒX‚Ì“®‚«‚Æ”½‘Î•ûŒü‚É”­Ë‚·‚éˆ—
+        // ãƒã‚¦ã‚¹ã®å‹•ãã¨åå¯¾æ–¹å‘ã«ç™ºå°„ã™ã‚‹å‡¦ç†
 
         if (Input.GetMouseButtonDown(0))
-        {   // ƒ}ƒEƒXƒNƒŠƒbƒNŠJn
+        {   // ãƒã‚¦ã‚¹ã‚¯ãƒªãƒƒã‚¯é–‹å§‹æ™‚
             SEManager.Instance.Play(SEPath.SHOT_CHARGE);
 
             dragStart = GetMousePosition();
@@ -126,7 +126,7 @@ public class PlayerManager : MonoBehaviour
             direction.SetPosition(1, physics.position);
         }
         else if (Input.GetMouseButton(0))
-        {   // ƒNƒŠƒbƒNƒz[ƒ‹ƒh
+        {   // ã‚¯ãƒªãƒƒã‚¯ãƒ›ãƒ¼ãƒ«ãƒ‰æ™‚
             var position = GetMousePosition();
 
             currentForce = position - dragStart;
@@ -140,7 +140,7 @@ public class PlayerManager : MonoBehaviour
             direction.SetPosition(1, physics.position + new Vector2(-currentForce.x, -currentForce.y));
         }
         else if (Input.GetMouseButtonUp(0))
-        {   // ƒ}ƒEƒXƒNƒŠƒbƒN‚ğ—£‚µ‚½
+        {   // ãƒã‚¦ã‚¹ã‚¯ãƒªãƒƒã‚¯ã‚’é›¢ã—ãŸæ™‚
             SEManager.Instance.Play(SEPath.SHOT);
 
             direction.enabled = false;
@@ -149,7 +149,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ’èŠúXVˆ—
+    /// å®šæœŸæ›´æ–°å‡¦ç†
     /// </summary>
     void FixedUpdate()
     {
@@ -158,12 +158,12 @@ public class PlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ}ƒEƒXÀ•W‚ğƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·‚µ‚Äæ“¾
+    /// ãƒã‚¦ã‚¹åº§æ¨™ã‚’ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›ã—ã¦å–å¾—
     /// </summary>
     /// <returns></returns>
     private Vector3 GetMousePosition()
     {
-        // ƒ}ƒEƒX‚©‚çæ“¾‚Å‚«‚È‚¢ZÀ•W‚ğ•âŠ®‚·‚é
+        // ãƒã‚¦ã‚¹ã‹ã‚‰å–å¾—ã§ããªã„Zåº§æ¨™ã‚’è£œå®Œã™ã‚‹
         var position = Input.mousePosition;
         position.z = mainCameraTransform.position.z;
         position = mainCamera.ScreenToWorldPoint(position);
@@ -173,17 +173,17 @@ public class PlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ{[ƒ‹‚ğ‚Í‚¶‚­
+    /// ãƒœãƒ¼ãƒ«ã‚’ã¯ã˜ã
     /// </summary>
     /// <param name="force"></param>
     public void Flip(Vector3 force)
     {
-        // uŠÔ“I‚É—Í‚ğ‰Á‚¦‚Ä‚Í‚¶‚­
+        // ç¬é–“çš„ã«åŠ›ã‚’åŠ ãˆã¦ã¯ã˜ã
         physics.AddForce(-force, ForceMode2D.Impulse);
     }
 
     /// <summary>
-    /// ”»’èÚG‚Ìˆ—
+    /// åˆ¤å®šæ¥è§¦æ™‚ã®å‡¦ç†
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
@@ -193,31 +193,31 @@ public class PlayerManager : MonoBehaviour
         SEManager.Instance.Play(SEPath.OBJ_BUTUKARI);
 
         if (collision.gameObject.tag == "Finish")
-        {   // ƒS[ƒ‹”»’è
+        {   // ã‚´ãƒ¼ãƒ«åˆ¤å®š
             SEManager.Instance.Play(SEPath.CLEAR,0.7f);
 
-            // ¬Œ÷ƒƒO“o˜^
+            // æˆåŠŸãƒ­ã‚°ç™»éŒ²
             StorePlayLog(true);
 
-            // ƒNƒŠƒAƒŠƒUƒ‹ƒgON
+            // ã‚¯ãƒªã‚¢ãƒªã‚¶ãƒ«ãƒˆON
             clearResultPanel.SetActive(true);
 
-            // ‘¬“x0‚É
+            // é€Ÿåº¦0ã«
             physics.velocity *= 0;
 
             clearFlag = true;
         }
         else if (collision.gameObject.tag == "Trap")
-        {   // ƒgƒ‰ƒbƒv”»’è
+        {   // ãƒˆãƒ©ãƒƒãƒ—åˆ¤å®š
             SEManager.Instance.Play(SEPath.FAILED);
 
-            // ¸”sƒƒO“o˜^
+            // å¤±æ•—ãƒ­ã‚°ç™»éŒ²
             StorePlayLog(false);
 
-            // ƒQ[ƒ€ƒI[ƒo[ƒpƒlƒ‹•\¦
+            // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ãƒ‘ãƒãƒ«è¡¨ç¤º
             gameOverPanel.SetActive(true);
 
-            // ‘¬“x0‚É
+            // é€Ÿåº¦0ã«
             physics.velocity *= 0;
 
             clearFlag = true;
@@ -225,7 +225,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒgƒŠƒK[”»’è
+    /// ãƒˆãƒªã‚¬ãƒ¼åˆ¤å®š
     /// </summary>
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
@@ -235,15 +235,15 @@ public class PlayerManager : MonoBehaviour
         SEManager.Instance.Play(SEPath.OBJ_BUTUKARI);
 
         if (collision.gameObject.tag == "Trap")
-        {   // ã©”»’è
+        {   // ç½ åˆ¤å®š
 
-            // ¸”sƒƒO“o˜^
+            // å¤±æ•—ãƒ­ã‚°ç™»éŒ²
             StorePlayLog(false);
 
-            // ƒQ[ƒ€ƒI[ƒo[ƒpƒlƒ‹•\¦
+            // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ãƒ‘ãƒãƒ«è¡¨ç¤º
             gameOverPanel.SetActive(true);
 
-            // ‘¬“x0‚É
+            // é€Ÿåº¦0ã«
             physics.velocity *= 0;
 
             clearFlag = true;
@@ -251,14 +251,14 @@ public class PlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒvƒŒƒCƒƒO“o˜^ˆ—
+    /// ãƒ—ãƒ¬ã‚¤ãƒ­ã‚°ç™»éŒ²å‡¦ç†
     /// </summary>
-    /// <param name="stageID">ƒXƒe[ƒWID</param>
-    /// <param name="type">   [1:ƒm[ƒ}ƒ‹ 2:ƒNƒŠƒGƒCƒg]</param>
-    /// <param name="flag">   ƒNƒŠƒAƒtƒ‰ƒO</param>
+    /// <param name="stageID">ã‚¹ãƒ†ãƒ¼ã‚¸ID</param>
+    /// <param name="type">   [1:ãƒãƒ¼ãƒãƒ« 2:ã‚¯ãƒªã‚¨ã‚¤ãƒˆ]</param>
+    /// <param name="flag">   ã‚¯ãƒªã‚¢ãƒ•ãƒ©ã‚°</param>
     private void StorePlayLog(bool flag)
     {
-        string name = SceneManager.GetActiveScene().name;   // ƒV[ƒ“–¼æ“¾
+        string name = SceneManager.GetActiveScene().name;   // ã‚·ãƒ¼ãƒ³åå–å¾—
         int stageID = 0;
         int type = 0;
 
@@ -278,14 +278,14 @@ public class PlayerManager : MonoBehaviour
                 break;
         }
 
-        // ƒvƒŒƒCƒƒO“o˜^APIŒÄ‚Ño‚µ
+        // ãƒ—ãƒ¬ã‚¤ãƒ­ã‚°ç™»éŒ²APIå‘¼ã³å‡ºã—
         StartCoroutine(NetworkManager.Instance.StorePlayLog(
             stageID,
             type,
             flag,
             result =>
             {
-                Debug.Log("ƒƒO“o˜^Š®—¹");
+                Debug.Log("ãƒ­ã‚°ç™»éŒ²å®Œäº†");
                 Destroy(GetComponent<Rigidbody2D>());
             }));
     }

@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒNƒŠƒGƒCƒgƒz[ƒ€ƒ}ƒl[ƒWƒƒ[ [ CreateHomeManager.cs ]
+// ã‚¯ãƒªã‚¨ã‚¤ãƒˆãƒ›ãƒ¼ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ CreateHomeManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/06
 // Update:2024/08/06
@@ -13,13 +13,13 @@ using UnityEngine;
 public class CreateHomeManager : MonoBehaviour
 {
     //-------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     //--------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     private void Start()
     {
@@ -27,7 +27,7 @@ public class CreateHomeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// XVˆ—
+    /// æ›´æ–°å‡¦ç†
     /// </summary>
     private void Update()
     {
@@ -35,12 +35,12 @@ public class CreateHomeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒV[ƒ“ˆÚ“®ˆ—
+    /// ã‚·ãƒ¼ãƒ³ç§»å‹•å‡¦ç†
     /// </summary>
     public void PushButton(string sceneName)
     {
-        /* ƒtƒF[ƒhˆ— (•)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (é»’)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade(sceneName, Color.black, 1.5f);
     }

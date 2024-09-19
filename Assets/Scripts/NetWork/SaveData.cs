@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒZ[ƒuƒf[ƒ^ƒNƒ‰ƒX [ SaveData.cs ]
+// ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ã‚¯ãƒ©ã‚¹ [ SaveData.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/26
 // Update:2024/08/26
@@ -13,12 +13,12 @@ using UnityEngine;
 public class SaveData
 {
     /// <summary>
-    /// ƒ†[ƒU[–¼
+    /// ãƒ¦ãƒ¼ã‚¶ãƒ¼å
     /// </summary>
     public string UserName { get; set; }
 
     /// <summary>
-    /// ƒ†[ƒU[ID
+    /// ãƒ¦ãƒ¼ã‚¶ãƒ¼ID
     /// </summary>
     public int UserID { get; set; }
 }

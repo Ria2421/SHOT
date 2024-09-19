@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// –¼‘O•ÏXƒŠƒNƒGƒXƒgƒNƒ‰ƒX [ NameChangeRequest.cs ]
+// åå‰å¤‰æ›´ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚¯ãƒ©ã‚¹ [ NameChangeRequest.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/14
 // Update:2024/09/14
@@ -13,11 +13,11 @@ using UnityEngine;
 
 public class NameChangeRequest
 {
-    /// ì¬ƒ†[ƒU[ID
+    /// ä½œæˆãƒ¦ãƒ¼ã‚¶ãƒ¼ID
     [JsonProperty("user_id")]
     public int UserID { get; set; }
 
-    /// ƒ†[ƒU[–¼
+    /// ãƒ¦ãƒ¼ã‚¶ãƒ¼å
     [JsonProperty("name")]
     public string Name { get; set; }
 }

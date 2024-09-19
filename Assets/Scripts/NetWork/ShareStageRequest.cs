@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ステージ共有リクエストクラス [ CreateStageRequest.cs ]
+// 繧ｹ繝�繝ｼ繧ｸ蜈ｱ譛峨Μ繧ｯ繧ｨ繧ｹ繝医け繝ｩ繧ｹ [ CreateStageRequest.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/15
 // Update:2024/09/15
@@ -13,11 +13,11 @@ using UnityEngine;
 
 public class ShareStageRequest
 {
-    /// ユーザーID
+    /// 繝ｦ繝ｼ繧ｶ繝ｼID
     [JsonProperty("user_id")]
     public int UserID { get; set; }
 
-    /// ステージID
+    /// 繧ｹ繝�繝ｼ繧ｸID
     [JsonProperty("stage_id")]
     public int StageID { get; set; }
 }

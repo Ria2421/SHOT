@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒXƒe[ƒWƒZƒŒƒNƒgƒ}ƒl[ƒWƒƒ[ [ SelectManager.cs ]
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚»ãƒ¬ã‚¯ãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ SelectManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/07/18
 // Update:2024/07/27
@@ -15,65 +15,65 @@ using UnityEngine.UI;
 public class SelectManager : MonoBehaviour
 {
     //-------------------------------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ¶¬‚·‚éƒ{ƒ^ƒ“‚ÌƒvƒŒƒnƒu
+    /// ç”Ÿæˆã™ã‚‹ãƒœã‚¿ãƒ³ã®ãƒ—ãƒ¬ãƒãƒ–
     /// </summary>
     [SerializeField] private GameObject buttonPrefub;
 
     /// <summary>
-    /// eƒIƒuƒWƒFƒNƒg (ƒXƒNƒ[ƒ‹ƒrƒ…[)
+    /// è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ (ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ“ãƒ¥ãƒ¼)
     /// </summary>
     [SerializeField] private Transform scrollView;
 
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹ƒrƒ…[ƒIƒuƒWƒFƒNƒg
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ“ãƒ¥ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     [SerializeField] private GameObject scrollObj;
 
     /// <summary>
-    /// ƒGƒ‰[•\¦ƒIƒuƒWƒF
+    /// ã‚¨ãƒ©ãƒ¼è¡¨ç¤ºã‚ªãƒ–ã‚¸ã‚§
     /// </summary>
     [SerializeField] private GameObject errorObj;
 
     //-------------------------------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
-        // ƒm[ƒ}ƒ‹ƒXƒe[ƒWî•ñ‚ğæ“¾
+        // ãƒãƒ¼ãƒãƒ«ã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±ã‚’å–å¾—
         StartCoroutine(NetworkManager.Instance.GetNormalStage(
             result =>
             {
                 if (result != null)
-                {   // ƒXƒe[ƒWƒf[ƒ^‚ª‚ ‚é
+                {   // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚‹æ™‚
 
-                    scrollObj.SetActive(true);  // ƒXƒNƒ[ƒ‹ƒEƒBƒ“ƒhƒE—LŒø‰»
+                    scrollObj.SetActive(true);  // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦æœ‰åŠ¹åŒ–
 
-                    // NetworkManager‚ğæ“¾
+                    // NetworkManagerã‚’å–å¾—
                     NetworkManager networkManager = NetworkManager.Instance;
 
                     foreach (NormalStageResponse stageData in result)
                     {
-                        // ƒvƒŒƒnƒu‚©‚çƒIƒuƒWƒFƒNƒg‚Ì¶¬
+                        // ãƒ—ãƒ¬ãƒãƒ–ã‹ã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
                         GameObject selectBtn = Instantiate(buttonPrefub, Vector3.zero, Quaternion.identity, scrollView);
 
-                        // ƒ{ƒ^ƒ“‚ÌƒeƒLƒXƒg‚ÉƒXƒe[ƒWID‚ğ”½‰f
+                        // ãƒœã‚¿ãƒ³ã®ãƒ†ã‚­ã‚¹ãƒˆã«ã‚¹ãƒ†ãƒ¼ã‚¸IDã‚’åæ˜ 
                         selectBtn.transform.GetChild(0).gameObject.GetComponent<Text>().text = stageData.StageID.ToString();
 
-                        // ¶¬‚µ‚½ƒ{ƒ^ƒ“‚ÉƒNƒŠƒbƒN‚Ìˆ—‚ğ’Ç‰Á
+                        // ç”Ÿæˆã—ãŸãƒœã‚¿ãƒ³ã«ã‚¯ãƒªãƒƒã‚¯æ™‚ã®å‡¦ç†ã‚’è¿½åŠ 
                         selectBtn.GetComponent<Button>().onClick.AddListener(() =>
                         {
-                            // NetworkManager‚ÉStageNoEType‚ğ•Û‘¶
+                            // NetworkManagerã«StageNoãƒ»Typeã‚’ä¿å­˜
                             networkManager.PlayStageNo = stageData.StageID;
                             networkManager.PlayStageType = 1;
 
-                            /* ƒtƒF[ƒhˆ— (•)  
-                                         ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+                            /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (é»’)  
+                                         ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
                             Initiate.DoneFading();
                             Initiate.Fade("UIScene", Color.gray, 2.5f);
                         });
@@ -81,14 +81,14 @@ public class SelectManager : MonoBehaviour
                 }
                 else
                 {
-                    // ƒGƒ‰[•\¦
+                    // ã‚¨ãƒ©ãƒ¼è¡¨ç¤º
                     errorObj.SetActive(true);
                 }
             }));
     }
 
     /// <summary>
-    /// XVˆ—
+    /// æ›´æ–°å‡¦ç†
     /// </summary>
     void Update()
     {
@@ -96,33 +96,33 @@ public class SelectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒXƒe[ƒW‘I‘ğˆ—
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠå‡¦ç†
     /// </summary>
     public void PushStageSelect(string buttonNum)
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // ƒƒO‚É‚ÄƒXƒe[ƒWNo‚ğ•\¦
+        // ãƒ­ã‚°ã«ã¦ã‚¹ãƒ†ãƒ¼ã‚¸Noã‚’è¡¨ç¤º
         Debug.Log(buttonNum);
 
         if (buttonNum != "")
         {
-            /* ƒtƒF[ƒhˆ— (•)  
-                         ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+            /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (é»’)  
+                         ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
             Initiate.DoneFading();
             Initiate.Fade("Stage" + buttonNum + "Scene", Color.gray, 2.5f);
         }
     }
 
     /// <summary>
-    /// –ß‚éƒ{ƒ^ƒ“‰Ÿ‰ºˆ—
+    /// æˆ»ã‚‹ãƒœã‚¿ãƒ³æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     public void PushBackButton()
     {
         SEManager.Instance.Play(SEPath.CANCEL);
 
-        /* ƒtƒF[ƒhˆ— (•)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (é»’)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("HomeScene", Color.gray, 2.5f);
     }

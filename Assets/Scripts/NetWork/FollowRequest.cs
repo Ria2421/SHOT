@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// フォローリクエストクラス [ FollowRequest.cs ]
+// 繝輔か繝ｭ繝ｼ繝ｪ繧ｯ繧ｨ繧ｹ繝医け繝ｩ繧ｹ [ FollowRequest.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/17
 // Update:2024/09/17
@@ -13,11 +13,11 @@ using UnityEngine;
 
 public class FollowRequest
 {
-    /// ユーザーID
+    /// 繝ｦ繝ｼ繧ｶ繝ｼID
     [JsonProperty("user_id")]
     public int UserID { get; set; }
 
-    /// フォローID
+    /// 繝輔か繝ｭ繝ｼID
     [JsonProperty("follow_id")]
     public int FollowID { get; set; }
 }

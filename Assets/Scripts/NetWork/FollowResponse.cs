@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //
-// フォローレスポンスクラス [ FollowResponse.cs ]
+// 繝輔か繝ｭ繝ｼ繝ｬ繧ｹ繝昴Φ繧ｹ繧ｯ繝ｩ繧ｹ [ FollowResponse.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/16
 // Update:2024/09/16
@@ -13,11 +13,11 @@ using UnityEngine;
 
 public class FollowResponse
 {
-    /// フォロー情報
+    /// 繝輔か繝ｭ繝ｼ諠�蝣ｱ
     [JsonProperty("follow")]
     public List<FollowInfo> Follow { get; set; }
 
-    /// フォロワー情報
+    /// 繝輔か繝ｭ繝ｯ繝ｼ諠�蝣ｱ
     [JsonProperty("follower")]
     public List<FollowInfo> Follower { get; set; }
 }

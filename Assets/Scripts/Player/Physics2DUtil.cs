@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ”½Ë—\‘ªü‚Ì•`‰æˆ— [ Physics2DUtill.cs ]
+// åå°„äºˆæ¸¬ç·šã®æç”»å‡¦ç† [ Physics2DUtill.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/07/24
 // Update:2024/07/24
@@ -14,13 +14,13 @@ namespace Utility
     public class Physics2DUtil
     {
         //-------------------------------------------
-        // ƒtƒB[ƒ‹ƒh
+        // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
-        //Å‘åƒqƒbƒg‰ñ”
+        //æœ€å¤§ãƒ’ãƒƒãƒˆå›æ•°
         private const int MAX_HIT_COUNT = 10;
 
         //--------------------------------------------
-        // ƒƒ\ƒbƒh
+        // ãƒ¡ã‚½ãƒƒãƒ‰
 
         public static List<Vector2> RefrectionLinePoses(Vector2 position, Vector2 direction, float length, LayerMask layerMask)
         {
@@ -31,7 +31,7 @@ namespace Utility
             {
                 if (hit.point != position)
                 {
-                    // HIT‚µ‚½êŠ‚Ìî•ñ‚ğ‹L˜^
+                    // HITã—ãŸå ´æ‰€ã®æƒ…å ±ã‚’è¨˜éŒ²
                     position = hit.point;
                     points.Add(position);
                     length -= hit.distance;
@@ -39,14 +39,14 @@ namespace Utility
                 }
                 else
                 {
-                    // HIT‚ª“¯‚¶êŠ‚Å”­¶‚·‚éê‡‚ª‚ ‚é‚½‚ß‚»‚ê‚ğ–h‚®–Ú“IAdirection•ª­‚µ‚¸‚ç‚·
+                    // HITãŒåŒã˜å ´æ‰€ã§ç™ºç”Ÿã™ã‚‹å ´åˆãŒã‚ã‚‹ãŸã‚ãã‚Œã‚’é˜²ãç›®çš„ã€directionåˆ†å°‘ã—ãšã‚‰ã™
                     position = hit.point + direction;
                 }
 
                 hit = Physics2D.Raycast(position, direction, length, layerMask);
 
-                // “¯‚¶êŠ‚Å•¡”‰ñƒqƒbƒg‚µ‚Ä‚µ‚Ü‚Á‚½‚Æ‚«–³ŒÀƒ‹[ƒv‚µ‚Ä‚µ‚Ü‚¤‚Ì‚Å
-                // Å‘åƒqƒbƒg‰ñ”ˆÈã‚Ìê‡‚Íƒ‹[ƒv‚ğ”²‚¯‚é‚æ‚¤‚É‚·‚é
+                // åŒã˜å ´æ‰€ã§è¤‡æ•°å›ãƒ’ãƒƒãƒˆã—ã¦ã—ã¾ã£ãŸã¨ãç„¡é™ãƒ«ãƒ¼ãƒ—ã—ã¦ã—ã¾ã†ã®ã§
+                // æœ€å¤§ãƒ’ãƒƒãƒˆå›æ•°ä»¥ä¸Šã®å ´åˆã¯ãƒ«ãƒ¼ãƒ—ã‚’æŠœã‘ã‚‹ã‚ˆã†ã«ã™ã‚‹
                 hitcount += 1;
                 if (hitcount > MAX_HIT_COUNT) break;
             }

@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒz[ƒ€ƒ}ƒl[ƒWƒƒ[ [ HomeManager.cs ]
+// ãƒ›ãƒ¼ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ HomeManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/01
 // Update:2024/09/13
@@ -17,185 +17,185 @@ using UnityEngine.UI;
 public class HomeManager : MonoBehaviour
 {
     //-------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ƒlƒbƒgƒ[ƒNƒ}ƒl[ƒWƒƒ[
+    /// ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
     /// </summary>
     private NetworkManager networkManager;
 
     /// <summary>
-    /// ƒAƒCƒRƒ“ID
+    /// ã‚¢ã‚¤ã‚³ãƒ³ID
     /// </summary>
     private int iconID = 0;
 
-    [Header(" ƒz[ƒ€‰æ–ÊŠÖ˜A ")]
+    [Header(" ãƒ›ãƒ¼ãƒ ç”»é¢é–¢é€£ ")]
 
     /// <summary>
-    /// ƒtƒHƒ[ƒpƒlƒ‹
+    /// ãƒ•ã‚©ãƒ­ãƒ¼ãƒ‘ãƒãƒ«
     /// </summary>
     [SerializeField] private GameObject followPanel;
 
     /// <summary>
-    /// BGMƒXƒ‰ƒCƒ_[
+    /// BGMã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
     /// </summary>
     [SerializeField] private Slider bgmSlider;
 
     /// <summary>
-    /// SEƒXƒ‰ƒCƒ_[
+    /// SEã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
     /// </summary>
     [SerializeField] private Slider seSlider;
 
-    [Header(" ƒAƒJƒEƒ“ƒg‰æ–ÊŠÖ˜A ")]
+    [Header(" ã‚¢ã‚«ã‚¦ãƒ³ãƒˆç”»é¢é–¢é€£ ")]
 
     /// <summary>
-    /// ƒ†[ƒU[–¼“ü—Í—“
+    /// ãƒ¦ãƒ¼ã‚¶ãƒ¼åå…¥åŠ›æ¬„
     /// </summary>
     [SerializeField] private InputField nameInput;
 
     /// <summary>
-    /// ƒvƒƒtƒB[ƒ‹î•ñƒeƒLƒXƒg
-    /// [0:ƒ†[ƒU[ID 1:ƒ†[ƒU[–¼ 2:‘ƒvƒŒƒC” 3:ƒNƒŠƒA” 4:ì¬ƒXƒe[ƒW” 5:ƒtƒHƒ[” 6:ƒtƒHƒƒ[”]
+    /// ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«æƒ…å ±ãƒ†ã‚­ã‚¹ãƒˆ
+    /// [0:ãƒ¦ãƒ¼ã‚¶ãƒ¼ID 1:ãƒ¦ãƒ¼ã‚¶ãƒ¼å 2:ç·ãƒ—ãƒ¬ã‚¤æ•° 3:ã‚¯ãƒªã‚¢æ•° 4:ä½œæˆã‚¹ãƒ†ãƒ¼ã‚¸æ•° 5:ãƒ•ã‚©ãƒ­ãƒ¼æ•° 6:ãƒ•ã‚©ãƒ­ãƒ¯ãƒ¼æ•°]
     /// </summary>
     [SerializeField] private List<Text> contentTexts;
 
     /// <summary>
-    /// Š®—¹’Ê’mˆÊ’uî•ñ
+    /// å®Œäº†é€šçŸ¥ä½ç½®æƒ…å ±
     /// </summary>
     [SerializeField] private RectTransform changeComplete;
 
     /// <summary>
-    /// ¸”s’Ê’mˆÊ’uî•ñ
+    /// å¤±æ•—é€šçŸ¥ä½ç½®æƒ…å ±
     /// </summary>
     [SerializeField] private RectTransform changeFailed;
 
     /// <summary>
-    /// –¼‘O“ü—Í—“
+    /// åå‰å…¥åŠ›æ¬„
     /// </summary>
     [SerializeField] private GameObject namePanel;
 
     /// <summary>
-    /// ƒAƒCƒRƒ“ˆê——ƒpƒlƒ‹
+    /// ã‚¢ã‚¤ã‚³ãƒ³ä¸€è¦§ãƒ‘ãƒãƒ«
     /// </summary>
     [SerializeField] private GameObject iconPanel;
 
     /// <summary>
-    /// ƒAƒCƒRƒ“W
+    /// ã‚¢ã‚¤ã‚³ãƒ³é›†
     /// </summary>
     [SerializeField] private List<Sprite> iconSprite;
 
     /// <summary>
-    /// ƒAƒCƒRƒ“‰æ‘œ
+    /// ã‚¢ã‚¤ã‚³ãƒ³ç”»åƒ
     /// </summary>
     [SerializeField] private Image iconImage;
 
-    [Header(" ƒtƒHƒ[‰æ–ÊŠÖ˜A ")]
+    [Header(" ãƒ•ã‚©ãƒ­ãƒ¼ç”»é¢é–¢é€£ ")]
 
     /// <summary>
-    /// ƒ†[ƒU[î•ñƒvƒŒƒnƒu
+    /// ãƒ¦ãƒ¼ã‚¶ãƒ¼æƒ…å ±ãƒ—ãƒ¬ãƒãƒ–
     /// </summary>
     [SerializeField] private GameObject userInfoPrefab;
 
     /// <summary>
-    /// ƒm[ƒf[ƒ^ƒvƒŒƒnƒu
+    /// ãƒãƒ¼ãƒ‡ãƒ¼ã‚¿ãƒ—ãƒ¬ãƒãƒ–
     /// </summary>
     [SerializeField] private GameObject noDataPrefab;
 
     /// <summary>
-    /// ƒŠƒXƒgØ‚è‘Ö‚¦ƒ{ƒ^ƒ“
+    /// ãƒªã‚¹ãƒˆåˆ‡ã‚Šæ›¿ãˆãƒœã‚¿ãƒ³
     /// </summary>
     [SerializeField] private List<GameObject> listButtons;
 
     /// <summary>
-    /// Ø‚è‘Ö‚¦ƒ{ƒ^ƒ“ImageƒŠƒXƒg
+    /// åˆ‡ã‚Šæ›¿ãˆãƒœã‚¿ãƒ³Imageãƒªã‚¹ãƒˆ
     /// </summary>
     [SerializeField] private List<Image> buttonColors;
 
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹ƒŠƒXƒg    [0:ƒtƒHƒ[ 1:ƒtƒHƒƒ[ 2:‘ŠŒİ]
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒªã‚¹ãƒˆ    [0:ãƒ•ã‚©ãƒ­ãƒ¼ 1:ãƒ•ã‚©ãƒ­ãƒ¯ãƒ¼ 2:ç›¸äº’]
     /// </summary>
     [SerializeField] private List<GameObject> scrollList;
 
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹ƒRƒ“ƒeƒ“ƒc
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚³ãƒ³ãƒ†ãƒ³ãƒ„
     /// </summary>
     [SerializeField] private List<GameObject> scrolltContents;
 
     /// <summary>
-    /// “o˜^‰æ‘œƒXƒvƒ‰ƒCƒg
+    /// ç™»éŒ²ç”»åƒã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
     /// </summary>
     [SerializeField] private Sprite registSprite;
 
     /// <summary>
-    /// ƒtƒHƒ[ID“ü—Í—“
+    /// ãƒ•ã‚©ãƒ­ãƒ¼IDå…¥åŠ›æ¬„
     /// </summary>
     [SerializeField] private InputField followIDInput;
 
     /// <summary>
-    /// ƒtƒHƒ[“o˜^ƒ{ƒ^ƒ“
+    /// ãƒ•ã‚©ãƒ­ãƒ¼ç™»éŒ²ãƒœã‚¿ãƒ³
     /// </summary>
     [SerializeField] private Button followRegistButton;
 
     /// <summary>
-    /// ƒGƒ‰[ƒpƒlƒ‹ [0:Š®—¹ 1:ƒtƒHƒ[Ï 2:404ƒGƒ‰[]
+    /// ã‚¨ãƒ©ãƒ¼ãƒ‘ãƒãƒ« [0:å®Œäº† 1:ãƒ•ã‚©ãƒ­ãƒ¼æ¸ˆ 2:404ã‚¨ãƒ©ãƒ¼]
     /// </summary>
     [SerializeField] private List<RectTransform> noticePanels;
 
     //--------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
-        // BGMÄ¶
+        // BGMå†ç”Ÿ
         if (!BGMManager.Instance.IsPlaying())
         {
             BGMManager.Instance.Play(BGMPath.HOME_SELECT,0.8f);
         }
 
-        // ƒlƒbƒgƒ[ƒNƒ}ƒl[ƒWƒƒ[æ“¾
+        // ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼å–å¾—
         networkManager = NetworkManager.Instance;
 
-        // ƒ†[ƒUID‚Ìæ“¾E”½‰f
+        // ãƒ¦ãƒ¼ã‚¶IDã®å–å¾—ãƒ»åæ˜ 
         contentTexts[0].text = "ID : " + networkManager.GetUserID().ToString();
 
-        // ƒ†[ƒU–¼‚Ìæ“¾E”½‰f
+        // ãƒ¦ãƒ¼ã‚¶åã®å–å¾—ãƒ»åæ˜ 
         contentTexts[1].text = networkManager.GetUserName();
 
-        // ƒ†[ƒU[ƒf[ƒ^‚ª•Û‘¶‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í“o˜^
+        // ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ‡ãƒ¼ã‚¿ãŒä¿å­˜ã•ã‚Œã¦ã„ãªã„å ´åˆã¯ç™»éŒ²
         StartCoroutine(NetworkManager.Instance.GetProfileInfo(
             result =>
-            {   // î•ñ”½‰f
-                iconID = result.IconID;                                      // ƒAƒCƒRƒ“IDæ“¾ 
-                iconImage.sprite = iconSprite[iconID - 1];                   // ƒAƒCƒRƒ“”½‰f
-                contentTexts[2].text = result.PlayCnt.ToString() + "‰ñ";     // ‘ƒvƒŒƒC”
-                contentTexts[3].text = result.ClearCnt.ToString() + "‰ñ";    // ƒNƒŠƒA”
-                contentTexts[4].text = result.CreateCnt.ToString() + "‰ñ";   // ƒXƒe[ƒWì¬”
-                contentTexts[5].text = result.FollowCnt.ToString() + "‰ñ";   // ƒtƒHƒ[”
-                contentTexts[6].text = result.FollowerCnt.ToString() + "‰ñ"; // ƒtƒHƒƒ[”
+            {   // æƒ…å ±åæ˜ 
+                iconID = result.IconID;                                      // ã‚¢ã‚¤ã‚³ãƒ³IDå–å¾— 
+                iconImage.sprite = iconSprite[iconID - 1];                   // ã‚¢ã‚¤ã‚³ãƒ³åæ˜ 
+                contentTexts[2].text = result.PlayCnt.ToString() + "å›";     // ç·ãƒ—ãƒ¬ã‚¤æ•°
+                contentTexts[3].text = result.ClearCnt.ToString() + "å›";    // ã‚¯ãƒªã‚¢æ•°
+                contentTexts[4].text = result.CreateCnt.ToString() + "å›";   // ã‚¹ãƒ†ãƒ¼ã‚¸ä½œæˆæ•°
+                contentTexts[5].text = result.FollowCnt.ToString() + "å›";   // ãƒ•ã‚©ãƒ­ãƒ¼æ•°
+                contentTexts[6].text = result.FollowerCnt.ToString() + "å›"; // ãƒ•ã‚©ãƒ­ãƒ¯ãƒ¼æ•°
             }));
 
     }
 
     //======================
-    // ƒV[ƒ“‘JˆÚƒƒ\ƒbƒh
+    // ã‚·ãƒ¼ãƒ³é·ç§»ãƒ¡ã‚½ãƒƒãƒ‰
 
     public void TransScene(string name)
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
-        /* ƒtƒF[ƒhˆ— (•)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (é»’)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade(name, Color.white, 2.5f);
     }
 
     //=======================================================
-    // ƒƒjƒ…[ŠÖ˜Aƒƒ\ƒbƒh
+    // ãƒ¡ãƒ‹ãƒ¥ãƒ¼é–¢é€£ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ŠeƒAƒCƒRƒ“‰Ÿ‰ºˆ—
+    /// å„ã‚¢ã‚¤ã‚³ãƒ³æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     public void PushMenuIconButton(GameObject iconPanel)
     {
@@ -204,7 +204,7 @@ public class HomeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒpƒlƒ‹•Â‚¶‚éˆ—
+    /// ãƒ‘ãƒãƒ«é–‰ã˜ã‚‹å‡¦ç†
     /// </summary>
     public void PushCloseButton(GameObject menuPanel)
     {
@@ -213,7 +213,7 @@ public class HomeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒtƒHƒ[ƒ{ƒ^ƒ“‰Ÿ‰º
+    /// ãƒ•ã‚©ãƒ­ãƒ¼ãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚
     /// </summary>
     public void PushFollowButton()
     {
@@ -221,64 +221,64 @@ public class HomeManager : MonoBehaviour
 
         followPanel.SetActive(true);
 
-        // ‚¨‚·‚·‚ßƒ†[ƒU[ƒŠƒXƒg‚Ì¶¬
+        // ãŠã™ã™ã‚ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒªã‚¹ãƒˆã®ç”Ÿæˆ
         StartCoroutine(NetworkManager.Instance.GetRandom(
             result =>
             {
                 if (result.Count == 0)
                 {
-                    // ƒf[ƒ^–³‚µ•\¦
+                    // ãƒ‡ãƒ¼ã‚¿ç„¡ã—è¡¨ç¤º
                     GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[2].transform);
                 }
                 foreach (var data in result)
-                {   // ƒtƒHƒ[ƒŠƒXƒg
+                {   // ãƒ•ã‚©ãƒ­ãƒ¼ãƒªã‚¹ãƒˆ
 
-                    // ƒ†[ƒU[ƒf[ƒ^¶¬
+                    // ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ‡ãƒ¼ã‚¿ç”Ÿæˆ
                     GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[2].transform);
 
-                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // ƒAƒCƒRƒ“İ’è
-                    userData.transform.GetChild(1).GetComponent<Text>().text = "ID : " + data.ID.ToString();    // IDİ’è
-                    userData.transform.GetChild(2).GetComponent<Text>().text = data.Name;                       // –¼‘Oİ’è
-                    userData.transform.GetChild(3).GetComponent<Image>().sprite = registSprite;                 // ‰æ‘œİ’è
+                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // ã‚¢ã‚¤ã‚³ãƒ³è¨­å®š
+                    userData.transform.GetChild(1).GetComponent<Text>().text = "ID : " + data.ID.ToString();    // IDè¨­å®š
+                    userData.transform.GetChild(2).GetComponent<Text>().text = data.Name;                       // åå‰è¨­å®š
+                    userData.transform.GetChild(3).GetComponent<Image>().sprite = registSprite;                 // ç”»åƒè¨­å®š
                     userData.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() =>
-                    {   // ƒtƒHƒ[“o˜^ˆ—
-                        // ƒ{ƒ^ƒ“‚Ì–³Œø‰»
+                    {   // ãƒ•ã‚©ãƒ­ãƒ¼ç™»éŒ²å‡¦ç†
+                        // ãƒœã‚¿ãƒ³ã®ç„¡åŠ¹åŒ–
                         userData.transform.GetChild(3).GetComponent<Button>().interactable = false;
 
                         StartCoroutine(NetworkManager.Instance.RegistFollow(
                             data.ID,
                             result =>
                             {
-                                Debug.Log("“o˜^Š®—¹");
+                                Debug.Log("ç™»éŒ²å®Œäº†");
                             }));
                     });
                 }
             }));
 
-        // ƒtƒHƒ[EƒtƒHƒƒ[ƒŠƒXƒg‚Ì¶¬
+        // ãƒ•ã‚©ãƒ­ãƒ¼ãƒ»ãƒ•ã‚©ãƒ­ãƒ¯ãƒ¼ãƒªã‚¹ãƒˆã®ç”Ÿæˆ
         StartCoroutine(NetworkManager.Instance.GetFollow(
             result =>
             {
                 if (result.Follow.Count == 0)
                 {
-                    // ƒf[ƒ^–³‚µ•\¦
+                    // ãƒ‡ãƒ¼ã‚¿ç„¡ã—è¡¨ç¤º
                     GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[0].transform);
                 }
                 foreach (var data in result.Follow)
-                {   // ƒtƒHƒ[ƒŠƒXƒg
+                {   // ãƒ•ã‚©ãƒ­ãƒ¼ãƒªã‚¹ãƒˆ
 
-                    // ƒ†[ƒU[ƒf[ƒ^¶¬
+                    // ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ‡ãƒ¼ã‚¿ç”Ÿæˆ
                     GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[0].transform);
 
-                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // ƒAƒCƒRƒ“İ’è
-                    userData.transform.GetChild(1).GetComponent<Text>().text = "ID : " + data.ID.ToString();    // IDİ’è
-                    userData.transform.GetChild(2).GetComponent<Text>().text = data.Name;                       // –¼‘Oİ’è
+                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // ã‚¢ã‚¤ã‚³ãƒ³è¨­å®š
+                    userData.transform.GetChild(1).GetComponent<Text>().text = "ID : " + data.ID.ToString();    // IDè¨­å®š
+                    userData.transform.GetChild(2).GetComponent<Text>().text = data.Name;                       // åå‰è¨­å®š
                     userData.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() =>
-                    {   // ƒtƒHƒ[‰ğœˆ—
+                    {   // ãƒ•ã‚©ãƒ­ãƒ¼è§£é™¤å‡¦ç†
                         StartCoroutine(NetworkManager.Instance.DestroyFollow(
                             data.ID,
                             result =>
-                            {   // ƒ†[ƒUInfoƒIƒuƒWƒF‚Ìíœ
+                            {   // ãƒ¦ãƒ¼ã‚¶Infoã‚ªãƒ–ã‚¸ã‚§ã®å‰Šé™¤
                                 Destroy(userData);
                             }));
                     });
@@ -286,34 +286,34 @@ public class HomeManager : MonoBehaviour
 
                 if (result.Follower.Count == 0)
                 {
-                    // ƒf[ƒ^–³‚µ•\¦
+                    // ãƒ‡ãƒ¼ã‚¿ç„¡ã—è¡¨ç¤º
                     GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[1].transform);
                 }
                 foreach (var data in result.Follower)
-                {   // ƒtƒHƒƒ[ƒŠƒXƒg
+                {   // ãƒ•ã‚©ãƒ­ãƒ¯ãƒ¼ãƒªã‚¹ãƒˆ
                     
-                    // ƒ†[ƒU[ƒf[ƒ^¶¬
+                    // ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ‡ãƒ¼ã‚¿ç”Ÿæˆ
                     GameObject userData = Instantiate(userInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[1].transform);
 
-                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // ƒAƒCƒRƒ“İ’è
-                    userData.transform.GetChild(1).GetComponent<Text>().text = "ID : " + data.ID.ToString();    // IDİ’è
-                    userData.transform.GetChild(2).GetComponent<Text>().text = data.Name;                       // –¼‘Oİ’è
-                    Destroy(userData.transform.GetChild(3).gameObject);    // ƒ{ƒ^ƒ“‚Ì”jŠü 
+                    userData.transform.GetChild(0).GetComponent<Image>().sprite = iconSprite[data.IconID - 1];  // ã‚¢ã‚¤ã‚³ãƒ³è¨­å®š
+                    userData.transform.GetChild(1).GetComponent<Text>().text = "ID : " + data.ID.ToString();    // IDè¨­å®š
+                    userData.transform.GetChild(2).GetComponent<Text>().text = data.Name;                       // åå‰è¨­å®š
+                    Destroy(userData.transform.GetChild(3).gameObject);    // ãƒœã‚¿ãƒ³ã®ç ´æ£„ 
                 }
 
-                Debug.Log("ƒŠƒXƒg¶¬Š®—¹");
+                Debug.Log("ãƒªã‚¹ãƒˆç”Ÿæˆå®Œäº†");
 
                 foreach (GameObject button in listButtons)
-                {   // ƒ{ƒ^ƒ“‚Ì—LŒø‰»
+                {   // ãƒœã‚¿ãƒ³ã®æœ‰åŠ¹åŒ–
                     button.GetComponent<Button>().interactable = true;
                 }
 
-                SetList(0); // ƒtƒHƒ[ƒŠƒXƒg‚Ì—LŒø‰»
+                SetList(0); // ãƒ•ã‚©ãƒ­ãƒ¼ãƒªã‚¹ãƒˆã®æœ‰åŠ¹åŒ–
             }));
     }
 
     /// <summary>
-    /// ƒtƒHƒ[ƒpƒlƒ‹•Â‚¶‚éˆ—
+    /// ãƒ•ã‚©ãƒ­ãƒ¼ãƒ‘ãƒãƒ«é–‰ã˜ã‚‹å‡¦ç†
     /// </summary>
     public void PushFollowClose()
     {
@@ -325,28 +325,28 @@ public class HomeManager : MonoBehaviour
         {
             foreach (Transform content in scrolltContents[i].transform)
             {
-                //©•ª‚Ìq‹Ÿ‚ğDestroy‚·‚é
+                //è‡ªåˆ†ã®å­ä¾›ã‚’Destroyã™ã‚‹
                 Destroy(content.gameObject);
             }
         }
     }
 
     /// <summary>
-    /// ’Ê’m‰Ÿ‰ºˆ—
+    /// é€šçŸ¥æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     /// <param name="gameObject"></param>
     public void PushNoticeButton(RectTransform rectTransform)
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // ‰ŠúˆÊ’u‚ÉˆÚ“®
+        // åˆæœŸä½ç½®ã«ç§»å‹•
         rectTransform.anchoredPosition = new Vector2(1000.0f, rectTransform.anchoredPosition.y);
     }
 
     /// <summary>
-    /// ’Ê’m•\¦ˆ—
+    /// é€šçŸ¥è¡¨ç¤ºå‡¦ç†
     /// </summary>
-    /// <param name="cautionImage">ˆÚ“®‘ÎÛ</param>
+    /// <param name="cautionImage">ç§»å‹•å¯¾è±¡</param>
     private void MoveCaution(RectTransform cautionImage)
     {
         SEManager.Instance.Play(SEPath.TUUTI);
@@ -354,7 +354,7 @@ public class HomeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// –¼‘O•ÏXƒ{ƒ^ƒ“‰Ÿ‰º
+    /// åå‰å¤‰æ›´ãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚
     /// </summary>
     public void PushNameChange()
     {
@@ -366,23 +366,23 @@ public class HomeManager : MonoBehaviour
             {
                 if (result)
                 {
-                    // –¼‘O‚Ì•ÏXˆ—
+                    // åå‰ã®å¤‰æ›´å‡¦ç†
                     contentTexts[1].text = nameInput.text;
-                    MoveCaution(changeComplete);    // ¬Œ÷’Ê’m
-                    namePanel.SetActive(false);     // “ü—Í—“”ñ•\¦
+                    MoveCaution(changeComplete);    // æˆåŠŸé€šçŸ¥
+                    namePanel.SetActive(false);     // å…¥åŠ›æ¬„éè¡¨ç¤º
                 }
                 else
                 {
-                    MoveCaution(changeFailed);      // ¸”s’Ê’m
-                    namePanel.SetActive(false);     // “ü—Í—“”ñ•\¦
+                    MoveCaution(changeFailed);      // å¤±æ•—é€šçŸ¥
+                    namePanel.SetActive(false);     // å…¥åŠ›æ¬„éè¡¨ç¤º
                 }
             }));
     }
 
     /// <summary>
-    /// ƒAƒCƒRƒ“•ÏX‰Ÿ‰ºˆ—
+    /// ã‚¢ã‚¤ã‚³ãƒ³å¤‰æ›´æŠ¼ä¸‹å‡¦ç†
     /// </summary>
-    /// <param name="id">ƒAƒCƒRƒ“ID</param>
+    /// <param name="id">ã‚¢ã‚¤ã‚³ãƒ³ID</param>
     public void PushIconChange(int id)
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
@@ -393,55 +393,55 @@ public class HomeManager : MonoBehaviour
             {
                 if (result)
                 {
-                    // ƒAƒCƒRƒ“‚Ì•ÏXˆ—
+                    // ã‚¢ã‚¤ã‚³ãƒ³ã®å¤‰æ›´å‡¦ç†
                     iconImage.sprite = iconSprite[id - 1];
-                    MoveCaution(changeComplete);    // ¬Œ÷’Ê’m
-                    iconPanel.SetActive(false);     // “ü—Í—“”ñ•\¦
+                    MoveCaution(changeComplete);    // æˆåŠŸé€šçŸ¥
+                    iconPanel.SetActive(false);     // å…¥åŠ›æ¬„éè¡¨ç¤º
                 }
                 else
                 {
-                    MoveCaution(changeFailed);      // ¸”s’Ê’m
-                    iconPanel.SetActive(false);     // “ü—Í—“”ñ•\¦
+                    MoveCaution(changeFailed);      // å¤±æ•—é€šçŸ¥
+                    iconPanel.SetActive(false);     // å…¥åŠ›æ¬„éè¡¨ç¤º
                 }
             }));
     }
 
     /// <summary>
-    /// ƒŠƒXƒgEƒ{ƒ^ƒ“‚Ì•\¦‰Šú‰»
+    /// ãƒªã‚¹ãƒˆãƒ»ãƒœã‚¿ãƒ³ã®è¡¨ç¤ºåˆæœŸåŒ–
     /// </summary>
     private void ResetList()
     {
-        // ƒ{ƒ^ƒ“EƒXƒNƒ[ƒ‹ƒEƒBƒ“ƒhƒE‰Šú‰»
+        // ãƒœã‚¿ãƒ³ãƒ»ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åˆæœŸåŒ–
         for (int i = 0; i < listButtons.Count; i++)
         {
-            scrollList[i].SetActive(false);         // ‘SƒŠƒXƒg‚ğ”ñ•\¦
-            buttonColors[i].color = Color.white;    // ƒJƒ‰[”’
+            scrollList[i].SetActive(false);         // å…¨ãƒªã‚¹ãƒˆã‚’éè¡¨ç¤º
+            buttonColors[i].color = Color.white;    // ã‚«ãƒ©ãƒ¼ç™½
         }
     }
 
     /// <summary>
-    /// w’èNo‚ÌƒŠƒXƒg‚ğ•\¦
+    /// æŒ‡å®šNoã®ãƒªã‚¹ãƒˆã‚’è¡¨ç¤º
     /// </summary>
     /// <param name="num"></param>
     public void SetList(int no)
     {
-        ResetList();   // ‰Šú‰»ˆ—
+        ResetList();   // åˆæœŸåŒ–å‡¦ç†
         scrollList[no].SetActive(true);
         buttonColors[no].color = Color.gray;
     }
 
     /// <summary>
-    /// ƒtƒHƒ[“o˜^ˆ—
+    /// ãƒ•ã‚©ãƒ­ãƒ¼ç™»éŒ²å‡¦ç†
     /// </summary>
     public void PushRegistFollow()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        if (followIDInput.text == "") { return; }  // “ü—Í–³‚¢
+        if (followIDInput.text == "") { return; }  // å…¥åŠ›ç„¡ã„æ™‚
 
-        followRegistButton.interactable = false;    // ƒ{ƒ^ƒ“–³Œø‰»
+        followRegistButton.interactable = false;    // ãƒœã‚¿ãƒ³ç„¡åŠ¹åŒ–
 
-        Invoke("RevivalFollowButton", 2.5f);        // w’èŠÔŒo‰ßŒãƒ{ƒ^ƒ“—LŒø‰»
+        Invoke("RevivalFollowButton", 2.5f);        // æŒ‡å®šæ™‚é–“çµŒéå¾Œãƒœã‚¿ãƒ³æœ‰åŠ¹åŒ–
 
         StartCoroutine(NetworkManager.Instance.RegistFollow(
             int.Parse(followIDInput.text),
@@ -449,18 +449,18 @@ public class HomeManager : MonoBehaviour
             {
                 switch (result)
                 {
-                    case "200": // “o˜^¬Œ÷
-                        Debug.Log("“o˜^Š®—¹");
+                    case "200": // ç™»éŒ²æˆåŠŸ
+                        Debug.Log("ç™»éŒ²å®Œäº†");
                         MoveCaution(noticePanels[0]);
                         break;
 
-                    case "400": // “o˜^Ï
-                        Debug.Log("“o˜^Ï");
+                    case "400": // ç™»éŒ²æ¸ˆ
+                        Debug.Log("ç™»éŒ²æ¸ˆ");
                         MoveCaution(noticePanels[1]);
                         break;
 
-                    case "404": // w’èID‚ª‘¶İ‚µ‚È‚¢
-                        Debug.Log("ID‚ª‘¶İ‚µ‚È‚¢");
+                    case "404": // æŒ‡å®šIDãŒå­˜åœ¨ã—ãªã„
+                        Debug.Log("IDãŒå­˜åœ¨ã—ãªã„");
                         MoveCaution(noticePanels[2]);
                         break;
 
@@ -471,7 +471,7 @@ public class HomeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ{ƒ^ƒ“—LŒø‰»ˆ—
+    /// ãƒœã‚¿ãƒ³æœ‰åŠ¹åŒ–å‡¦ç†
     /// </summary>
     /// <param name="button"></param>
     private void RevivalFollowButton()
@@ -480,7 +480,7 @@ public class HomeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// BGM‰¹—Ê•ÏXˆ—
+    /// BGMéŸ³é‡å¤‰æ›´å‡¦ç†
     /// </summary>
     public void ChangeBgmVolume()
     {
@@ -488,7 +488,7 @@ public class HomeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// SE‰¹—Ê•ÏXˆ—
+    /// SEéŸ³é‡å¤‰æ›´å‡¦ç†
     /// </summary>
     public void ChangeSeVolume()
     {

@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒNƒŠƒGƒCƒgƒf[ƒ^ƒNƒ‰ƒX [ CreateData.cs ]
+// ã‚¯ãƒªã‚¨ã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿ã‚¯ãƒ©ã‚¹ [ CreateData.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/04
 // Update:2024/09/04
@@ -13,16 +13,16 @@ using UnityEngine;
 public class GimmickData
 {
     /// <summary>
-    /// ƒMƒ~ƒbƒNID
+    /// ã‚®ãƒŸãƒƒã‚¯ID
     /// </summary>
     public int ID { get; set; }
     /// <summary>
-    /// xÀ•W
+    /// xåº§æ¨™
     /// </summary>
     public float X { get; set; }
 
     /// <summary>
-    /// yÀ•W
+    /// yåº§æ¨™
     /// </summary>
     public float Y { get; set; }
 }

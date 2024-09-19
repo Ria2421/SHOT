@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒAƒZƒbƒg“Ç‚İ‚İ [ AssetLoader.cs ]
+// ã‚¢ã‚»ãƒƒãƒˆèª­ã¿è¾¼ã¿ [ AssetLoader.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/29
 // Update:2024/08/29
@@ -16,18 +16,18 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public class AssetLoader : MonoBehaviour
 {
     //-------------------------------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ƒ[ƒfƒBƒ“ƒOƒXƒ‰ƒCƒ_[
+    /// ãƒ­ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
     /// </summary>
     [SerializeField] private Slider loadingSlider;
 
     //-------------------------------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
@@ -35,7 +35,7 @@ public class AssetLoader : MonoBehaviour
     }
 
     /// <summary>
-    /// XVˆ—
+    /// æ›´æ–°å‡¦ç†
     /// </summary>
     void Update()
     {
@@ -43,29 +43,29 @@ public class AssetLoader : MonoBehaviour
     }
 
     /// <summary>
-    /// XVƒf[ƒ^“Ç‚İ‚İˆ—
+    /// æ›´æ–°ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿å‡¦ç†
     /// </summary>
     /// <returns></returns>
     private IEnumerator loading()
     {
-        // ƒJƒ^ƒƒOXVˆ—
-        var handle = Addressables.UpdateCatalogs(); // ÅV‚ÌƒJƒ^ƒƒO(json)‚ğæ“¾
+        // ã‚«ã‚¿ãƒ­ã‚°æ›´æ–°å‡¦ç†
+        var handle = Addressables.UpdateCatalogs(); // æœ€æ–°ã®ã‚«ã‚¿ãƒ­ã‚°(json)ã‚’å–å¾—
         yield return handle;
 
-        // ƒ_ƒEƒ“ƒ[ƒh‚ÌÀs                                                           «ƒOƒ‹[ƒv‚Åİ’è‚µ‚½ƒ‰ƒxƒ‹
+        // ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã®å®Ÿè¡Œ                                                           â†“ã‚°ãƒ«ãƒ¼ãƒ—ã§è¨­å®šã—ãŸãƒ©ãƒ™ãƒ«
         AsyncOperationHandle downloadingHandle = Addressables.DownloadDependenciesAsync("default", false);  
 
-        // ƒ_ƒEƒ“ƒ[ƒhŠ®—¹‚·‚é‚Ü‚ÅƒXƒ‰ƒCƒ_[‚ÌUI‚ğXV
+        // ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å®Œäº†ã™ã‚‹ã¾ã§ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®UIã‚’æ›´æ–°
         while(downloadingHandle.Status == AsyncOperationStatus.None)
         {
-            loadingSlider.value = downloadingHandle.GetDownloadStatus().Percent * 100;  // Percent‚Í0`1‚Åæ“¾
-            yield return null;  // 1ƒtƒŒ[ƒ€‘Ò‚Â
+            loadingSlider.value = downloadingHandle.GetDownloadStatus().Percent * 100;  // Percentã¯0ï½1ã§å–å¾—
+            yield return null;  // 1ãƒ•ãƒ¬ãƒ¼ãƒ å¾…ã¤
         }
 
-        loadingSlider.value = 100;  // Š®—¹ŒãAƒo[‚ğÅ‘å’l‚Éİ’è
+        loadingSlider.value = 100;  // å®Œäº†å¾Œã€ãƒãƒ¼ã‚’æœ€å¤§å€¤ã«è¨­å®š
         Addressables.Release(downloadingHandle);
 
-        // Ÿ‚ÌƒV[ƒ“‚ÖˆÚ“®
+        // æ¬¡ã®ã‚·ãƒ¼ãƒ³ã¸ç§»å‹•
         Initiate.DoneFading();
         Initiate.Fade("HomeScene", Color.black, 1.5f);
     }

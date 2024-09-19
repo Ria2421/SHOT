@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ì¬ƒXƒe[ƒWˆê—— [ LookCreateStageManager.cs ]
+// ä½œæˆã‚¹ãƒ†ãƒ¼ã‚¸ä¸€è¦§ [ LookCreateStageManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/08
 // Update:2024/08/08
@@ -16,74 +16,74 @@ using UnityEngine.UI;
 public class LookCreateStageManager : MonoBehaviour
 {
     //-------------------------------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// î•ñƒvƒŒƒnƒu
+    /// æƒ…å ±ãƒ—ãƒ¬ãƒãƒ–
     /// </summary>
     [SerializeField] private GameObject infoPrefab;
 
     /// <summary>
-    /// eƒIƒuƒWƒF
+    /// è¦ªã‚ªãƒ–ã‚¸ã‚§
     /// </summary>
     [SerializeField] private GameObject parentObj;
 
     /// <summary>
-    /// ƒAƒCƒRƒ“ƒXƒvƒ‰ƒCƒg
+    /// ã‚¢ã‚¤ã‚³ãƒ³ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
     /// </summary>
     [SerializeField] private List<Sprite> iconSprits;
 
     /// <summary>
-    /// ƒlƒbƒgƒ[ƒNƒ}ƒl[ƒWƒƒ[Ši”[—p
+    /// ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼æ ¼ç´ç”¨
     /// </summary>
     private NetworkManager networkManager;
 
     //-------------------------------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
-        // ƒlƒbƒgƒ[ƒNƒ}ƒl[ƒWƒƒ[‚Ìæ“¾
+        // ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®å–å¾—
         networkManager = NetworkManager.Instance;
 
-        // ƒXƒe[ƒWƒIƒuƒWƒFƒNƒg‚ğŒŸõ
+        // ã‚¹ãƒ†ãƒ¼ã‚¸ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¤œç´¢
         GameObject stageDataObject = GameObject.Find("StageDataObject");
 
         if(stageDataObject != null)
         {
-            // ƒXƒe[ƒWƒf[ƒ^‚ÌƒŠƒZƒbƒg
+            // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã®ãƒªã‚»ãƒƒãƒˆ
             stageDataObject.GetComponent<StageDataObject>().ResetData();
         }
         else
         {
-            // ƒf[ƒ^•ÛŠÇ—pƒIƒuƒWƒFƒNƒg‚Ì¶¬
+            // ãƒ‡ãƒ¼ã‚¿ä¿ç®¡ç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
             stageDataObject = new GameObject("StageDataObject");
             stageDataObject.AddComponent<StageDataObject>();
-            DontDestroyOnLoad(stageDataObject);    // Scene‘JˆÚ‚Å”jŠü‚³‚ê‚È‚æ‚¤‚É‚·‚é
+            DontDestroyOnLoad(stageDataObject);    // Sceneé·ç§»ã§ç ´æ£„ã•ã‚Œãªã‚ˆã†ã«ã™ã‚‹
         }
 
-        // ©ìƒXƒe[ƒWˆê——‚Ìæ“¾
+        // è‡ªä½œã‚¹ãƒ†ãƒ¼ã‚¸ä¸€è¦§ã®å–å¾—
         StartCoroutine(NetworkManager.Instance.GetPlayerCreateStage(
             result =>
             {
                 if (result != null)
                 {
-                    // ƒf[ƒ^æ“¾Š®—¹
-                    Debug.Log("ƒXƒe[ƒWˆê——æ“¾");
+                    // ãƒ‡ãƒ¼ã‚¿å–å¾—å®Œäº†
+                    Debug.Log("ã‚¹ãƒ†ãƒ¼ã‚¸ä¸€è¦§å–å¾—");
                     foreach (var data in result)
                     {
-                        // ƒXƒe[ƒWˆê——‚Ì¶¬
+                        // ã‚¹ãƒ†ãƒ¼ã‚¸ä¸€è¦§ã®ç”Ÿæˆ
                         GameObject info = Instantiate(infoPrefab, Vector3.zero, Quaternion.identity, parentObj.transform);
-                        // ƒXƒe[ƒWî•ñ‘ã“ü
+                        // ã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±ä»£å…¥
                         info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "ID:" + data.ID.ToString();    // ID
-                        info.transform.GetChild(1).gameObject.GetComponent<Text>().text = data.Name;                     // ƒXƒe[ƒW–¼
-                        info.transform.GetChild(2).gameObject.GetComponent<Text>().text = networkManager.GetUserName();  // ƒ†[ƒU[–¼
-                        info.transform.GetChild(3).gameObject.GetComponent<Text>().text = data.GoodVol.ToString();       // ƒCƒCƒl”
-                        info.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = iconSprits[data.IconID - 1];// ƒAƒCƒRƒ“İ’è
-                        // ƒNƒŠƒbƒNƒXƒe[ƒW‘JˆÚ
+                        info.transform.GetChild(1).gameObject.GetComponent<Text>().text = data.Name;                     // ã‚¹ãƒ†ãƒ¼ã‚¸å
+                        info.transform.GetChild(2).gameObject.GetComponent<Text>().text = networkManager.GetUserName();  // ãƒ¦ãƒ¼ã‚¶ãƒ¼å
+                        info.transform.GetChild(3).gameObject.GetComponent<Text>().text = data.GoodVol.ToString();       // ã‚¤ã‚¤ãƒæ•°
+                        info.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = iconSprits[data.IconID - 1];// ã‚¢ã‚¤ã‚³ãƒ³è¨­å®š
+                        // ã‚¯ãƒªãƒƒã‚¯æ™‚ã‚¹ãƒ†ãƒ¼ã‚¸é·ç§»
                         info.GetComponent<Button>().onClick.AddListener(() =>
                         {
                             SEManager.Instance.Play(SEPath.MENU_SELECT);
@@ -92,13 +92,13 @@ public class LookCreateStageManager : MonoBehaviour
                                 data.ID,
                                 result =>
                                 {
-                                    // JSONƒfƒVƒŠƒAƒ‰ƒCƒY
+                                    // JSONãƒ‡ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚º
                                     var resultData = JsonConvert.DeserializeObject<List<GimmickData>>(result.GimmickPos);
                                     stageDataObject.GetComponent<StageDataObject>().SetData(data.ID,data.UserID,resultData,data.GoodVol);
-                                    Debug.Log("ƒXƒe[ƒWƒf[ƒ^æ“¾");
+                                    Debug.Log("ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿å–å¾—");
 
-                                    /* ƒtƒF[ƒhˆ— (”’)  
-                                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+                                    /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (ç™½)  
+                                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
                                     Initiate.DoneFading();
                                     Initiate.Fade("CreatePlayScene", Color.white, 2.5f);
                                 }));
@@ -107,27 +107,27 @@ public class LookCreateStageManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("æ“¾¸”s");
+                    Debug.Log("å–å¾—å¤±æ•—");
                 }
             }));
     }
 
     /// <summary>
-    /// –ß‚éƒ{ƒ^ƒ“‰Ÿ‰ºˆ—
+    /// æˆ»ã‚‹ãƒœã‚¿ãƒ³æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     public void PushBackButton()
     {
         SEManager.Instance.Play(SEPath.CANCEL);
 
         var stageDataObject = GameObject.Find("StageDataObject");
-        // ƒXƒe[ƒWƒf[ƒ^ƒIƒuƒWƒF‚Ìíœ
+        // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚ªãƒ–ã‚¸ã‚§ã®å‰Šé™¤
         if(stageDataObject != null)
         {
             Destroy(stageDataObject);
         }
 
-        /* ƒtƒF[ƒhˆ— (•)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (é»’)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("HomeScene", Color.gray, 1.5f);
     }

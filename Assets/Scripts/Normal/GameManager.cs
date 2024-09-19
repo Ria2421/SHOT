@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒQ[ƒ€ƒ}ƒl[ƒWƒƒ[ [ GameManager.cs ]
+// ã‚²ãƒ¼ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ GameManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/07/18
 // Update:2024/09/18
@@ -14,16 +14,16 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     //-------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
-    // ƒXƒe[ƒWNo
+    // ã‚¹ãƒ†ãƒ¼ã‚¸No
     [SerializeField] int stageNo;
 
     //--------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ƒXƒe[ƒWNo•Ô‹p
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸Noè¿”å´
     /// </summary>
     /// <returns></returns>
     public int GetStageNo() { return stageNo; }

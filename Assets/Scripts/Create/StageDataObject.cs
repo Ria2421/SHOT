@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒXƒe[ƒWƒf[ƒ^•ÛŠÇƒXƒNƒŠƒvƒg [ StageDataObject.cs ]
+// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ä¿ç®¡ã‚¹ã‚¯ãƒªãƒ—ãƒˆ [ StageDataObject.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/04
 // Update:2024/09/04
@@ -14,74 +14,74 @@ using UnityEngine;
 public class StageDataObject : MonoBehaviour
 {
     //-------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ƒXƒe[ƒWID
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ID
     /// </summary>
     private int stageID = 0;
 
     /// <summary>
-    /// ì¬ÒID
+    /// ä½œæˆè€…ID
     /// </summary>
     private int creatorID = 0;
 
     /// <summary>
-    /// ƒNƒŠƒGƒCƒgƒf[ƒ^
+    /// ã‚¯ãƒªã‚¨ã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿
     /// </summary>
     private List<GimmickData> stageDatas = new List<GimmickData>();
 
     /// <summary>
-    /// ƒCƒCƒl”
+    /// ã‚¤ã‚¤ãƒæ•°
     /// </summary>
     private int goodVol = 0;
 
     //--------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ƒf[ƒ^óæˆ—
+    /// ãƒ‡ãƒ¼ã‚¿å—å–å‡¦ç†
     /// </summary>
-    /// <param name="datas">ƒXƒe[ƒWƒf[ƒ^</param>
+    /// <param name="datas">ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿</param>
     public void SetData(int id,int cid,List<GimmickData> datas,int good)
     {
         stageID = id;
         creatorID = cid;
         stageDatas = datas;
         goodVol = good;
-        Debug.Log("óæŠ®—¹");
+        Debug.Log("å—å–å®Œäº†");
     }
 
     /// <summary>
-    /// ƒXƒe[ƒWID•Ô‚µˆ—
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸IDè¿”ã—å‡¦ç†
     /// </summary>
     /// <returns></returns>
     public int GetID() { return stageID; }
 
     /// <summary>
-    /// ƒXƒe[ƒWID•Ô‚µˆ—
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸IDè¿”ã—å‡¦ç†
     /// </summary>
     /// <returns></returns>
     public int GetCreatorID() { return creatorID; }
 
     /// <summary>
-    /// ƒXƒe[ƒWƒf[ƒ^•Ô‚µˆ—
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿è¿”ã—å‡¦ç†
     /// </summary>
-    /// <returns>ƒNƒŠƒGƒCƒgƒf[ƒ^</returns>
+    /// <returns>ã‚¯ãƒªã‚¨ã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿</returns>
     public List<GimmickData> GetStageData() {  return stageDatas; }
 
     /// <summary>
-    /// ƒCƒCƒl”•Ô‚µˆ—
+    /// ã‚¤ã‚¤ãƒæ•°è¿”ã—å‡¦ç†
     /// </summary>
     /// <returns></returns>
     public int GetGood() { return goodVol; }
 
     /// <summary>
-    /// ƒXƒe[ƒWƒf[ƒ^ƒŠƒZƒbƒg
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ãƒªã‚»ãƒƒãƒˆ
     /// </summary>
     public void ResetData()
     {
-        // ƒf[ƒ^ƒNƒŠƒA
+        // ãƒ‡ãƒ¼ã‚¿ã‚¯ãƒªã‚¢
         stageDatas.Clear();
     }
 }

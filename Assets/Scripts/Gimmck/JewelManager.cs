@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒWƒ…ƒGƒ‹ƒ}ƒl[ƒWƒƒ[ [ JewelManager.cs ]
+// ã‚¸ãƒ¥ã‚¨ãƒ«ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ JewelManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/07/24
 // Update:2024/07/24
@@ -13,36 +13,36 @@ using UnityEngine;
 public class jewel : MonoBehaviour
 {
     //-------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     Material material = null;
 
-    [Header("F•ÏXƒXƒpƒ“")]
+    [Header("è‰²å¤‰æ›´ã‚¹ãƒ‘ãƒ³")]
     public float Chnge_Color_Time = 0.1f;
 
-    [Header("•ÏX‚ÌŠŠ‚ç‚©‚³")]
+    [Header("å¤‰æ›´ã®æ»‘ã‚‰ã‹ã•")]
     public float Smooth = 0.01f;
 
-    [Header("FÊ")]
+    [Header("è‰²å½©")]
     [Range(0, 1)] public float HSV_Hue = 1.0f;// 0 ~ 1
 
-    [Header("Ê“x")]
+    [Header("å½©åº¦")]
     [Range(0, 1)] public float HSV_Saturation = 1.0f;// 0 ~ 1
 
-    [Header("–¾“x")]
+    [Header("æ˜åº¦")]
     [Range(0, 1)] public float HSV_Brightness = 1.0f;// 0 ~ 1
 
-    [Header("FÊ MAX")]
+    [Header("è‰²å½© MAX")]
     [Range(0, 1)] public float HSV_Hue_max = 1.0f;// 0 ~ 1
 
-    [Header("FÊ MIN")]
+    [Header("è‰²å½© MIN")]
     [Range(0, 1)] public float HSV_Hue_min = 0.0f;// 0 ~ 1
 
     //--------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
@@ -52,7 +52,7 @@ public class jewel : MonoBehaviour
     }
 
     /// <summary>
-    /// XVˆ—
+    /// æ›´æ–°å‡¦ç†
     /// </summary>
     void Update()
     {
@@ -60,7 +60,7 @@ public class jewel : MonoBehaviour
     }
 
     /// <summary>
-    /// F‚Ì•ÏXˆ—
+    /// è‰²ã®å¤‰æ›´å‡¦ç†
     /// </summary>
     /// <returns></returns>
     IEnumerator Change_Color()
@@ -80,15 +80,15 @@ public class jewel : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒgƒŠƒK[”»’è
+    /// ãƒˆãƒªã‚¬ãƒ¼åˆ¤å®š
     /// </summary>
-    /// <param name="collision">ÚG‚µ‚½ƒIƒuƒWƒFƒNƒg</param>
+    /// <param name="collision">æ¥è§¦ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
-        {   // ƒvƒŒƒCƒ„[”»‚Ì
+        {   // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åˆ¤ã®æ™‚
 
-            // ƒWƒ…ƒGƒ‹”jŠü
+            // ã‚¸ãƒ¥ã‚¨ãƒ«ç ´æ£„
             Destroy(this.gameObject);
         }
     }

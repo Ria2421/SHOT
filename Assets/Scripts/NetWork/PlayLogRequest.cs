@@ -1,6 +1,6 @@
 //-----------------------------------------------------
 //
-// ƒvƒŒƒCƒƒOƒŠƒNƒGƒXƒgƒNƒ‰ƒX [ PlayLogRequest.cs ]
+// ãƒ—ãƒ¬ã‚¤ãƒ­ã‚°ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚¯ãƒ©ã‚¹ [ PlayLogRequest.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/18
 // Update:2024/09/18
@@ -13,19 +13,19 @@ using UnityEngine;
 
 public class PlayLogRequest
 {
-    /// ƒ†[ƒU[ID
+    /// ãƒ¦ãƒ¼ã‚¶ãƒ¼ID
     [JsonProperty("user_id")]
     public int UserID { get; set; }
 
-    /// ƒXƒe[ƒWID
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ID
     [JsonProperty("stage_id")]
     public int StageID { get; set; }
 
-    // ƒXƒe[ƒWƒ^ƒCƒv [1:ƒm[ƒ}ƒ‹ 2:ƒNƒŠƒGƒCƒg]
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¿ã‚¤ãƒ— [1:ãƒãƒ¼ãƒãƒ« 2:ã‚¯ãƒªã‚¨ã‚¤ãƒˆ]
     [JsonProperty("stage_type")]
     public int StageType { get; set; }
 
-    // ƒNƒŠƒA”»’è
+    // ã‚¯ãƒªã‚¢åˆ¤å®š
     [JsonProperty("clear_flag")]
     public bool ClearFlag { get; set; }
 }

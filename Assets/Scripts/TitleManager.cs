@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒ^ƒCƒgƒ‹ƒ}ƒl[ƒWƒƒ[ [ TitleManager.cs ]
+// ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ TitleManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/07/18
 // Update:2024/09/13
@@ -18,52 +18,52 @@ using UnityEngine.AddressableAssets;
 public class TitleManager : MonoBehaviour
 {
     //-------------------------------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
-        // ƒ†[ƒU[ƒf[ƒ^‚Ì“Çˆ—EŒ‹‰Ê‚ğæ“¾
+        // ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ‡ãƒ¼ã‚¿ã®èª­è¾¼å‡¦ç†ãƒ»çµæœã‚’å–å¾—
         bool isSuccess = NetworkManager.Instance.LoadUserData();
 
         if (!isSuccess)
         {
-            // ƒ†[ƒU[ƒf[ƒ^‚ª•Û‘¶‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í“o˜^
+            // ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ‡ãƒ¼ã‚¿ãŒä¿å­˜ã•ã‚Œã¦ã„ãªã„å ´åˆã¯ç™»éŒ²
             StartCoroutine(NetworkManager.Instance.StoreUser(
-                Guid.NewGuid().ToString(),  // ƒ†[ƒU[–¼
+                Guid.NewGuid().ToString(),  // ãƒ¦ãƒ¼ã‚¶ãƒ¼å
                 result =>
                 {
-                    // ƒJƒ^ƒƒOXVƒ`ƒFƒbƒN
+                    // ã‚«ã‚¿ãƒ­ã‚°æ›´æ–°ãƒã‚§ãƒƒã‚¯
                     StartCoroutine(checkCatalog());
                 }));
         }
         else
         {
-            // ƒJƒ^ƒƒOXVƒ`ƒFƒbƒN
+            // ã‚«ã‚¿ãƒ­ã‚°æ›´æ–°ãƒã‚§ãƒƒã‚¯
             StartCoroutine(checkCatalog());
         }
     }
     /// <summary>
-    /// ƒXƒe[ƒWƒJƒ^ƒƒOƒ`ƒFƒbƒN
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚«ã‚¿ãƒ­ã‚°ãƒã‚§ãƒƒã‚¯
     /// </summary>
     /// <returns></returns>
     private IEnumerator checkCatalog()
     {
-        // ƒJƒ^ƒƒOƒf[ƒ^‚ªXV‚³‚ê‚Ä‚¢‚é‚©‚ğƒ`ƒFƒbƒN
+        // ã‚«ã‚¿ãƒ­ã‚°ãƒ‡ãƒ¼ã‚¿ãŒæ›´æ–°ã•ã‚Œã¦ã„ã‚‹ã‹ã‚’ãƒã‚§ãƒƒã‚¯
         var checkHandle = Addressables.CheckForCatalogUpdates(false);
         yield return checkHandle;
         var updates = checkHandle.Result;
-        Addressables.Release(checkHandle);  // ƒƒ‚ƒŠ‚ÌŠJ•ú
+        Addressables.Release(checkHandle);  // ãƒ¡ãƒ¢ãƒªã®é–‹æ”¾
 
         if(updates.Count >= 1)
-        {   // XV‚ª1‚ÂˆÈã‚ ‚Á‚½ê‡‚Íƒ[ƒh‰æ–Ê‚Ö
+        {   // æ›´æ–°ãŒ1ã¤ä»¥ä¸Šã‚ã£ãŸå ´åˆã¯ãƒ­ãƒ¼ãƒ‰ç”»é¢ã¸
             Initiate.DoneFading();
             Initiate.Fade("LoadingScene", Color.white, 2.5f);
         }
         else
-        {   // ‚È‚¢ê‡‚Íƒz[ƒ€‰æ–Ê‚Ö
+        {   // ãªã„å ´åˆã¯ãƒ›ãƒ¼ãƒ ç”»é¢ã¸
             Initiate.DoneFading();
             Initiate.Fade("HomeScene", Color.white, 2.5f);
         }

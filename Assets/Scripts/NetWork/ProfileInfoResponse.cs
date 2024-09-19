@@ -1,6 +1,6 @@
 //--------------------------------------------------------------
 //
-// ƒvƒƒtƒB[ƒ‹î•ñƒŒƒXƒ|ƒ“ƒXƒNƒ‰ƒX [ ProfileInfoResponse.cs ]
+// ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«æƒ…å ±ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚¯ãƒ©ã‚¹ [ ProfileInfoResponse.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/13
 // Update:2024/09/13
@@ -13,27 +13,27 @@ using UnityEngine;
 
 public class ProfileInfoResponse
 {
-    /// ‘ƒvƒŒƒC”
+    /// ç·ãƒ—ãƒ¬ã‚¤æ•°
     [JsonProperty("icon_id")]
     public int IconID { get; set; }
 
-    /// ‘ƒvƒŒƒC”
+    /// ç·ãƒ—ãƒ¬ã‚¤æ•°
     [JsonProperty("play_cnt")]
     public int PlayCnt { get; set; }
 
-    /// ƒNƒŠƒA”
+    /// ã‚¯ãƒªã‚¢æ•°
     [JsonProperty("clear_cnt")]
     public int ClearCnt { get; set; }
 
-    /// ƒXƒe[ƒWì¬”
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ä½œæˆæ•°
     [JsonProperty("create_cnt")]
     public int CreateCnt { get; set; }
 
-    /// ƒtƒHƒ[”
+    /// ãƒ•ã‚©ãƒ­ãƒ¼æ•°
     [JsonProperty("follow_cnt")]
     public int FollowCnt { get; set; }
 
-    // ƒtƒHƒƒ[”
+    // ãƒ•ã‚©ãƒ­ãƒ¯ãƒ¼æ•°
     [JsonProperty("follower_cnt")]
     public int FollowerCnt { get; set; }
 }

@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// UIƒ}ƒl[ƒWƒƒ[ [ UIManager.cs ]
+// UIãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ UIManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/29
 // Update:2024/09/04
@@ -16,67 +16,67 @@ using KanKikuchi.AudioManager;
 public class UIManager : MonoBehaviour
 {
     //-------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ƒV[ƒ“–¼
+    /// ã‚·ãƒ¼ãƒ³å
     /// </summary>
     [SerializeField] private string sceneName = "";
 
     //--------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‹N“®ˆ—
+    /// èµ·å‹•å‡¦ç†
     /// </summary>
     void Awake()
     {
-        // NetworkManageræ“¾
+        // NetworkManagerå–å¾—
         NetworkManager networkManager = NetworkManager.Instance;
 
 #if UNITY_EDITOR
         Addressables.LoadScene("Stage" + networkManager.PlayStageNo.ToString(), LoadSceneMode.Additive);
 #else
-        // UIƒV[ƒ“‚Ì’Ç‰Á
+        // UIã‚·ãƒ¼ãƒ³ã®è¿½åŠ 
         Addressables.LoadScene("Stage" + networkManager.PlayStageNo.ToString(), LoadSceneMode.Additive);
 #endif
     }
 
     /// <summary>
-    /// ƒŠƒvƒŒƒCˆ—
+    /// ãƒªãƒ—ãƒ¬ã‚¤å‡¦ç†
     /// </summary>
     public void gameReplay()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // ƒV[ƒ“‚ÌÄ“Ç‚İ
+        // ã‚·ãƒ¼ãƒ³ã®å†èª­ã¿
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
-    /// ƒz[ƒ€‘JˆÚˆ—
+    /// ãƒ›ãƒ¼ãƒ é·ç§»å‡¦ç†
     /// </summary>
     public void transitionHome()
     {
         BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        /* ƒtƒF[ƒhˆ— (•)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (é»’)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("HomeScene", Color.gray, 2.5f);
     }
 
     /// <summary>
-    /// ƒXƒe[ƒW‘I‘ğ‘JˆÚˆ—
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠé·ç§»å‡¦ç†
     /// </summary>
     public void transitionSelect()
     {
         BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        /* ƒtƒF[ƒhˆ— (•)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (é»’)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("StageSelectScene", Color.gray, 2.5f);
     }

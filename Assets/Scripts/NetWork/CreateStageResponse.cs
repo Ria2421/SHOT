@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒNƒŠƒGƒCƒgƒXƒe[ƒWƒŒƒXƒ|ƒ“ƒXƒNƒ‰ƒX [ CreateStageResponse.cs ]
+// ã‚¯ãƒªã‚¨ã‚¤ãƒˆã‚¹ãƒ†ãƒ¼ã‚¸ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚¯ãƒ©ã‚¹ [ CreateStageResponse.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/09
 // Update:2024/09/09
@@ -13,7 +13,7 @@ using UnityEngine;
 
 public class CreateStageResponse
 {
-    // ƒMƒ~ƒbƒNÀ•W
+    // ã‚®ãƒŸãƒƒã‚¯åº§æ¨™
     [JsonProperty("gimmick_pos")]
     public string GimmickPos { get; set; }
 }

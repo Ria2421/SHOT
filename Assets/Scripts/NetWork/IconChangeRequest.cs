@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class IconChangeRequest
 {
-    /// 作成ユーザーID
+    /// 菴懈�舌Θ繝ｼ繧ｶ繝ｼID
     [JsonProperty("user_id")]
     public int UserID { get; set; }
 
-    /// アイコンID
+    /// 繧｢繧､繧ｳ繝ｳID
     [JsonProperty("icon_id")]
     public int IconID { get; set; }
 }

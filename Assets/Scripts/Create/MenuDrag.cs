@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒƒjƒ…[ƒhƒ‰ƒbƒOˆÚ“®—pƒXƒNƒŠƒvƒg [ MenuDrag.cs ]
+// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ‰ãƒ©ãƒƒã‚°ç§»å‹•ç”¨ã‚¹ã‚¯ãƒªãƒ—ãƒˆ [ MenuDrag.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/03
 // Update:2024/09/03
@@ -26,16 +26,16 @@ public class MenuDrag : MonoBehaviour, IDragHandler
     }
 
     /// <summary>
-    /// ƒhƒ‰ƒbƒOˆÚ“®ˆ—
+    /// ãƒ‰ãƒ©ãƒƒã‚°ç§»å‹•å‡¦ç†
     /// </summary>
     /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
-        // ƒhƒ‰ƒbƒOÀ•W‚Ìæ“¾
+        // ãƒ‰ãƒ©ãƒƒã‚°åº§æ¨™ã®å–å¾—
         Vector3 TargetPos = Camera.main.ScreenToWorldPoint(eventData.position);
         TargetPos.z = 0;
 
-        // ‘ÎÛ‚ÌÀ•W‚ğXV
+        // å¯¾è±¡ã®åº§æ¨™ã‚’æ›´æ–°
         transform.position = eventData.position;
     }
 }

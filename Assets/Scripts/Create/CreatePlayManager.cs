@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒNƒŠƒGƒCƒgƒvƒŒƒCƒ}ƒl[ƒWƒƒ[ [ CreatePlayManager.cs ]
+// ã‚¯ãƒªã‚¨ã‚¤ãƒˆãƒ—ãƒ¬ã‚¤ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ CreatePlayManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/10
 // Update:2024/09/10
@@ -15,104 +15,104 @@ using UnityEngine.SceneManagement;
 public class CreatePlayManager : MonoBehaviour
 {
     //-------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ƒMƒ~ƒbƒNŠi”[—p‚ÌeƒIƒuƒWƒFƒNƒg
+    /// ã‚®ãƒŸãƒƒã‚¯æ ¼ç´ç”¨ã®è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     [SerializeField] private GameObject parentObj;
 
     /// <summary>
-    /// ƒƒjƒ…[ƒpƒlƒ‹
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ‘ãƒãƒ«
     /// </summary>
     [SerializeField] private GameObject menuPanel;
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
-        // ƒXƒe[ƒWƒf[ƒ^‚Ìó‚¯æ‚èE”z’u
+        // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã®å—ã‘å–ã‚Šãƒ»é…ç½®
         var stageDatas = GameObject.Find("StageDataObject").GetComponent<StageDataObject>().GetStageData();
         foreach (GimmickData data in stageDatas)
         {
-            // ResourcesƒtƒHƒ‹ƒ_‚©‚çƒMƒ~ƒbƒN‚ÌƒIƒuƒWƒFƒNƒg‚ğæ“¾E¶¬
+            // Resourcesãƒ•ã‚©ãƒ«ãƒ€ã‹ã‚‰ã‚®ãƒŸãƒƒã‚¯ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ãƒ»ç”Ÿæˆ
             GameObject obj = (GameObject)Resources.Load(data.ID.ToString());
             Instantiate(obj, new Vector3(data.X, data.Y, 0), Quaternion.identity);
         }
     }
 
     /// <summary>
-    /// ƒZƒŒƒNƒgƒ{ƒ^ƒ“‰Ÿ‰ºˆ—
+    /// ã‚»ãƒ¬ã‚¯ãƒˆãƒœã‚¿ãƒ³æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     public void PushSelectButton()
     {
         BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        /* ƒtƒF[ƒhˆ— (”’)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (ç™½)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("LookCreateStageScene", Color.white, 2.5f);
     }
 
     /// <summary>
-    /// ƒŠƒvƒŒƒCˆ—
+    /// ãƒªãƒ—ãƒ¬ã‚¤å‡¦ç†
     /// </summary>
     public void PushGameReplay()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // ƒV[ƒ“‚ÌÄ“Ç‚İ
+        // ã‚·ãƒ¼ãƒ³ã®å†èª­ã¿
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
-    /// ƒz[ƒ€‘JˆÚˆ—
+    /// ãƒ›ãƒ¼ãƒ é·ç§»å‡¦ç†
     /// </summary>
     public void PushComplete()
     {
         BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        /* ƒtƒF[ƒhˆ— (”’)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (ç™½)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("ConfCreateScene", Color.white, 2.5f);
     }
 
     /// <summary>
-    /// ƒƒjƒ…[‰Ÿ‰º
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼æŠ¼ä¸‹æ™‚
     /// </summary>
     public void PushMenuButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // ƒƒjƒ…[ƒpƒlƒ‹‚ğ•\¦
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ‘ãƒãƒ«ã‚’è¡¨ç¤º
         menuPanel.SetActive(true);
     }
 
     /// <summary>
-    /// •Â‚¶‚éƒ{ƒ^ƒ“‰Ÿ‰º
+    /// é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚
     /// </summary>
     public void PushCloseButton()
     {
         SEManager.Instance.Play(SEPath.CANCEL);
 
-        // ƒƒjƒ…[ƒpƒlƒ‹‚ğ”ñ•\¦
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ‘ãƒãƒ«ã‚’éè¡¨ç¤º
         menuPanel.SetActive(false);
     }
 
     /// <summary>
-    /// ƒoƒbƒNƒ{ƒ^ƒ“‰Ÿ‰º
+    /// ãƒãƒƒã‚¯ãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚
     /// </summary>
     public void PushBackButton()
     {
         BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        /* ƒtƒF[ƒhˆ— (”’)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (ç™½)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("CreateMainScene", Color.white, 1.5f);
     }

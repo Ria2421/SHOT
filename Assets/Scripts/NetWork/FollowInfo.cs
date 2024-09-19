@@ -1,6 +1,6 @@
 //--------------------------------------------
 //
-// ƒtƒHƒ[î•ñƒNƒ‰ƒX [ FollowInfo.cs ]
+// ãƒ•ã‚©ãƒ­ãƒ¼æƒ…å ±ã‚¯ãƒ©ã‚¹ [ FollowInfo.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/16
 // Update:2024/09/16
@@ -13,15 +13,15 @@ using UnityEngine;
 
 public class FollowInfo
 {
-    /// ƒ†[ƒU[ID
+    /// ãƒ¦ãƒ¼ã‚¶ãƒ¼ID
     [JsonProperty("id")]
     public int ID { get; set; }
 
-    /// ƒAƒCƒRƒ“ID
+    /// ã‚¢ã‚¤ã‚³ãƒ³ID
     [JsonProperty("icon_id")]
     public int IconID { get; set; }
 
-    /// ƒ†[ƒU[–¼
+    /// ãƒ¦ãƒ¼ã‚¶ãƒ¼å
     [JsonProperty("name")]
     public string Name { get; set; }
 }

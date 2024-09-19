@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒNƒŠƒGƒCƒgƒXƒe[ƒWƒŠƒNƒGƒXƒgƒNƒ‰ƒX [ CreateStageRequest.cs ]
+// ã‚¯ãƒªã‚¨ã‚¤ãƒˆã‚¹ãƒ†ãƒ¼ã‚¸ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚¯ãƒ©ã‚¹ [ CreateStageRequest.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/06
 // Update:2024/09/06
@@ -13,15 +13,15 @@ using UnityEngine;
 
 public class CreateStageRequest
 {
-    /// ƒXƒe[ƒW–¼
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸å
     [JsonProperty("name")]
     public string Name { get; set; }
 
-    /// ì¬ƒ†[ƒU[ID
+    /// ä½œæˆãƒ¦ãƒ¼ã‚¶ãƒ¼ID
     [JsonProperty("user_id")]
     public int UserID { get; set; }
 
-    // ƒMƒ~ƒbƒNÀ•W
+    // ã‚®ãƒŸãƒƒã‚¯åº§æ¨™
     [JsonProperty("gimmick_pos")]
     public string GimmickPos { get; set; }
 }

@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒJƒXƒ^ƒ€ƒQ[ƒ€ƒ}ƒl[ƒWƒƒ[ [ CustomGameManager.cs ]
+// ã‚«ã‚¹ã‚¿ãƒ ã‚²ãƒ¼ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ CustomGameManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/05
 // Update:2024/09/11
@@ -17,58 +17,58 @@ using UnityEngine.UI;
 public class CustomGameManager : MonoBehaviour
 {
     //-------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ƒMƒ~ƒbƒNŠi”[—p‚ÌeƒIƒuƒWƒFƒNƒg
+    /// ã‚®ãƒŸãƒƒã‚¯æ ¼ç´ç”¨ã®è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     [SerializeField] private GameObject parentObj;
 
     /// <summary>
-    /// ƒƒjƒ…[ƒpƒlƒ‹
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ‘ãƒãƒ«
     /// </summary>
     [SerializeField] private GameObject menuPanel;
 
     /// <summary>
-    /// ƒCƒCƒlƒ{ƒ^ƒ“
+    /// ã‚¤ã‚¤ãƒãƒœã‚¿ãƒ³
     /// </summary>
     [SerializeField] private GameObject goodButton;
 
     /// <summary>
-    /// ‹¤—Lƒ{ƒ^ƒ“
+    /// å…±æœ‰ãƒœã‚¿ãƒ³
     /// </summary>
     [SerializeField] private GameObject shareButton;
 
     /// <summary>
-    /// ƒtƒHƒ[ƒ{ƒ^ƒ“
+    /// ãƒ•ã‚©ãƒ­ãƒ¼ãƒœã‚¿ãƒ³
     /// </summary>
     [SerializeField] private GameObject followButton;
 
     /// <summary>
-    /// ƒlƒbƒgƒ[ƒNƒ}ƒl[ƒWƒƒ[
+    /// ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
     /// </summary>
     private NetworkManager networkManager;
 
     /// <summary>
-    /// ƒXƒe[ƒWƒf[ƒ^ƒIƒuƒWƒFƒNƒg
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     private StageDataObject stageDataObject;
 
     //--------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
         networkManager = NetworkManager.Instance;
-        // ƒXƒe[ƒWƒf[ƒ^‚Ìó‚¯æ‚èE”z’u
+        // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã®å—ã‘å–ã‚Šãƒ»é…ç½®
         stageDataObject = GameObject.Find("StageDataObject").GetComponent<StageDataObject>();
         var stageDatas = stageDataObject.GetStageData();
         foreach (GimmickData data in stageDatas)
         {
-            // ResourcesƒtƒHƒ‹ƒ_‚©‚çƒMƒ~ƒbƒN‚ÌƒIƒuƒWƒFƒNƒg‚ğæ“¾E¶¬
+            // Resourcesãƒ•ã‚©ãƒ«ãƒ€ã‹ã‚‰ã‚®ãƒŸãƒƒã‚¯ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ãƒ»ç”Ÿæˆ
             GameObject obj = (GameObject)Resources.Load(data.ID.ToString());
             Instantiate(obj, new Vector3(data.X, data.Y, 0), Quaternion.identity);
         }
@@ -76,77 +76,77 @@ public class CustomGameManager : MonoBehaviour
 
 
     //================================
-    // ƒƒjƒ…[ˆ—
+    // ãƒ¡ãƒ‹ãƒ¥ãƒ¼å‡¦ç†
 
     /// <summary>
-    /// ƒƒjƒ…[‰Ÿ‰º
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼æŠ¼ä¸‹æ™‚
     /// </summary>
     public void PushMenuButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // ƒƒjƒ…[ƒpƒlƒ‹‚ğ•\¦
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ‘ãƒãƒ«ã‚’è¡¨ç¤º
         menuPanel.SetActive(true);
     }
 
     /// <summary>
-    /// •Â‚¶‚éƒ{ƒ^ƒ“‰Ÿ‰º
+    /// é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚
     /// </summary>
     public void PushCloseButton()
     {
         SEManager.Instance.Play(SEPath.CANCEL);
 
-        // ƒƒjƒ…[ƒpƒlƒ‹‚ğ”ñ•\¦
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ‘ãƒãƒ«ã‚’éè¡¨ç¤º
         menuPanel.SetActive(false);
     }
 
     /// <summary>
-    /// –ß‚é‰Ÿ‰ºˆ—
+    /// æˆ»ã‚‹æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     public void PushBackButton()
     {
         BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        /* ƒtƒF[ƒhˆ— (”’)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (ç™½)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("CustumSelectScene", Color.white, 2.5f);
     }
 
     /// <summary>
-    /// ƒŠƒvƒŒƒC‰Ÿ‰ºˆ—
+    /// ãƒªãƒ—ãƒ¬ã‚¤æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     public void PushReplayButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // ƒV[ƒ“‚ÌÄ“Ç‚İ
+        // ã‚·ãƒ¼ãƒ³ã®å†èª­ã¿
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // ƒz[ƒ€ƒ{ƒ^ƒ“‰Ÿ‰ºˆ—
+    // ãƒ›ãƒ¼ãƒ ãƒœã‚¿ãƒ³æŠ¼ä¸‹å‡¦ç†
     public void PushHomeButton()
     {
         BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        /* ƒtƒF[ƒhˆ— (”’)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (ç™½)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("HomeScene", Color.white, 2.5f);
     }
 
     /// <summary>
-    /// ƒCƒCƒlƒ{ƒ^ƒ“ˆ—
+    /// ã‚¤ã‚¤ãƒãƒœã‚¿ãƒ³å‡¦ç†
     /// </summary>
     public void PushGoodButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        goodButton.GetComponent<Button>().interactable = false;    // ƒ{ƒ^ƒ“–³Œø‰»
+        goodButton.GetComponent<Button>().interactable = false;    // ãƒœã‚¿ãƒ³ç„¡åŠ¹åŒ–
 
-        // ƒCƒCƒlXVˆ—
+        // ã‚¤ã‚¤ãƒæ›´æ–°å‡¦ç†
         StartCoroutine(NetworkManager.Instance.UpdateGood(
             stageDataObject.GetID(),
             stageDataObject.GetGood() + 1,
@@ -164,15 +164,15 @@ public class CustomGameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ‹¤—Lƒ{ƒ^ƒ“ˆ—
+    /// å…±æœ‰ãƒœã‚¿ãƒ³å‡¦ç†
     /// </summary>
     public void PushShareButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        shareButton.GetComponent<Button>().interactable = false;    // ƒ{ƒ^ƒ“–³Œø‰»
+        shareButton.GetComponent<Button>().interactable = false;    // ãƒœã‚¿ãƒ³ç„¡åŠ¹åŒ–
 
-        // ƒCƒCƒlXVˆ—
+        // ã‚¤ã‚¤ãƒæ›´æ–°å‡¦ç†
         StartCoroutine(NetworkManager.Instance.ShereStage(
             stageDataObject.GetID(),
             result =>
@@ -189,13 +189,13 @@ public class CustomGameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒtƒHƒ[ƒ{ƒ^ƒ“ˆ—
+    /// ãƒ•ã‚©ãƒ­ãƒ¼ãƒœã‚¿ãƒ³å‡¦ç†
     /// </summary>
     public void PushFollowButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        followButton.GetComponent<Button>().interactable = false;    // ƒ{ƒ^ƒ“–³Œø‰»
+        followButton.GetComponent<Button>().interactable = false;    // ãƒœã‚¿ãƒ³ç„¡åŠ¹åŒ–
 
         StartCoroutine(NetworkManager.Instance.RegistFollow(
             stageDataObject.GetCreatorID(),
@@ -203,18 +203,18 @@ public class CustomGameManager : MonoBehaviour
             {
                 switch (result)
                 {
-                    case "200": // “o˜^¬Œ÷
-                        Debug.Log("“o˜^Š®—¹");
+                    case "200": // ç™»éŒ²æˆåŠŸ
+                        Debug.Log("ç™»éŒ²å®Œäº†");
                         followButton.GetComponent<Image>().color = Color.green;
                         break;
 
-                    case "400": // “o˜^Ï
-                        Debug.Log("“o˜^Ï");
+                    case "400": // ç™»éŒ²æ¸ˆ
+                        Debug.Log("ç™»éŒ²æ¸ˆ");
                         followButton.GetComponent<Image>().color = Color.green;
                         break;
 
-                    case "404": // w’èID‚ª‘¶İ‚µ‚È‚¢
-                        Debug.Log("ID‚ª‘¶İ‚µ‚È‚¢");
+                    case "404": // æŒ‡å®šIDãŒå­˜åœ¨ã—ãªã„
+                        Debug.Log("IDãŒå­˜åœ¨ã—ãªã„");
                         followButton.GetComponent<Image>().color = Color.red;
                         break;
 

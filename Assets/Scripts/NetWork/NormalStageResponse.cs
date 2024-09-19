@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒm[ƒ}ƒ‹ƒXƒe[ƒWƒŒƒXƒ|ƒ“ƒXƒNƒ‰ƒX [ NormalStageResponse.cs ]
+// ãƒŽãƒ¼ãƒžãƒ«ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚¯ãƒ©ã‚¹ [ NormalStageResponse.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/27
 // Update:2024/08/27
@@ -13,15 +13,15 @@ using UnityEngine;
 
 public class NormalStageResponse
 {
-    /// ƒXƒe[ƒWID
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ID
     [JsonProperty("id")]
     public int StageID { get; set; }
 
-    /// •ñVƒAƒCƒeƒ€ID
+    /// å ±é…¬ã‚¢ã‚¤ãƒ†ãƒ ID
     [JsonProperty("item_id")]
     public int ItemID { get; set; }
 
-    // •ñV”
+    // å ±é…¬æ•°
     [JsonProperty("quantity")]
     public int Quantity { get; set; }
 }

@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒNƒŠƒGƒCƒgƒ}ƒl[ƒWƒƒ[ [ CreateMainManager.cs ]
+// ã‚¯ãƒªã‚¨ã‚¤ãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ CreateMainManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/06
 // Update:2024/08/06
@@ -18,82 +18,82 @@ using KanKikuchi.AudioManager;
 public class CreateMainManager : MonoBehaviour
 {
     //-------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ƒƒjƒ…[ƒpƒlƒ‹
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ‘ãƒãƒ«
     /// </summary>
     [SerializeField] private GameObject menuPanel;
 
     /// <summary>
-    /// ƒSƒ~” ‰æ‘œ(•Â)
+    /// ã‚´ãƒŸç®±ç”»åƒ(é–‰)
     /// </summary>
     [SerializeField] private Sprite closeBox;
 
     /// <summary>
-    /// ƒSƒ~” ‰æ‘œ(ŠJ)
+    /// ã‚´ãƒŸç®±ç”»åƒ(é–‹)
     /// </summary>
     [SerializeField] private Sprite openBox;
 
     /// <summary>
-    /// Playerİ’u’ˆÓƒIƒuƒWƒF
+    /// Playerè¨­ç½®æ³¨æ„ã‚ªãƒ–ã‚¸ã‚§
     /// </summary>
     [SerializeField] private RectTransform cautionPlayer;
 
     /// <summary>
-    /// Goalİ’u’ˆÓƒIƒuƒWƒF
+    /// Goalè¨­ç½®æ³¨æ„ã‚ªãƒ–ã‚¸ã‚§
     /// </summary>
     [SerializeField] private RectTransform cautionGoal;
 
     /// <summary>
-    /// ƒNƒŠƒGƒCƒgƒf[ƒ^Ši”[—p
+    /// ã‚¯ãƒªã‚¨ã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿æ ¼ç´ç”¨
     /// </summary>
     private List<GimmickData> createDatas = new List<GimmickData>();
 
     /// <summary>
-    /// íœƒ‚[ƒhƒtƒ‰ƒOƒvƒƒpƒeƒB
+    /// å‰Šé™¤ãƒ¢ãƒ¼ãƒ‰ãƒ•ãƒ©ã‚°ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
     /// </summary>
     public bool DeleteModeFlag {  get; private set; }
 
     //--------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     private void Start()
     {
-        // íœƒ‚[ƒhƒIƒt
+        // å‰Šé™¤ãƒ¢ãƒ¼ãƒ‰ã‚ªãƒ•
         DeleteModeFlag = false;
 
-        // ƒXƒe[ƒWƒf[ƒ^•ÛŠÇ—pƒIƒuƒWƒFƒNƒg‚Ì‘¶İŠm”F
+        // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ä¿ç®¡ç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å­˜åœ¨ç¢ºèª
         GameObject check = GameObject.Find("StageDataObject");
 
         if (check == null)
-        {   // ƒf[ƒ^•ÛŠÇ—pƒIƒuƒWƒFƒNƒg‚Ì¶¬
+        {   // ãƒ‡ãƒ¼ã‚¿ä¿ç®¡ç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
             GameObject stageDataObject = new GameObject("StageDataObject");
             stageDataObject.AddComponent<StageDataObject>();
-            DontDestroyOnLoad(stageDataObject);    // Scene‘JˆÚ‚Å”jŠü‚³‚ê‚È‚æ‚¤‚É‚·‚é
+            DontDestroyOnLoad(stageDataObject);    // Sceneé·ç§»ã§ç ´æ£„ã•ã‚Œãªã‚ˆã†ã«ã™ã‚‹
         }
         else
-        {   // ƒf[ƒ^‚ğŒ³‚ÉƒMƒ~ƒbƒN‚ğ”z’u
+        {   // ãƒ‡ãƒ¼ã‚¿ã‚’å…ƒã«ã‚®ãƒŸãƒƒã‚¯ã‚’é…ç½®
             var gimmckDatas = check.GetComponent<StageDataObject>().GetStageData();
             foreach(GimmickData data in gimmckDatas)
             {
-                // ResourcesƒtƒHƒ‹ƒ_‚©‚çƒMƒ~ƒbƒN‚ÌƒIƒuƒWƒFƒNƒg‚ğæ“¾E¶¬
+                // Resourcesãƒ•ã‚©ãƒ«ãƒ€ã‹ã‚‰ã‚®ãƒŸãƒƒã‚¯ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ãƒ»ç”Ÿæˆ
                 GameObject obj = (GameObject)Resources.Load(data.ID.ToString());
                 GameObject gimmick = Instantiate(obj, new Vector3(data.X,data.Y,0), Quaternion.identity);
 
-                // ƒhƒ‰ƒbƒO—pƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì’Ç‰Á
+                // ãƒ‰ãƒ©ãƒƒã‚°ç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®è¿½åŠ 
                 gimmick.AddComponent<BoxCollider2D>();
                 gimmick.AddComponent<ObjDrag>();
                 Destroy(gimmick.GetComponent<Rigidbody2D>());
 
-                // ƒ^ƒO‚ğ•t—^
+                // ã‚¿ã‚°ã‚’ä»˜ä¸
                 gimmick.tag = "Create";
 
                 if (gimmick.name == "99(Clone)")
-                {   // ƒvƒŒƒCƒ„[¶¬‚É“®‚©‚È‚¢‚æ‚¤‚ÉƒRƒ“ƒ|[ƒlƒ“ƒg‚ğíœ
+                {   // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”Ÿæˆæ™‚ã«å‹•ã‹ãªã„ã‚ˆã†ã«ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å‰Šé™¤
                     Destroy(gimmick.GetComponent<PlayerManager>());
                 }
             }
@@ -101,9 +101,9 @@ public class CreateMainManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ’ˆÓ‘‚«•\¦ˆ—
+    /// æ³¨æ„æ›¸ãè¡¨ç¤ºå‡¦ç†
     /// </summary>
-    /// <param name="cautionImage">ˆÚ“®‘ÎÛ</param>
+    /// <param name="cautionImage">ç§»å‹•å¯¾è±¡</param>
     private void MoveCaution(RectTransform cautionImage)
     {
         SEManager.Instance.Play(SEPath.TUUTI);
@@ -111,58 +111,58 @@ public class CreateMainManager : MonoBehaviour
     }
 
     //=====================================
-    // ƒ{ƒ^ƒ“‰Ÿ‰ºˆ—
+    // ãƒœã‚¿ãƒ³æŠ¼ä¸‹å‡¦ç†
 
     /// <summary>
-    /// ƒƒjƒ…[‰Ÿ‰º
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼æŠ¼ä¸‹æ™‚
     /// </summary>
     public void PushMenuButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
-        // ƒƒjƒ…[ƒpƒlƒ‹‚ğ•\¦
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ‘ãƒãƒ«ã‚’è¡¨ç¤º
         menuPanel.SetActive(true);
     }
 
     /// <summary>
-    /// •Â‚¶‚éƒ{ƒ^ƒ“‰Ÿ‰º
+    /// é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚
     /// </summary>
     public void PushCloseButton()
     {
         SEManager.Instance.Play(SEPath.CANCEL);
-        // ƒƒjƒ…[ƒpƒlƒ‹‚ğ”ñ•\¦
+        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ‘ãƒãƒ«ã‚’éè¡¨ç¤º
         menuPanel.SetActive(false);
     }
 
     /// <summary>
-    /// ƒz[ƒ€ƒ{ƒ^ƒ“‰Ÿ‰º
+    /// ãƒ›ãƒ¼ãƒ ãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚
     /// </summary>
     public void PushHomeButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        /* ƒtƒF[ƒhˆ— (•)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (é»’)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("HomeScene", Color.black, 1.5f);
         
     }
 
     /// <summary>
-    /// ƒSƒ~” ƒ{ƒ^ƒ“‰Ÿ‰ºˆ—
+    /// ã‚´ãƒŸç®±ãƒœã‚¿ãƒ³æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     public void PushDustBox(GameObject gameObject)
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
         if (!DeleteModeFlag)
-        {   // íœƒ‚[ƒhOFF‚Ì
+        {   // å‰Šé™¤ãƒ¢ãƒ¼ãƒ‰OFFã®æ™‚
             DeleteModeFlag = true;
             Image dustBoxImg = gameObject.GetComponent<Image>();
-            dustBoxImg.sprite = openBox;    // ‰æ‘œ•ÏX
-            dustBoxImg.color = Color.red;   // F•ÏX
+            dustBoxImg.sprite = openBox;    // ç”»åƒå¤‰æ›´
+            dustBoxImg.color = Color.red;   // è‰²å¤‰æ›´
         }
         else
-        {   // íœƒ‚[ƒhON‚Ì
+        {   // å‰Šé™¤ãƒ¢ãƒ¼ãƒ‰ONã®æ™‚
             DeleteModeFlag = false;
             Image dustBoxImg = gameObject.GetComponent<Image>();
             dustBoxImg.sprite = closeBox;
@@ -171,111 +171,111 @@ public class CreateMainManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒMƒ~ƒbƒNƒ{ƒ^ƒ“‰Ÿ‰ºˆ—
+    /// ã‚®ãƒŸãƒƒã‚¯ãƒœã‚¿ãƒ³æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     public void PushGimmickButton(string objName)
     {
         SEManager.Instance.Play(SEPath.GIMMICK_SET);
-        Debug.Log(objName); // ƒMƒ~ƒbƒN–¼‚Ì•\¦
+        Debug.Log(objName); // ã‚®ãƒŸãƒƒã‚¯åã®è¡¨ç¤º
 
-        // ResourcesƒtƒHƒ‹ƒ_‚©‚çƒMƒ~ƒbƒN‚ÌƒIƒuƒWƒFƒNƒg‚ğæ“¾E¶¬
+        // Resourcesãƒ•ã‚©ãƒ«ãƒ€ã‹ã‚‰ã‚®ãƒŸãƒƒã‚¯ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ãƒ»ç”Ÿæˆ
         GameObject obj = (GameObject)Resources.Load(objName);
         GameObject gimmick = Instantiate(obj,Vector3.zero,Quaternion.identity);
 
-        // ƒhƒ‰ƒbƒO—pƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì’Ç‰Á
+        // ãƒ‰ãƒ©ãƒƒã‚°ç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®è¿½åŠ 
         gimmick.AddComponent<BoxCollider2D>();
         gimmick.AddComponent<ObjDrag>();
         Destroy(gimmick.GetComponent<Rigidbody2D>());
 
-        // ƒ^ƒO‚ğ•t—^
+        // ã‚¿ã‚°ã‚’ä»˜ä¸
         gimmick.tag = "Create";
 
         if(gimmick.name == "99(Clone)")
-        {   // ƒvƒŒƒCƒ„[¶¬‚É“®‚©‚È‚¢‚æ‚¤‚ÉƒRƒ“ƒ|[ƒlƒ“ƒg‚ğíœ
+        {   // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”Ÿæˆæ™‚ã«å‹•ã‹ãªã„ã‚ˆã†ã«ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å‰Šé™¤
             Destroy(gimmick.GetComponent<PlayerManager>());
             Destroy(gimmick.GetComponent<Rigidbody2D>());
         }
     }
 
     /// <summary>
-    /// ƒeƒXƒgƒ{ƒ^ƒ“‰Ÿ‰ºˆ—
+    /// ãƒ†ã‚¹ãƒˆãƒœã‚¿ãƒ³æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     public void PushTestPlay()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // ƒvƒŒƒCƒ„[EƒS[ƒ‹İ’uƒtƒ‰ƒO
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ»ã‚´ãƒ¼ãƒ«è¨­ç½®ãƒ•ãƒ©ã‚°
         bool plFlag = false;
         bool glFlag = false;
 
-        // Createƒ^ƒO‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‚·‚×‚Äæ“¾‚·‚é
+        // Createã‚¿ã‚°ã®ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã™ã¹ã¦å–å¾—ã™ã‚‹
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Create");
 
-        // ‰Ÿ‰ºˆ—
+        // æŠ¼ä¸‹å‡¦ç†
         foreach (GameObject obj in objs)
         {
-            // obj–¼‚ğID‚É•ÏŠ·
+            // objåã‚’IDã«å¤‰æ›
             string name = obj.name.Replace("(Clone)", "");
 
-            // İ’u”»’è
+            // è¨­ç½®åˆ¤å®š
             if(name == "99")
-            {   // ƒS[ƒ‹—L
+            {   // ã‚´ãƒ¼ãƒ«æœ‰
                 glFlag = true;
             }else if(name == "100")
-            {   // PL—L
+            {   // PLæœ‰
                 plFlag = true;
             }
 
-            // ƒMƒ~ƒbƒNƒf[ƒ^‚Ìì¬
+            // ã‚®ãƒŸãƒƒã‚¯ãƒ‡ãƒ¼ã‚¿ã®ä½œæˆ
             GimmickData gimmickData = new GimmickData();
             gimmickData.ID = int.Parse(name);
-            gimmickData.X = (float)Math.Round(obj.transform.position.x, 3); // ¬”“_‚Í‘æ‚RˆÊ‚Ü‚Å
+            gimmickData.X = (float)Math.Round(obj.transform.position.x, 3); // å°æ•°ç‚¹ã¯ç¬¬ï¼“ä½ã¾ã§
             gimmickData.Y = (float)Math.Round(obj.transform.position.y, 3);
-            Debug.Log(gimmickData.ID + ":" + " x=" + gimmickData.X + " y=" +gimmickData.Y); // ƒf[ƒ^‚Ì•\¦
+            Debug.Log(gimmickData.ID + ":" + " x=" + gimmickData.X + " y=" +gimmickData.Y); // ãƒ‡ãƒ¼ã‚¿ã®è¡¨ç¤º
 
-            // ƒŠƒXƒg‚É’Ç‰Á
+            // ãƒªã‚¹ãƒˆã«è¿½åŠ 
             createDatas.Add(gimmickData);
         }
 
-        // Šeƒtƒ‰ƒO–ˆ‚É’ˆÓ‘‚«•\¦EƒXƒe[‚¶î•ñ‰Šú‰»
+        // å„ãƒ•ãƒ©ã‚°æ¯ã«æ³¨æ„æ›¸ãè¡¨ç¤ºãƒ»ã‚¹ãƒ†ãƒ¼ã˜æƒ…å ±åˆæœŸåŒ–
         if(!plFlag && !glFlag)
-        {   // —¼•û–³‚¢
+        {   // ä¸¡æ–¹ç„¡ã„
             MoveCaution(cautionPlayer);
             MoveCaution(cautionGoal);
             createDatas.Clear();
             return;
         }else if (!plFlag)
-        {   // PL–³‚¢
+        {   // PLç„¡ã„
             MoveCaution(cautionPlayer);
             createDatas.Clear();
             return;
         }else if(!glFlag)
-        {   // ƒS[ƒ‹–³‚¢
+        {   // ã‚´ãƒ¼ãƒ«ç„¡ã„
             MoveCaution(cautionGoal);
             createDatas.Clear();
             return;
         }
         else
         {
-            // ƒXƒe[ƒWƒf[ƒ^‚ğ•ÛŠÇƒIƒuƒWƒF‚Éó‚¯“n‚µ
+            // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚’ä¿ç®¡ã‚ªãƒ–ã‚¸ã‚§ã«å—ã‘æ¸¡ã—
             var dataObj = GameObject.Find("StageDataObject").GetComponent<StageDataObject>();
             dataObj.SetData(0,0,createDatas,0);
         }
 
-        /* ƒtƒF[ƒhˆ— (”’)  
-                ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (ç™½)  
+                ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("TestPlayScene", Color.white, 2.5f);
     }
 
     /// <summary>
-    /// ’ˆÓ‰Ÿ‰ºˆ—
+    /// æ³¨æ„æŠ¼ä¸‹å‡¦ç†
     /// </summary>
     public void PushCation(RectTransform rectTransform)
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // ‰ŠúˆÊ’u‚ÉˆÚ“®
+        // åˆæœŸä½ç½®ã«ç§»å‹•
         rectTransform.anchoredPosition = new Vector2(1000.0f, rectTransform.anchoredPosition.y);
     }
 }

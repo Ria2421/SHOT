@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒJƒXƒ^ƒ€ƒZƒŒƒNƒgƒ}ƒl[ƒWƒƒ[ [ CustomSelectManager.cs ]
+// ã‚«ã‚¹ã‚¿ãƒ ã‚»ãƒ¬ã‚¯ãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ CustomSelectManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/26
 // Update:2024/09/11
@@ -16,98 +16,98 @@ using UnityEngine.UI;
 public class CustomSelectManager : MonoBehaviour
 {
     //-------------------------------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ƒXƒe[ƒWî•ñŠi”[ƒvƒŒƒnƒu
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±æ ¼ç´ãƒ—ãƒ¬ãƒãƒ–
     /// </summary>
     [SerializeField] private GameObject stageInfoPrefab;
 
     /// <summary>
-    /// ƒf[ƒ^‚È‚µ•\¦ƒvƒŒƒnƒu
+    /// ãƒ‡ãƒ¼ã‚¿ãªã—è¡¨ç¤ºãƒ—ãƒ¬ãƒãƒ–
     /// </summary>
     [SerializeField] private GameObject noDataPrefab;
 
     /// <summary>
-    /// ƒŠƒXƒgØ‚è‘Ö‚¦ƒ{ƒ^ƒ“
+    /// ãƒªã‚¹ãƒˆåˆ‡ã‚Šæ›¿ãˆãƒœã‚¿ãƒ³
     /// </summary>
     [SerializeField] private List<GameObject> listButtons;
 
     /// <summary>
-    /// Ø‚è‘Ö‚¦ƒ{ƒ^ƒ“ImageƒŠƒXƒg
+    /// åˆ‡ã‚Šæ›¿ãˆãƒœã‚¿ãƒ³Imageãƒªã‚¹ãƒˆ
     /// </summary>
     [SerializeField] private List<Image> buttonColors;
 
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹ƒŠƒXƒg    [0:ƒtƒHƒ[ 1:ƒCƒCƒl 2:‹¤—L]
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒªã‚¹ãƒˆ    [0:ãƒ•ã‚©ãƒ­ãƒ¼ 1:ã‚¤ã‚¤ãƒ 2:å…±æœ‰]
     /// </summary>
     [SerializeField] private List<GameObject> scrollList;
 
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹ƒRƒ“ƒeƒ“ƒc
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚³ãƒ³ãƒ†ãƒ³ãƒ„
     /// </summary>
     [SerializeField] private List<GameObject> scrolltContents;
 
     /// <summary>
-    /// ƒAƒCƒRƒ“ƒXƒvƒ‰ƒCƒg
+    /// ã‚¢ã‚¤ã‚³ãƒ³ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
     /// </summary>
     [SerializeField] private List<Sprite> iconSprits;
 
     /// <summary>
-    /// ƒlƒbƒgƒ[ƒNƒ}ƒl[ƒWƒƒ[Ši”[—p
+    /// ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼æ ¼ç´ç”¨
     /// </summary>
     private NetworkManager networkManager;
 
     //-------------------------------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
-        // ƒlƒbƒgƒ[ƒNƒ}ƒl[ƒWƒƒ[‚Ìæ“¾
+        // ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®å–å¾—
         networkManager = NetworkManager.Instance;
 
-        // ƒXƒe[ƒWƒIƒuƒWƒFƒNƒg‚ğŒŸõ
+        // ã‚¹ãƒ†ãƒ¼ã‚¸ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¤œç´¢
         GameObject stageDataObject = GameObject.Find("StageDataObject");
 
         if (stageDataObject != null)
         {
-            // ƒXƒe[ƒWƒf[ƒ^‚ÌƒŠƒZƒbƒg
+            // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã®ãƒªã‚»ãƒƒãƒˆ
             stageDataObject.GetComponent<StageDataObject>().ResetData();
         }
         else
         {
-            // ƒf[ƒ^•ÛŠÇ—pƒIƒuƒWƒFƒNƒg‚Ì¶¬
+            // ãƒ‡ãƒ¼ã‚¿ä¿ç®¡ç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
             stageDataObject = new GameObject("StageDataObject");
             stageDataObject.AddComponent<StageDataObject>();
-            DontDestroyOnLoad(stageDataObject);    // Scene‘JˆÚ‚Å”jŠü‚³‚ê‚È‚æ‚¤‚É‚·‚é
+            DontDestroyOnLoad(stageDataObject);    // Sceneé·ç§»ã§ç ´æ£„ã•ã‚Œãªã‚ˆã†ã«ã™ã‚‹
         }
 
-        // ƒJƒXƒ^ƒ€ƒŠƒXƒg‚Ìæ“¾
+        // ã‚«ã‚¹ã‚¿ãƒ ãƒªã‚¹ãƒˆã®å–å¾—
         StartCoroutine(NetworkManager.Instance.GetCustomList(
             result =>
             {
                 for(int i = 0; i < result.Count; i++)
                 {
                     if (result[i].Count == 0)
-                    {   // ƒf[ƒ^–³‚µ•\¦
+                    {   // ãƒ‡ãƒ¼ã‚¿ç„¡ã—è¡¨ç¤º
                         GameObject noData = Instantiate(noDataPrefab, Vector3.zero, Quaternion.identity, scrolltContents[i].transform);
                         continue;
                     }
 
                     foreach (var data in result[i])
                     {
-                        // ƒXƒe[ƒWˆê——‚Ì¶¬
+                        // ã‚¹ãƒ†ãƒ¼ã‚¸ä¸€è¦§ã®ç”Ÿæˆ
                         GameObject info = Instantiate(stageInfoPrefab, Vector3.zero, Quaternion.identity, scrolltContents[i].transform);
-                        // ƒXƒe[ƒWî•ñ‘ã“ü
+                        // ã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±ä»£å…¥
                         info.transform.GetChild(0).gameObject.GetComponent<Text>().text = "ID:" + data.ID.ToString();    // ID
-                        info.transform.GetChild(1).gameObject.GetComponent<Text>().text = data.Name;                     // ƒXƒe[ƒW–¼
-                        info.transform.GetChild(2).gameObject.GetComponent<Text>().text = data.UserName;                 // ƒ†[ƒU[–¼
-                        info.transform.GetChild(3).gameObject.GetComponent<Text>().text = data.GoodVol.ToString();       // ƒCƒCƒl”
-                        info.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = iconSprits[data.IconID - 1];// ƒAƒCƒRƒ“İ’è
-                        // ƒNƒŠƒbƒNƒXƒe[ƒW‘JˆÚ
+                        info.transform.GetChild(1).gameObject.GetComponent<Text>().text = data.Name;                     // ã‚¹ãƒ†ãƒ¼ã‚¸å
+                        info.transform.GetChild(2).gameObject.GetComponent<Text>().text = data.UserName;                 // ãƒ¦ãƒ¼ã‚¶ãƒ¼å
+                        info.transform.GetChild(3).gameObject.GetComponent<Text>().text = data.GoodVol.ToString();       // ã‚¤ã‚¤ãƒæ•°
+                        info.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = iconSprits[data.IconID - 1];// ã‚¢ã‚¤ã‚³ãƒ³è¨­å®š
+                        // ã‚¯ãƒªãƒƒã‚¯æ™‚ã‚¹ãƒ†ãƒ¼ã‚¸é·ç§»
                         info.GetComponent<Button>().onClick.AddListener(() =>
                         {
                             SEManager.Instance.Play(SEPath.MENU_SELECT);
@@ -116,14 +116,14 @@ public class CustomSelectManager : MonoBehaviour
                                 data.ID,
                                 result =>
                                 {
-                                    // JSONƒfƒVƒŠƒAƒ‰ƒCƒY
+                                    // JSONãƒ‡ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚º
                                     var resultData = JsonConvert.DeserializeObject<List<GimmickData>>(result.GimmickPos);
-                                    if (resultData == null) { return; }  // nullƒ`ƒFƒbƒN
+                                    if (resultData == null) { return; }  // nullãƒã‚§ãƒƒã‚¯
                                     stageDataObject.GetComponent<StageDataObject>().SetData(data.ID,data.UserID ,resultData, data.GoodVol);
-                                    Debug.Log("ƒXƒe[ƒWƒf[ƒ^æ“¾");
+                                    Debug.Log("ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿å–å¾—");
 
-                                    /* ƒtƒF[ƒhˆ— (”’)  
-                                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+                                    /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (ç™½)  
+                                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
                                     Initiate.DoneFading();
                                     Initiate.Fade("CustomGameScene", Color.white, 2.5f);
                                 }));
@@ -131,50 +131,50 @@ public class CustomSelectManager : MonoBehaviour
                     }
                 }
 
-                Debug.Log("ƒŠƒXƒg¶¬Š®—¹");
+                Debug.Log("ãƒªã‚¹ãƒˆç”Ÿæˆå®Œäº†");
 
                 foreach(GameObject button in listButtons)
-                {   // ƒ{ƒ^ƒ“‚Ì—LŒø‰»
+                {   // ãƒœã‚¿ãƒ³ã®æœ‰åŠ¹åŒ–
                     button.GetComponent<Button>().interactable = true;
                 }
 
-                SetList(0); // ƒtƒHƒ[ƒŠƒXƒg‚Ì—LŒø‰»
+                SetList(0); // ãƒ•ã‚©ãƒ­ãƒ¼ãƒªã‚¹ãƒˆã®æœ‰åŠ¹åŒ–
             }));
     }
 
     /// <summary>
-    /// ƒŠƒXƒgEƒ{ƒ^ƒ“‚Ì•\¦‰Šú‰»
+    /// ãƒªã‚¹ãƒˆãƒ»ãƒœã‚¿ãƒ³ã®è¡¨ç¤ºåˆæœŸåŒ–
     /// </summary>
     private void ResetList()
     {
-        // ƒ{ƒ^ƒ“EƒXƒNƒ[ƒ‹ƒEƒBƒ“ƒhƒE‰Šú‰»
+        // ãƒœã‚¿ãƒ³ãƒ»ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åˆæœŸåŒ–
         for (int i = 0; i < listButtons.Count; i++)
         {
-            scrollList[i].SetActive(false);         // ‘SƒŠƒXƒg‚ğ”ñ•\¦
-            buttonColors[i].color = Color.white;    // ƒJƒ‰[”’
+            scrollList[i].SetActive(false);         // å…¨ãƒªã‚¹ãƒˆã‚’éè¡¨ç¤º
+            buttonColors[i].color = Color.white;    // ã‚«ãƒ©ãƒ¼ç™½
         }
     }
 
     /// <summary>
-    /// w’èNo‚ÌƒŠƒXƒg‚ğ•\¦
+    /// æŒ‡å®šNoã®ãƒªã‚¹ãƒˆã‚’è¡¨ç¤º
     /// </summary>
     /// <param name="num"></param>
     public void SetList(int no)
     {
-        ResetList();   // ‰Šú‰»ˆ—
+        ResetList();   // åˆæœŸåŒ–å‡¦ç†
         scrollList[no].SetActive(true); 
         buttonColors[no].color = Color.gray;   
     }
 
     /// <summary>
-    /// ƒz[ƒ€‘JˆÚˆ—
+    /// ãƒ›ãƒ¼ãƒ é·ç§»å‡¦ç†
     /// </summary>
     public void PushBackButton()
     {
         SEManager.Instance.Play(SEPath.CANCEL);
 
-        /* ƒtƒF[ƒhˆ— (•)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (é»’)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("HomeScene", Color.white, 2.5f);
     }

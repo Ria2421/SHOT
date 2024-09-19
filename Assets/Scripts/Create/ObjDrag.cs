@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒIƒuƒWƒFƒhƒ‰ƒbƒOˆÚ“®—pƒXƒNƒŠƒvƒg [ ObjDrag.cs ]
+// ã‚ªãƒ–ã‚¸ã‚§ãƒ‰ãƒ©ãƒƒã‚°ç§»å‹•ç”¨ã‚¹ã‚¯ãƒªãƒ—ãƒˆ [ ObjDrag.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/03
 // Update:2024/09/03
@@ -14,34 +14,34 @@ using UnityEngine.EventSystems;
 public class ObjDrag : MonoBehaviour
 {
     //---------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// ƒ^ƒbƒ`‚ÌƒXƒNƒŠ[ƒ“À•W
+    /// ã‚¿ãƒƒãƒæ™‚ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™
     /// </summary>
     private Vector3 screenPoint;
 
     private CreateMainManager mainManager;
 
     //---------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
-        // ƒ}ƒl[ƒWƒƒ[‚Ìæ“¾
+        // ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®å–å¾—
         mainManager = GameObject.Find("CreateMainManager").GetComponent<CreateMainManager>();
     }
 
     /// <summary>
-    /// ƒhƒ‰ƒbƒOˆ—
+    /// ãƒ‰ãƒ©ãƒƒã‚°å‡¦ç†
     /// </summary>
     void OnMouseDrag()
     {
         if (mainManager.DeleteModeFlag)
-        {   // íœƒ‚[ƒh‚Ì
+        {   // å‰Šé™¤ãƒ¢ãƒ¼ãƒ‰ã®æ™‚
             Destroy(this.gameObject); 
             return;
         }
@@ -55,17 +55,17 @@ public class ObjDrag : MonoBehaviour
    if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))return;
 #endif
 
-        // ƒ^ƒbƒ`‚Ìƒ[ƒ‹ƒhÀ•W‚ğƒXƒNƒŠ[ƒ“À•W‚É•ÏŠ·
+        // ã‚¿ãƒƒãƒæ™‚ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã«å¤‰æ›
         screenPoint = Camera.main.WorldToScreenPoint(transform.position);
 
-        // Œ»İ‚ÌƒXƒNƒŠ[ƒ“À•W‚ğæ“¾
+        // ç¾åœ¨ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã‚’å–å¾—
         float screenX = Input.mousePosition.x;
         float screenY = Input.mousePosition.y;
         float screenZ = screenPoint.z;
 
         Vector3 currentScreenPoint = new Vector3(screenX, screenY, screenZ);
 
-        // ƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·ŒãA”½‰f
+        // ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›å¾Œã€åæ˜ 
         Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenPoint);
         transform.position = currentPosition;
     }

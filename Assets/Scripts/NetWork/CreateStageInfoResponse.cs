@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
 //
-// ƒNƒŠƒGƒCƒgƒXƒe[ƒWî•ñƒŒƒXƒ|ƒ“ƒXƒNƒ‰ƒX [ CreateStageInfoResponse.cs ]
+// ã‚¯ãƒªã‚¨ã‚¤ãƒˆã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚¯ãƒ©ã‚¹ [ CreateStageInfoResponse.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/11
 // Update:2024/09/11
@@ -13,27 +13,27 @@ using UnityEngine;
 
 public class CreateStageInfoResponse
 {
-    /// ƒXƒe[ƒWID
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ID
     [JsonProperty("id")]
     public int ID { get; set; }
 
-    /// ƒXƒe[ƒW–¼
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸å
     [JsonProperty("name")]
     public string Name { get; set; }
 
-    /// ƒXƒe[ƒW–¼
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸å
     [JsonProperty("icon_id")]
     public int IconID { get; set; }
 
-    /// ì¬ƒ†[ƒU[ID
+    /// ä½œæˆãƒ¦ãƒ¼ã‚¶ãƒ¼ID
     [JsonProperty("user_id")]
     public int UserID { get; set; }
 
-    /// ì¬ƒ†[ƒU[–¼
+    /// ä½œæˆãƒ¦ãƒ¼ã‚¶ãƒ¼å
     [JsonProperty("user_name")]
     public string UserName { get; set; }
 
-    // ƒCƒCƒl”
+    // ã‚¤ã‚¤ãƒæ•°
     [JsonProperty("good_vol")]
     public int GoodVol { get; set; }
 }

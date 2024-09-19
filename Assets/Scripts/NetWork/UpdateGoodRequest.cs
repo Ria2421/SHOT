@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒOƒbƒh”XVƒŠƒNƒGƒXƒgƒNƒ‰ƒX [ UpdateGoodRequest.cs ]
+// ã‚°ãƒƒãƒ‰æ•°æ›´æ–°ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚¯ãƒ©ã‚¹ [ UpdateGoodRequest.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/15
 // Update:2024/09/15
@@ -13,11 +13,11 @@ using UnityEngine;
 
 public class UpdateGoodRequest
 {
-    /// ƒXƒe[ƒWID
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ID
     [JsonProperty("id")]
     public int ID { get; set; }
 
-    /// ƒOƒbƒh”
+    /// ã‚°ãƒƒãƒ‰æ•°
     [JsonProperty("good_vol")]
     public int GoodVol { get; set; }
 }

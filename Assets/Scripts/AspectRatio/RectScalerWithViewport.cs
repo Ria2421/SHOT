@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// ƒAƒXƒyƒNƒg”ä‘Î‰UIƒXƒP[ƒ‰[ [ RectScalerWithViewport.cs ]
+// ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”å¯¾å¿œUIã‚¹ã‚±ãƒ¼ãƒ©ãƒ¼ [ RectScalerWithViewport.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/07/17
 // Update:2024/07/17
@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace TedLab
 {
-    [ExecuteAlways] // Ä¶ˆÈŠO‚Å‚à“®ì‚·‚é
+    [ExecuteAlways] // å†ç”Ÿæ™‚ä»¥å¤–ã§ã‚‚å‹•ä½œã™ã‚‹
     public class RectScalerWithViewport : MonoBehaviour
     {
         private const float LogBase = 2;
@@ -63,7 +63,7 @@ namespace TedLab
 
         private Camera GetTargetCamera()
         {
-            // İ’è‚ª‚ ‚ê‚Î‚»‚¿‚ç‚ğ—Dæ
+            // è¨­å®šãŒã‚ã‚Œã°ãã¡ã‚‰ã‚’å„ªå…ˆ
             return refCamera != null ? refCamera : Camera.main;
         }
 
@@ -87,7 +87,7 @@ namespace TedLab
                 return;
             }
 
-            // canvas scaler‚©‚çˆø—p
+            // canvas scalerã‹ã‚‰å¼•ç”¨
             var logWidth = Mathf.Log(width / referenceResolution.x, LogBase);
             var logHeight = Mathf.Log(height / referenceResolution.y, LogBase);
             var logWeightedAverage = Mathf.Lerp(logWidth, logHeight, matchWidthOrHeight);
@@ -100,7 +100,7 @@ namespace TedLab
 
             refRect.localScale = new Vector3(scale, scale, scale);
 
-            // ƒXƒP[ƒ‹‚Åk‚Ü‚é‚Ì‚Å—Ìˆæ‚¾‚¯L‚°‚é
+            // ã‚¹ã‚±ãƒ¼ãƒ«ã§ç¸®ã¾ã‚‹ã®ã§é ˜åŸŸã ã‘åºƒã’ã‚‹
             var revScale = 1f / scale;
             refRect.sizeDelta = new Vector2(width * revScale, height * revScale);
 

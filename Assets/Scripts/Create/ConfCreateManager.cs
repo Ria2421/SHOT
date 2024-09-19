@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 //
-// Š®¬Šm”F‰æ–Êƒ}ƒl[ƒWƒƒ[ [ ConfCreateManager.cs ]
+// å®Œæˆç¢ºèªç”»é¢ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ [ ConfCreateManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/09/06
 // Update:2024/09/09
@@ -16,78 +16,78 @@ using KanKikuchi.AudioManager;
 public class ConfCreateManager : MonoBehaviour
 {
     //-------------------------------------------------------------------
-    // ƒtƒB[ƒ‹ƒh
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 
     /// <summary>
-    /// Š®¬ƒ{ƒ^ƒ“ƒRƒ“ƒ|[ƒlƒ“ƒg•Û‘¶—p
+    /// å®Œæˆãƒœã‚¿ãƒ³ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆä¿å­˜ç”¨
     /// </summary>
     [SerializeField] private Button compBtn;
 
     /// <summary>
-    /// –ß‚éƒ{ƒ^ƒ“
+    /// æˆ»ã‚‹ãƒœã‚¿ãƒ³
     /// </summary>
     [SerializeField] private Button backBtn;
 
     /// <summary>
-    /// ƒXƒe[ƒW–¼“ü—ÍƒtƒB[ƒ‹ƒh
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸åå…¥åŠ›ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
     /// </summary>
     [SerializeField] private InputField inputField;
 
     /// <summary>
-    /// Š®¬ƒ{ƒ^ƒ“Image
+    /// å®Œæˆãƒœã‚¿ãƒ³Image
     /// </summary>
     [SerializeField] private Image buttonColor;
 
     /// <summary>
-    /// ƒXƒe[ƒWƒf[ƒ^ƒIƒuƒWƒF
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚ªãƒ–ã‚¸ã‚§
     /// </summary>
     private StageDataObject stageDataObject;
 
     //-------------------------------------------------------------------
-    // ƒƒ\ƒbƒh
+    // ãƒ¡ã‚½ãƒƒãƒ‰
 
     /// <summary>
-    /// ‰Šúˆ—
+    /// åˆæœŸå‡¦ç†
     /// </summary>
     void Start()
     {
-        // ƒXƒe[ƒWƒf[ƒ^ƒIƒuƒWƒFƒNƒg‚Ì“üè
+        // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å…¥æ‰‹
         stageDataObject = GameObject.Find("StageDataObject").GetComponent<StageDataObject>();
     }
 
     /// <summary>
-    /// Š®¬ˆ—
+    /// å®Œæˆå‡¦ç†
     /// </summary>
     public void PushCompButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // UI‚ğ–³Œø‰»
+        // UIã‚’ç„¡åŠ¹åŒ–
         compBtn.interactable = false;
         backBtn.interactable = false;
         inputField.interactable = false;
 
-        // ƒXƒe[ƒWƒf[ƒ^‚ğjsonƒVƒŠƒAƒ‰ƒCƒY
+        // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚’jsonã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚º
         var data = stageDataObject.GetStageData();
         string json = JsonConvert.SerializeObject(data);
 
-        // ƒ†[ƒU[ƒf[ƒ^‚ª•Û‘¶‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í“o˜^
+        // ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ‡ãƒ¼ã‚¿ãŒä¿å­˜ã•ã‚Œã¦ã„ãªã„å ´åˆã¯ç™»éŒ²
         StartCoroutine(NetworkManager.Instance.StoreCreateStage(
-            inputField.text,    // ƒ†[ƒU[–¼
-            json,               // ƒXƒe[ƒWƒf[ƒ^
+            inputField.text,    // ãƒ¦ãƒ¼ã‚¶ãƒ¼å
+            json,               // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿
             result =>
             {
                 if (result)
                 {
-                    // “o˜^Š®—¹•\¦B•\¦“à‚Éƒz[ƒ€‚Ö–ß‚éƒ{ƒ^ƒ“‚ğ”z’u
-                    Debug.Log("“o˜^Š®—¹");
+                    // ç™»éŒ²å®Œäº†è¡¨ç¤ºã€‚è¡¨ç¤ºå†…ã«ãƒ›ãƒ¼ãƒ ã¸æˆ»ã‚‹ãƒœã‚¿ãƒ³ã‚’é…ç½®
+                    Debug.Log("ç™»éŒ²å®Œäº†");
                     buttonColor.color = Color.green;
-                    // ƒXƒe[ƒWƒf[ƒ^ƒIƒuƒWƒF‚ğ”jŠü
+                    // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚ªãƒ–ã‚¸ã‚§ã‚’ç ´æ£„
                     Destroy(GameObject.Find("StageDataObject"));
                 }
                 else
                 {
-                    Debug.Log("“o˜^¸”s");
+                    Debug.Log("ç™»éŒ²å¤±æ•—");
                     buttonColor.color = Color.red;
                     Invoke("ValidityCompButton", 1.5f);
                 }
@@ -95,36 +95,36 @@ public class ConfCreateManager : MonoBehaviour
     }
 
     /// <summary>
-    /// —Vƒ‚[ƒh‘JˆÚˆ—
+    /// è©¦éŠãƒ¢ãƒ¼ãƒ‰é·ç§»å‡¦ç†
     /// </summary>
     public void PushBackButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        /* ƒtƒF[ƒhˆ— (”’)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (ç™½)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("TestPlayScene", Color.white, 2.5f);
     }
 
     /// <summary>
-    /// ƒz[ƒ€‘JˆÚˆ—
+    /// ãƒ›ãƒ¼ãƒ é·ç§»å‡¦ç†
     /// </summary>
     public void PushHomeButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        // ƒXƒe[ƒWƒf[ƒ^ƒIƒuƒWƒF‚ğ”jŠü
+        // ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚ªãƒ–ã‚¸ã‚§ã‚’ç ´æ£„
         Destroy(GameObject.Find("StageDataObject"));
 
-        /* ƒtƒF[ƒhˆ— (”’)  
-                        ( "ƒV[ƒ“–¼",ƒtƒF[ƒh‚ÌF, ‘¬‚³);  */
+        /* ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç† (ç™½)  
+                        ( "ã‚·ãƒ¼ãƒ³å",ãƒ•ã‚§ãƒ¼ãƒ‰ã®è‰², é€Ÿã•);  */
         Initiate.DoneFading();
         Initiate.Fade("HomeScene", Color.white, 2.5f);
     }
 
     /// <summary>
-    /// Š®¬ƒ{ƒ^ƒ“•œŠˆ
+    /// å®Œæˆãƒœã‚¿ãƒ³å¾©æ´»
     /// </summary>
     public void ValidityCompButton()
     {
