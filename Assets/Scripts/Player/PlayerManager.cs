@@ -14,7 +14,6 @@ using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Utility;
-using static UnityEditor.PlayerSettings;
 
 public class PlayerManager : MonoBehaviour
 {
