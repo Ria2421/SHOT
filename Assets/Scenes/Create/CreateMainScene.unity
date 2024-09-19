@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0
+      value: 0.090887964
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
@@ -193,7 +193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
+      value: 0.8182241
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1884,15 +1884,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8389795037963917432, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.2222222
       objectReference: {fileID: 0}
     - target: {fileID: 8389795037963917432, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.2222222
       objectReference: {fileID: 0}
     - target: {fileID: 8389795037963917432, guid: 0ebf7aa7988226544b8b9e9905cbbe43, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.2222222
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3408,8 +3408,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1313990636}
   m_HandleRect: {fileID: 1313990635}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.94
+  m_Value: 0.9999962
+  m_Size: 0.94000006
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
