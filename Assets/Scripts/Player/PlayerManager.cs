@@ -31,9 +31,19 @@ public class PlayerManager : MonoBehaviour
     private GameObject gameOverPanel = null;
 
     /// <summary>
+    /// 下敷きフラグ
+    /// </summary>
+    private bool sitazikiFlag = false;
+
+    /// <summary>
     /// クリアフラグ
     /// </summary>
-    private bool clearFlag;
+    private bool clearFlag = false;
+
+    /// <summary>
+    /// 速さ上限
+    /// </summary>
+    [SerializeField] private float speedLimit;
 
     //======================================
     // 反射予測線用
@@ -154,7 +164,10 @@ public class PlayerManager : MonoBehaviour
     void FixedUpdate()
     {
         if (clearFlag) { return; }
-        physics.velocity *= 0.95f;
+
+        if (sitazikiFlag) { return; }
+
+        physics.velocity *= 0.91f;
     }
 
     /// <summary>
@@ -247,6 +260,23 @@ public class PlayerManager : MonoBehaviour
             physics.velocity *= 0;
 
             clearFlag = true;
+        }
+
+        if (collision.tag == "Sitaziki")
+        {
+            sitazikiFlag = true;
+        }
+    }
+
+    /// <summary>
+    /// 判定抜け処理
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Sitaziki")
+        {
+            sitazikiFlag = false;
         }
     }
 

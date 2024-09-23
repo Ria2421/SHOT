@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,11 +76,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0a70d08366dbf61498aaa86d1e41d946, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -142,21 +142,21 @@ EdgeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.086575985, y: -0.3480164}
-  - {x: -0.07936877, y: -0.34261096}
-  - {x: 0.012899041, y: -0.045603633}
-  - {x: -0.17449123, y: -0.042745948}
-  - {x: 0.082758605, y: 0.3442056}
-  - {x: -0.01712507, y: 0.04596448}
-  - {x: 0.16564125, y: 0.039883614}
-  - {x: 0.08086103, y: -0.08938432}
-  - {x: -0.072292745, y: -0.32542112}
+  - {x: -0.28013152, y: -0.82473654}
+  - {x: -0.28009298, y: -0.8085779}
+  - {x: -0.1125536, y: -0.11729085}
+  - {x: -0.42603818, y: -0.113146946}
+  - {x: -0.24913885, y: 0.8354056}
+  - {x: 0.30228338, y: 0.8323024}
+  - {x: 0.09350418, y: 0.1721348}
+  - {x: 0.41449454, y: 0.17511788}
+  - {x: -0.273017, y: -0.8164786}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

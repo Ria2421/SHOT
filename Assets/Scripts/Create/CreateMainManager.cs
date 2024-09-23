@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using static UnityEngine.GraphicsBuffer;
 using KanKikuchi.AudioManager;
 
 public class CreateMainManager : MonoBehaviour

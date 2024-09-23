@@ -451,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0
+      value: 0.090887964
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
@@ -459,7 +459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9220291660630939520, guid: b9ac481415a2ff54ab03dabae12e1ebb, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
+      value: 0.8182241
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131b50b41aabbfe4db49610add83012d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Stage2
+  sceneName: Stage10
 --- !u!1 &929088350
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,15 +715,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5849423125287309060, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.2222222
       objectReference: {fileID: 0}
     - target: {fileID: 5849423125287309060, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.2222222
       objectReference: {fileID: 0}
     - target: {fileID: 5849423125287309060, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.2222222
       objectReference: {fileID: 0}
     - target: {fileID: 6303450138973521964, guid: 6dbb537f83a42eb47bb610921bf434d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
