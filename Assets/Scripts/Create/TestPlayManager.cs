@@ -41,7 +41,7 @@ public class TestPlayManager : MonoBehaviour
         {
             // Resourcesフォルダからギミックのオブジェクトを取得・生成
             GameObject obj = (GameObject)Resources.Load(data.ID.ToString());
-            Instantiate(obj, new Vector3(data.X, data.Y, 0), Quaternion.identity);
+            Instantiate(obj, new Vector3(data.X, data.Y, 0), Quaternion.Euler(0, 0, data.D));
         }
     }
 

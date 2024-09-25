@@ -70,7 +70,7 @@ public class CustomGameManager : MonoBehaviour
         {
             // Resourcesフォルダからギミックのオブジェクトを取得・生成
             GameObject obj = (GameObject)Resources.Load(data.ID.ToString());
-            Instantiate(obj, new Vector3(data.X, data.Y, 0), Quaternion.identity);
+            Instantiate(obj, new Vector3(data.X, data.Y, 0), Quaternion.Euler(0, 0, data.D));
         }
     }
 
@@ -125,7 +125,9 @@ public class CustomGameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // ホームボタン押下処理
+    /// <summary>
+    /// ホームボタン押下処理
+    /// </summary>
     public void PushHomeButton()
     {
         BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);

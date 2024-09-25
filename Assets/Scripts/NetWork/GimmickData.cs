@@ -25,4 +25,9 @@ public class GimmickData
     /// y座標
     /// </summary>
     public float Y { get; set; }
+
+    /// <summary>
+    /// 角度
+    /// </summary>
+    public float D { get; set; } = 0;
 }

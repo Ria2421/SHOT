@@ -99,7 +99,7 @@ public class PlayerManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name != "CreateMainScene")
         {
-            BGMManager.Instance.Play(BGMPath.GAME);
+            BGMManager.Instance.Play(BGMPath.GAME,0.65f);
 
             // リザルトパネルの取得
             var panel = GameObject.Find("Panel");   // UIパネルの取得
@@ -126,7 +126,7 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {   // マウスクリック開始時
-            SEManager.Instance.Play(SEPath.SHOT_CHARGE);
+            SEManager.Instance.Play(SEPath.SHOT_CHARGE,0.8f);
 
             dragStart = GetMousePosition();
 
@@ -207,7 +207,7 @@ public class PlayerManager : MonoBehaviour
 
         if (collision.gameObject.tag == "Finish")
         {   // ゴール判定
-            SEManager.Instance.Play(SEPath.CLEAR,0.7f);
+            SEManager.Instance.Play(SEPath.CLEAR,0.55f);
 
             // 成功ログ登録
             StorePlayLog(true);

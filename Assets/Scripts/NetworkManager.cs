@@ -44,6 +44,11 @@ public class NetworkManager : MonoBehaviour
     /// </summary>
     public int PlayStageType {  get; set; }
 
+    /// <summary>
+    /// 最後のノーマルステージNo
+    /// </summary>
+    public int LastStageNo { get; set; }
+
     // getプロパティを呼び出した初回時にインスタンス生成してstaticで保持
     private static NetworkManager instance;
 

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     // フィールド
 
     // ステージNo
-    [SerializeField] int stageNo;
+    [SerializeField] private int stageNo;
 
     //--------------------------------------------
     // メソッド

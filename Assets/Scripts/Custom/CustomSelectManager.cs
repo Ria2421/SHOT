@@ -3,7 +3,7 @@
 // カスタムセレクトマネージャー [ CustomSelectManager.cs ]
 // Author:Kenta Nakamoto
 // Data:2024/08/26
-// Update:2024/09/11
+// Update:2024/09/25
 //
 //---------------------------------------------------------------
 using KanKikuchi.AudioManager;

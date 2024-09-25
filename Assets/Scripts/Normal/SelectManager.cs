@@ -9,6 +9,7 @@
 using KanKikuchi.AudioManager;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,6 +57,7 @@ public class SelectManager : MonoBehaviour
 
                     // NetworkManagerを取得
                     NetworkManager networkManager = NetworkManager.Instance;
+                    networkManager.LastStageNo = result.Last().StageID;         // 最後のステージNoを保存
 
                     foreach (NormalStageResponse stageData in result)
                     {

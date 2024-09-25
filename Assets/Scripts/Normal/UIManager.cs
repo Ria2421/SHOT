@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
 using KanKikuchi.AudioManager;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -23,6 +24,18 @@ public class UIManager : MonoBehaviour
     /// </summary>
     [SerializeField] private string sceneName = "";
 
+    /// <summary>
+    /// メニューパネル
+    /// </summary>
+    [SerializeField] private GameObject menuPanel;
+
+    /// <summary>
+    /// ネクストボタン
+    /// </summary>
+    [SerializeField] private Button nextButton;
+
+    private NetworkManager networkManager;
+
     //--------------------------------------------
     // メソッド
 
@@ -32,7 +45,12 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         // NetworkManager取得
-        NetworkManager networkManager = NetworkManager.Instance;
+        networkManager = NetworkManager.Instance;
+
+        if(networkManager.PlayStageNo == networkManager.LastStageNo)
+        {   // ラストステージの時はネクストボタンを無効化
+            nextButton.interactable = false;
+        }
 
 #if UNITY_EDITOR
         //SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
@@ -44,9 +62,45 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// リプレイ処理
+    /// メニュー押下時
     /// </summary>
-    public void gameReplay()
+    public void PushMenuButton()
+    {
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
+        // メニューパネルを表示
+        menuPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// 閉じるボタン押下時
+    /// </summary>
+    public void PushCloseButton()
+    {
+        SEManager.Instance.Play(SEPath.CANCEL);
+
+        // メニューパネルを非表示
+        menuPanel.SetActive(false);
+    }
+
+    /// <summary>
+    /// 戻る押下処理
+    /// </summary>
+    public void PushBackButton()
+    {
+        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
+        SEManager.Instance.Play(SEPath.MENU_SELECT);
+
+        /* フェード処理 (白)  
+                        ( "シーン名",フェードの色, 速さ);  */
+        Initiate.DoneFading();
+        Initiate.Fade("StageSelectScene", Color.white, 2.5f);
+    }
+
+    /// <summary>
+    /// リプレイ押下処理
+    /// </summary>
+    public void PushReplayButton()
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
@@ -55,30 +109,14 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ホーム遷移処理
+    /// ネクストボタン押下処理
     /// </summary>
-    public void transitionHome()
+    public void PushNextButton()
     {
-        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        /* フェード処理 (黒)  
-                        ( "シーン名",フェードの色, 速さ);  */
-        Initiate.DoneFading();
-        Initiate.Fade("HomeScene", Color.gray, 2.5f);
-    }
-
-    /// <summary>
-    /// ステージ選択遷移処理
-    /// </summary>
-    public void transitionSelect()
-    {
-        BGMSwitcher.FadeOutAndFadeIn(BGMPath.HOME_SELECT);
-        SEManager.Instance.Play(SEPath.MENU_SELECT);
-
-        /* フェード処理 (黒)  
-                        ( "シーン名",フェードの色, 速さ);  */
-        Initiate.DoneFading();
-        Initiate.Fade("StageSelectScene", Color.gray, 2.5f);
+        // 次のステージ名を取得後、移動
+        networkManager.PlayStageNo = GameObject.Find("GameManager").GetComponent<GameManager>().GetStageNo() + 1;
+        Initiate.Fade("UIScene", Color.white, 2.5f);
     }
 }

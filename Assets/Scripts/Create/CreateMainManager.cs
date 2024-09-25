@@ -20,6 +20,21 @@ public class CreateMainManager : MonoBehaviour
     // フィールド
 
     /// <summary>
+    /// 警告初期位置X
+    /// </summary>
+    private const float CATION_XPOS = 1000.0f;
+
+    /// <summary>
+    /// 上限回転数
+    /// </summary>
+    private const float ROTATION_LIMIT = 4.0f;
+
+    /// <summary>
+    /// 回転量
+    /// </summary>
+    private const float ROTATION_VOL = 90.0f;
+
+    /// <summary>
     /// メニューパネル
     /// </summary>
     [SerializeField] private GameObject menuPanel;
@@ -45,6 +60,11 @@ public class CreateMainManager : MonoBehaviour
     [SerializeField] private RectTransform cautionGoal;
 
     /// <summary>
+    /// ギミックアイコン
+    /// </summary>
+    [SerializeField] private List<RectTransform> gimmickIcons;
+
+    /// <summary>
     /// クリエイトデータ格納用
     /// </summary>
     private List<GimmickData> createDatas = new List<GimmickData>();
@@ -53,6 +73,11 @@ public class CreateMainManager : MonoBehaviour
     /// 削除モードフラグプロパティ
     /// </summary>
     public bool DeleteModeFlag {  get; private set; }
+
+    /// <summary>
+    /// 回転数
+    /// </summary>
+    private float rotationNum = 0;
 
     //--------------------------------------------
     // メソッド
@@ -81,7 +106,7 @@ public class CreateMainManager : MonoBehaviour
             {
                 // Resourcesフォルダからギミックのオブジェクトを取得・生成
                 GameObject obj = (GameObject)Resources.Load(data.ID.ToString());
-                GameObject gimmick = Instantiate(obj, new Vector3(data.X,data.Y,0), Quaternion.identity);
+                GameObject gimmick = Instantiate(obj, new Vector3(data.X,data.Y,0), Quaternion.Euler(0,0,data.D));
 
                 // ドラッグ用コンポーネントの追加
                 gimmick.AddComponent<BoxCollider2D>();
@@ -179,7 +204,7 @@ public class CreateMainManager : MonoBehaviour
 
         // Resourcesフォルダからギミックのオブジェクトを取得・生成
         GameObject obj = (GameObject)Resources.Load(objName);
-        GameObject gimmick = Instantiate(obj,Vector3.zero,Quaternion.identity);
+        GameObject gimmick = Instantiate(obj,Vector3.zero,Quaternion.Euler(0,0, rotationNum * ROTATION_VOL));
 
         // ドラッグ用コンポーネントの追加
         gimmick.AddComponent<BoxCollider2D>();
@@ -230,7 +255,8 @@ public class CreateMainManager : MonoBehaviour
             gimmickData.ID = int.Parse(name);
             gimmickData.X = (float)Math.Round(obj.transform.position.x, 3); // 小数点は第３位まで
             gimmickData.Y = (float)Math.Round(obj.transform.position.y, 3);
-            Debug.Log(gimmickData.ID + ":" + " x=" + gimmickData.X + " y=" +gimmickData.Y); // データの表示
+            gimmickData.D = obj.transform.eulerAngles.z;
+            Debug.Log(gimmickData.ID + ":" + " x=" + gimmickData.X + " y=" + gimmickData.Y); // データの表示
 
             // リストに追加
             createDatas.Add(gimmickData);
@@ -275,6 +301,25 @@ public class CreateMainManager : MonoBehaviour
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
         // 初期位置に移動
-        rectTransform.anchoredPosition = new Vector2(1000.0f, rectTransform.anchoredPosition.y);
+        rectTransform.anchoredPosition = new Vector2(CATION_XPOS, rectTransform.anchoredPosition.y);
+    }
+
+    /// <summary>
+    /// ギミック回転処理
+    /// </summary>
+    public void PushRotation()
+    {
+        SEManager.Instance.Play(SEPath.GIMMICK_SET);
+
+        rotationNum++;
+
+        // 一周したら0度に戻す
+        if (rotationNum == ROTATION_LIMIT) { rotationNum = 0; }
+
+        // アイコンの回転
+        foreach(RectTransform gimmick in gimmickIcons)
+        {
+            gimmick.eulerAngles = new Vector3(0, 0, rotationNum * ROTATION_VOL);
+        }
     }
 }
