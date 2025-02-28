@@ -321,11 +321,11 @@ public class HomeManager : MonoBehaviour
 
         followPanel.SetActive(false);
 
-        for(int i=0; i<scrolltContents.Count; i++)
+        // 現在のフォロー情報objを削除
+        for (int i=0; i<scrolltContents.Count; i++)
         {
             foreach (Transform content in scrolltContents[i].transform)
             {
-                //自分の子供をDestroyする
                 Destroy(content.gameObject);
             }
         }
@@ -360,19 +360,19 @@ public class HomeManager : MonoBehaviour
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
+        // 名前の変更処理
         StartCoroutine(NetworkManager.Instance.ChangeName(
             nameInput.text,
             result =>
             {
                 if (result)
-                {
-                    // 名前の変更処理
+                {   // 成功
                     contentTexts[1].text = nameInput.text;
                     MoveCaution(changeComplete);    // 成功通知
                     namePanel.SetActive(false);     // 入力欄非表示
                 }
                 else
-                {
+                {   // 失敗
                     MoveCaution(changeFailed);      // 失敗通知
                     namePanel.SetActive(false);     // 入力欄非表示
                 }
@@ -387,19 +387,19 @@ public class HomeManager : MonoBehaviour
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
+        // アイコンの変更処理
         StartCoroutine(NetworkManager.Instance.ChangeIcon(
             id,
             result =>
             {
                 if (result)
-                {
-                    // アイコンの変更処理
+                {   // 成功
                     iconImage.sprite = iconSprite[id - 1];
                     MoveCaution(changeComplete);    // 成功通知
                     iconPanel.SetActive(false);     // 入力欄非表示
                 }
                 else
-                {
+                {   // 失敗
                     MoveCaution(changeFailed);      // 失敗通知
                     iconPanel.SetActive(false);     // 入力欄非表示
                 }
@@ -437,7 +437,7 @@ public class HomeManager : MonoBehaviour
     {
         SEManager.Instance.Play(SEPath.MENU_SELECT);
 
-        if (followIDInput.text == "") { return; }  // 入力無い時
+        if (followIDInput.text == "") { return; }   // 入力無い時
 
         followRegistButton.interactable = false;    // ボタン無効化
 

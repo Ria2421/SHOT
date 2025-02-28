@@ -49,7 +49,9 @@ public class NetworkManager : MonoBehaviour
     /// </summary>
     public int LastStageNo { get; set; }
 
-    // getプロパティを呼び出した初回時にインスタンス生成してstaticで保持
+    /// <summary>
+    /// getプロパティを呼び出した初回時にインスタンス生成してstaticで保持
+    /// </summary>
     private static NetworkManager instance;
 
     /// <summary>
@@ -330,7 +332,7 @@ public class NetworkManager : MonoBehaviour
     /// ランダムなユーザーデータを20件取得
     /// </summary>
     /// <param name="result"></param>
-    /// <returns></returns>
+    /// <returns>ユーザーデータリスト</returns>
     public IEnumerator GetRandom(Action<List<FollowInfo>> result)
     {
         List<FollowInfo> responses = new List<FollowInfo>();
@@ -364,7 +366,6 @@ public class NetworkManager : MonoBehaviour
     {
         // サーバーに送信するオブジェクトを作成
         StoreUserRepuest repuestData = new StoreUserRepuest();
-
         repuestData.Name = name;    // 名前を代入
 
         // サーバーに送信するオブジェクトをJSONに変換

@@ -136,7 +136,7 @@ public class CustomGameManager : MonoBehaviour
         /* フェード処理 (白)  
                         ( "シーン名",フェードの色, 速さ);  */
         Initiate.DoneFading();
-        Initiate.Fade("HomeScene", Color.white, 2.5f);
+        Initiate.Fade("Raning", Color.white, 2.5f);
     }
 
     /// <summary>
